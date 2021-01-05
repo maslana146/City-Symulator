@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.MainSettingsScreen">
+   <children>
+      <Slider fx:id="popVacSlider" blockIncrement="25.0" layoutX="267.0" layoutY="197.0" onDragDetected="#setPopulationVac" prefHeight="38.0" prefWidth="267.0" showTickLabels="true" showTickMarks="true" value="25.0" />
+      <Label layoutX="343.0" layoutY="32.0" text="\% population sick" />
+      <Label layoutX="320.0" layoutY="173.0" text="\% population vaccinated" />
+      <Label layoutX="302.0" layoutY="242.0" text="Chance to get sick vaccinated" />
+      <Label layoutX="304.0" layoutY="311.0" text="Chance to get sick with mask" />
+      <Label layoutX="344.0" layoutY="105.0" text="Shops to get well" />
+      <Slider fx:id="chanToGetSickVacSlider" blockIncrement="25.0" layoutX="267.0" layoutY="265.0" onDragDetected="#setChanceToGetSickVac" prefHeight="38.0" prefWidth="267.0" showTickLabels="true" showTickMarks="true" value="25.0" />
+      <Slider fx:id="popSickSlider" blockIncrement="25.0" layoutX="267.0" layoutY="59.0" onDragDetected="#setPopulationSick" prefHeight="38.0" prefWidth="267.0" showTickLabels="true" showTickMarks="true" value="30.0" />
+      <Slider fx:id="shopsToGetWellSlider" blockIncrement="1.0" layoutX="267.0" layoutY="128.0" majorTickUnit="2.0" max="10.0" minorTickCount="1" onDragDetected="#setShopsToGetWell" prefHeight="38.0" prefWidth="267.0" showTickLabels="true" showTickMarks="true" value="3.0" />
+      <Slider fx:id="chanToGetSickMaskSlider" blockIncrement="25.0" layoutX="267.0" layoutY="334.0" onDragDetected="#setChanceToGetSickMask" prefHeight="38.0" prefWidth="267.0" showTickLabels="true" showTickMarks="true" value="25.0" />
+      <Label fx:id="popSicklabel" layoutX="534.0" layoutY="51.0" prefHeight="16.0" prefWidth="38.0" />
+      <Label fx:id="shopsToGetWelllabel" layoutX="534.0" layoutY="120.0" prefHeight="16.0" prefWidth="38.0" />
+      <Label fx:id="popVaclabel" layoutX="534.0" layoutY="189.0" prefHeight="16.0" prefWidth="38.0" />
+      <Label fx:id="chanToGetSickVaclabel" layoutX="534.0" layoutY="250.0" prefHeight="16.0" prefWidth="38.0" />
+      <Label fx:id="chanToGetSickMasklabel" layoutX="534.0" layoutY="326.0" prefHeight="16.0" prefWidth="38.0" />
+   </children>
+</Pane>
