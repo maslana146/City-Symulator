@@ -1,26 +1,16 @@
 package com.bartoszmaslanka144091.Controllers;
 
-import javafx.event.Event;
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 
-public class MainSettingsScreen {
+public class MainWorldScreen {
     private MainScreen mainScreen;
-
 
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
 
 
-    @FXML
-    public void backMenu() {
+    public void backMenu(ActionEvent actionEvent) {
         mainScreen.loadMenuScreen();
-
     }
-
-    public void initSettings(Event event) {
-
-    }
-
-
 }

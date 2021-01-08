@@ -5,39 +5,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.CreateScreen">
    <children>
       <Label layoutX="69.0" layoutY="61.0" text="Create Client" />
-      <TextField fx:id="clientIdField" layoutX="188.0" layoutY="121.0" />
-      <CheckBox fx:id="clientIsSick" layoutX="34.0" layoutY="167.0" mnemonicParsing="false" text="is sick" />
-      <CheckBox fx:id="clientWearsMask" layoutX="129.0" layoutY="167.0" mnemonicParsing="false" text="wears mask" />
-      <CheckBox fx:id="clientIsVaccinated" layoutX="248.0" layoutY="167.0" mnemonicParsing="false" text="is vaccinated" />
-      <Label layoutX="37.0" layoutY="126.0" prefHeight="16.0" prefWidth="64.0" text="Id" />
-      <Label layoutX="37.0" layoutY="276.0" prefHeight="16.0" prefWidth="117.0" text="First name" />
-      <Label layoutX="37.0" layoutY="244.0" prefHeight="16.0" prefWidth="117.0" text="Max bag capacity" />
-      <Label layoutX="37.0" layoutY="307.0" prefHeight="16.0" prefWidth="117.0" text="Last name" />
-      <TextField fx:id="clientBagCapacityField" layoutX="188.0" layoutY="239.0" />
-      <TextField fx:id="clientFirstNameField" layoutX="188.0" layoutY="271.0" />
-      <TextField fx:id="clientLastNameField" layoutX="188.0" layoutY="302.0" />
+      <CheckBox fx:id="clientIsSick" layoutX="34.0" layoutY="117.0" mnemonicParsing="false" text="is sick" />
+      <CheckBox fx:id="clientWearsMask" layoutX="129.0" layoutY="117.0" mnemonicParsing="false" text="wears mask" />
+      <CheckBox fx:id="clientIsVaccinated" layoutX="248.0" layoutY="117.0" mnemonicParsing="false" text="is vaccinated" />
+      <Label layoutX="37.0" layoutY="226.0" prefHeight="16.0" prefWidth="117.0" text="First name" />
+      <Label layoutX="37.0" layoutY="194.0" prefHeight="16.0" prefWidth="117.0" text="Max bag capacity" />
+      <Label layoutX="37.0" layoutY="257.0" prefHeight="16.0" prefWidth="117.0" text="Last name" />
+      <TextField fx:id="clientBagCapacityField" layoutX="188.0" layoutY="189.0" />
+      <TextField fx:id="clientFirstNameField" layoutX="188.0" layoutY="221.0" />
+      <TextField fx:id="clientLastNameField" layoutX="188.0" layoutY="252.0" />
       <Button layoutX="200.0" layoutY="56.0" mnemonicParsing="false" onAction="#createRandomClient" text="Create random Client" />
       <Label layoutX="457.0" layoutY="61.0" text="Create Supplier" />
-      <TextField fx:id="supplierIdField" layoutX="595.0" layoutY="121.0" />
-      <CheckBox fx:id="supplierIsSick" layoutX="441.0" layoutY="167.0" mnemonicParsing="false" text="is sick" />
-      <CheckBox fx:id="supplierWearsMask" layoutX="536.0" layoutY="167.0" mnemonicParsing="false" text="wears mask" />
-      <CheckBox fx:id="supplierIsVaccinated" layoutX="655.0" layoutY="167.0" mnemonicParsing="false" text="is vaccinated" />
-      <Label layoutX="444.0" layoutY="126.0" prefHeight="16.0" prefWidth="64.0" text="Id" />
-      <Label layoutX="444.0" layoutY="276.0" prefHeight="16.0" prefWidth="117.0" text="Company name" />
-      <Label layoutX="444.0" layoutY="244.0" prefHeight="16.0" prefWidth="117.0" text="Max bag capacity" />
-      <Label layoutX="444.0" layoutY="307.0" prefHeight="16.0" prefWidth="117.0" text="Car brand" />
-      <TextField fx:id="supplierBagCapacityField" layoutX="595.0" layoutY="239.0" />
-      <TextField fx:id="supplierCompanyNameField" layoutX="595.0" layoutY="271.0" />
-      <TextField fx:id="supplierCarBrandField" layoutX="595.0" layoutY="302.0" />
+      <CheckBox fx:id="supplierIsSick" layoutX="441.0" layoutY="117.0" mnemonicParsing="false" text="is sick" />
+      <CheckBox fx:id="supplierWearsMask" layoutX="536.0" layoutY="117.0" mnemonicParsing="false" text="wears mask" />
+      <CheckBox fx:id="supplierIsVaccinated" layoutX="655.0" layoutY="117.0" mnemonicParsing="false" text="is vaccinated" />
+      <Label layoutX="444.0" layoutY="226.0" prefHeight="16.0" prefWidth="117.0" text="Company name" />
+      <Label layoutX="444.0" layoutY="194.0" prefHeight="16.0" prefWidth="117.0" text="Max bag capacity" />
+      <Label layoutX="444.0" layoutY="257.0" prefHeight="16.0" prefWidth="117.0" text="Car brand" />
+      <TextField fx:id="supplierBagCapacityField" layoutX="595.0" layoutY="189.0" />
+      <TextField fx:id="supplierCompanyNameField" layoutX="595.0" layoutY="221.0" />
+      <TextField fx:id="supplierCarBrandField" layoutX="595.0" layoutY="252.0" />
       <Button layoutX="587.0" layoutY="56.0" mnemonicParsing="false" onAction="#createRandomSupplier" text="Create random Supplier" />
-      <Button layoutX="149.0" layoutY="338.0" mnemonicParsing="false" onAction="#createClient" text="Create" />
-      <Button layoutX="556.0" layoutY="338.0" mnemonicParsing="false" onAction="#createSupplier" text="Create" />
-      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="397.0" prefHeight="16.0" prefWidth="746.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " textOverrun="CENTER_WORD_ELLIPSIS" />
-      <Button layoutX="58.0" layoutY="400.0" mnemonicParsing="false" onAction="#check" text="Button" />
-      <Button layoutX="169.0" layoutY="442.0" mnemonicParsing="false" onAction="#info" text="inf" />
+      <Button layoutX="149.0" layoutY="288.0" mnemonicParsing="false" onAction="#createClient" text="Create" />
+      <Button layoutX="556.0" layoutY="288.0" mnemonicParsing="false" onAction="#createSupplier" text="Create" />
+      <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="363.0" prefHeight="32.0" prefWidth="664.0" text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
    </children>
 </Pane>

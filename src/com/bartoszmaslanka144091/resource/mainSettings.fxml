@@ -14,7 +14,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <fx:include source="tab1.fxml" />
+                        <fx:include source="settingsTab.fxml" />
                         <Button layoutX="736.0" layoutY="427.0" mnemonicParsing="false" onAction="#backMenu" text="Back" />
                      </children>
                   </AnchorPane>
@@ -30,10 +30,15 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Untitled Tab 1">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
+            <Tab text="Table">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <fx:include source="tableTab.fxml" />
+                        <Button layoutX="736.0" layoutY="427.0" mnemonicParsing="false" onAction="#backMenu" text="Back" />
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
         </tabs>
       </TabPane>

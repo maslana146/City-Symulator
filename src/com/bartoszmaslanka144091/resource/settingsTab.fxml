@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.SettingsTab">
+   <children>
+      <Slider fx:id="popVacSlider" blockIncrement="25.0" layoutX="181.0" layoutY="181.0" onContextMenuRequested="#setPopulationVac" onDragDetected="#setPopulationVac" onDragDone="#setPopulationVac" onDragDropped="#setPopulationVac" onMouseClicked="#setPopulationVac" onMouseDragged="#setPopulationVac" onMouseEntered="#setPopulationVac" prefHeight="38.0" prefWidth="403.0" showTickLabels="true" showTickMarks="true" value="25.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="30.0" prefHeight="16.0" prefWidth="493.0" text="\% population sick" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="165.0" prefHeight="16.0" prefWidth="493.0" text="\% population vaccinated" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="234.0" prefHeight="16.0" prefWidth="493.0" text="Chance to get sick vaccinated" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="302.0" prefHeight="16.0" prefWidth="493.0" text="Chance to get sick with mask" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="96.0" prefHeight="16.0" prefWidth="493.0" text="Shops to get well" />
+      <Slider fx:id="chanToGetSickVacSlider" blockIncrement="25.0" layoutX="181.0" layoutY="249.0" onContextMenuRequested="#setChanceToGetSickVac" onDragDetected="#setChanceToGetSickVac" onDragDone="#setChanceToGetSickVac" onDragDropped="#setChanceToGetSickVac" onMouseClicked="#setChanceToGetSickVac" onMouseDragged="#setChanceToGetSickVac" onMouseEntered="#setChanceToGetSickVac" prefHeight="38.0" prefWidth="403.0" showTickLabels="true" showTickMarks="true" value="25.0" />
+      <Slider fx:id="popSickSlider" blockIncrement="25.0" layoutX="181.0" layoutY="43.0" onContextMenuRequested="#setPopulationSick" onDragDetected="#setPopulationSick" onDragDone="#setPopulationSick" onDragDropped="#setPopulationSick" onMouseClicked="#setPopulationSick" onMouseDragged="#setPopulationSick" onMouseEntered="#setPopulationSick" prefHeight="38.0" prefWidth="403.0" showTickLabels="true" showTickMarks="true" />
+      <Slider fx:id="shopsToGetWellSlider" blockIncrement="1.0" layoutX="181.0" layoutY="112.0" majorTickUnit="2.0" max="10.0" minorTickCount="1" onContextMenuRequested="#setShopsToGetWell" onDragDetected="#setShopsToGetWell" onDragDone="#setShopsToGetWell" onDragDropped="#setShopsToGetWell" onMouseClicked="#setShopsToGetWell" onMouseDragged="#setShopsToGetWell" onMouseEntered="#setShopsToGetWell" prefHeight="38.0" prefWidth="403.0" showTickLabels="true" showTickMarks="true" value="3.0" />
+      <Slider fx:id="chanToGetSickMaskSlider" blockIncrement="25.0" layoutX="181.0" layoutY="318.0" onContextMenuRequested="#setChanceToGetSickMask" onDragDetected="#setChanceToGetSickMask" onDragDone="#setChanceToGetSickMask" onDragDropped="#setChanceToGetSickMask" onMouseClicked="#setChanceToGetSickMask" onMouseDragged="#setChanceToGetSickMask" onMouseEntered="#setChanceToGetSickMask" prefHeight="38.0" prefWidth="403.0" showTickLabels="true" showTickMarks="true" value="25.0" />
+      <Label fx:id="popSicklabel" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="43.0" prefHeight="16.0" prefWidth="69.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+      <Label fx:id="shopsToGetWelllabel" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="112.0" prefHeight="16.0" prefWidth="69.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+      <Label fx:id="popVaclabel" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="181.0" prefHeight="16.0" prefWidth="69.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+      <Label fx:id="chanToGetSickVaclabel" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="242.0" prefHeight="16.0" prefWidth="69.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+      <Label fx:id="chanToGetSickMasklabel" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="318.0" prefHeight="16.0" prefWidth="69.0" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+      <Button layoutX="710.0" layoutY="25.0" mnemonicParsing="false" onAction="#initSettings" text="Refresh" />
+      <Button layoutX="710.0" layoutY="83.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="26.0" prefWidth="68.0" text="Save" />
+      <ToggleButton fx:id="lockdownButton" layoutX="302.0" layoutY="394.0" mnemonicParsing="false" onAction="#lockdown" prefHeight="38.0" prefWidth="197.0" text="LOCKDOWN" />
+   </children>
+</Pane>

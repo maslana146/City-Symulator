@@ -13,10 +13,25 @@ public class Person {
     int maxCapacity;
     ArrayList<Product> bag;
 
-    public void currentPosition(){};
-    public void takeProducts(){};
-    public void findPath(){};
-    public void move(){};
+    public void currentPosition() {
+    }
+
+    ;
+
+    public void takeProducts() {
+    }
+
+    ;
+
+    public void findPath() {
+    }
+
+    ;
+
+    public void move() {
+    }
+
+    ;
 
     public Person(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick,
                   int shopsToGetWell, int currentCapacity, int maxCapacity, ArrayList<Product> bag) {
@@ -42,7 +57,7 @@ public class Person {
         return id;
     }
 
-    public Boolean getSick() {
+    public Boolean getIsSick() {
         return isSick;
     }
 
@@ -78,7 +93,7 @@ public class Person {
         this.id = id;
     }
 
-    public void setSick(Boolean sick) {
+    public void setIsSick(Boolean sick) {
         isSick = sick;
     }
 

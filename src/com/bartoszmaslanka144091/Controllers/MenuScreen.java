@@ -1,11 +1,8 @@
 package com.bartoszmaslanka144091.Controllers;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -18,7 +15,14 @@ public class MenuScreen {
     }
 
     @FXML
-    public void openWorld(){}
+    public void openWorld() throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/bartoszmaslanka144091/resource/mainWorldScreen.fxml"));
+        Pane pane = loader.load();
+
+        MainWorldScreen mainWorldScreen = loader.getController();
+        mainWorldScreen.setMainScreen(mainScreen);
+        mainScreen.setScreen(pane);
+    }
     @FXML
     public void openSettings() throws IOException {
 

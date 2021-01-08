@@ -5,10 +5,20 @@ import java.util.List;
 import java.util.Random;
 
 public class Generators {
+    private static int idCount = 0;
 
     private static Random random = new Random();
 
+    public int getIdCount() {
+        return idCount;
+    }
 
+    public static Integer newId(){
+        int id = idCount;
+        idCount+=1;
+        return id;
+
+    };
     public static String brandName(){
         List<String> brands_names = Arrays.asList("Pepsi","CocaCola","Nestle","Apple","Samasung","Xiaomi",
                 "Lipton","Madero","Tyskie","Lech","McDonalds","Pattex","Huawei","Neutrogena","Polski Banan","Microsoft",

@@ -34,6 +34,54 @@ public class Supplier extends Person {
         this.currentFuel = currentFuel;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+    }
+
+    public void setListOfStops(ArrayList<Shop> listOfStops) {
+        this.listOfStops = listOfStops;
+    }
+
+    public void setFuelConsumption(float fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
+
+    public void setFuelCapacity(float fuelCapacity) {
+        this.fuelCapacity = fuelCapacity;
+    }
+
+    public void setCurrentFuel(float currentFuel) {
+        this.currentFuel = currentFuel;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public ArrayList<Shop> getListOfStops() {
+        return listOfStops;
+    }
+
+    public float getFuelConsumption() {
+        return fuelConsumption;
+    }
+
+    public float getFuelCapacity() {
+        return fuelCapacity;
+    }
+
+    public float getCurrentFuel() {
+        return currentFuel;
+    }
+
     @Override
     public String toString() {
         return "Supplier{" +
