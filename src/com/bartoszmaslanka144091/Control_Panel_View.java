@@ -32,7 +32,7 @@ public class Control_Panel_View extends Application {
         while (controlPanel.listOfClients.size() < 3){
             Client client = new Client(i,Boolean.FALSE,false,false,199.33F,
                     3,2,3,new ArrayList<Product>(),"abbs",
-                    "abbc",3,new ArrayList<Product>() );
+                    "abbc");
             controlPanel.listOfClients.add(client);
         }
         launch(args);

@@ -1,140 +1,59 @@
 package com.bartoszmaslanka144091.Controllers;
 
 import com.bartoszmaslanka144091.Cell;
+import com.bartoszmaslanka144091.Map;
+import com.bartoszmaslanka144091.PathCreator;
 import com.bartoszmaslanka144091.Program;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class WorldScreen {
 
+    public Canvas worldCanvas;
     public Pane worldPane;
     Program program = Program.getInstance();
     static int numCols = 10;
     static int numRows = 10;
     static int cellWidth = 50;
     static int cellHeight = 50;
+    static int speed = 5;
     Cell[][] grid = new Cell[numCols][numRows];
+
 
     @FXML
     public void initialize() {
-        for (int y = 0;y <numCols;y++){
-            for (int x = 0; x < numRows; x++){
-                Cell cell = new Cell(x,y,"-",true,true);
-            }
-        }
-    }
 
+        GraphicsContext gc = worldCanvas.getGraphicsContext2D();
+        Map.createCells();
+        Map.paintMap(gc);
 
+        Cell[][] grid = Map.getGrid();
+//        List<Cell> list = PathCreator.findPath(grid[0][0], grid[9][9], grid);
+        Circle circle = new Circle(0, 0, 12.5, Color.RED);
+        worldPane.getChildren().addAll(circle);
+//        Path path = (Path) PathCreator.createPath(list);
+        PathCreator.moveObject(grid,circle,grid[0][5],grid[9][5]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-//        GraphicsContext gc = worldCanvas.getGraphicsContext2D();
-//        for (int i = 0; i < worldCanvas.widthProperty().intValue(); i += 50) {
-//            for (int j = 0; j < worldCanvas.widthProperty().intValue(); j += 50) {
-////                Cell cell = new Cell(i, j, null);
-////                cellList.add(cell);
-//            }
+//        System.out.println("elo");
+//        for (PathElement element : path.getElements()) {
+//            System.out.println(element);
 //        }
-//        Path path = createPath();
-//        Animation animation = createPathAnimation(path, Duration.seconds(1));
-//        animation.play();
-//    }
-//
-//    private Path createPath() {
-//        Path path = new Path();
-//        path.setStroke(Color.RED);
-//        path.setStrokeWidth(10);
-//        path.getElements().addAll(new MoveTo(50, 250), new LineTo(150,100),new LineTo(250,250),
-//                new MoveTo(200,175), new LineTo(100, 175));
-//        return path;
-//    }
-//
-//
-//    private Animation createPathAnimation(Path path, Duration duration) {
-//
-//        GraphicsContext gc = worldCanvas.getGraphicsContext2D();
-//
-//        // move a node along a path. we want its position
-//        Circle pen = new Circle(0, 0, 4);
-//
-//        // create path transition
-//        PathTransition pathTransition = new PathTransition(duration, path, pen);
-//        pathTransition.currentTimeProperty().addListener(new ChangeListener<Duration>() {
-//
-//            Location oldLocation = null;
-//
-//            /**
-//             * Draw a line from the old location to the new location
-//             */
+//        Circle circle = new Circle(0, 0, 12.5, Color.RED);
+//        worldPane.getChildren().addAll(circle);
+//        PathTransition pathTransition = new PathTransition(Duration.seconds(8), path, circle);
+//        EventHandler<MouseEvent> eventEventHandler = new EventHandler<MouseEvent>() {
 //            @Override
-//            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
-//
-//                // skip starting at 0/0
-//                if (oldValue == Duration.ZERO)
-//                    return;
-//
-//                // get current location
-//                double x = pen.getTranslateX();
-//                double y = pen.getTranslateY();
-//
-//                // initialize the location
-//                if (oldLocation == null) {
-//                    oldLocation = new Location();
-//                    oldLocation.x = x;
-//                    oldLocation.y = y;
-//                    return;
-//                }
-//
-//                // draw line
-//                gc.setStroke(Color.BLUE);
-//                gc.setFill(Color.YELLOW);
-//                gc.setLineWidth(4);
-//                gc.strokeLine(oldLocation.x, oldLocation.y, x, y);
-//
-//                // update old location with current one
-//                oldLocation.x = x;
-//                oldLocation.y = y;
+//            public void handle(MouseEvent event) {
+//                circle.setFill(Color.BISQUE);
 //            }
-//        });
-//
-//        return pathTransition;
-//    }
-//
-//
-//    public static class Location {
-//        double x;
-//        double y;
-//    }
+//        };
+//        circle.addEventFilter(MouseEvent.MOUSE_CLICKED,eventEventHandler);
+//        pathTransition.play();
 
-//}
+
+    }
+}

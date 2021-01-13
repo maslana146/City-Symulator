@@ -1,12 +1,15 @@
 package com.bartoszmaslanka144091;
 
+import javafx.scene.shape.Circle;
+
 import java.util.ArrayList;
 
 public class Client extends Person {
     String firstName;
     String lastName;
-    int cartCapacity;
-    ArrayList<Product> cart;
+    Circle obj;
+
+
 
     public void consume(){
 
@@ -14,12 +17,11 @@ public class Client extends Person {
     public void nextShop(){};
 
     public Client(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
-                  int currentCapacity, int maxCapacity, ArrayList<Product> bag, String firstName, String lastName, int cartCapacity, ArrayList<Product> cart) {
+                  int currentCapacity, int maxCapacity, ArrayList<Product> bag, String firstName, String lastName) {
         super(id, isSick, wearsMask, vaccinated, chanceToGetSick, shopsToGetWell, currentCapacity, maxCapacity, bag);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.cartCapacity = cartCapacity;
-        this.cart = cart;
+
     }
 
     @Override
@@ -27,9 +29,17 @@ public class Client extends Person {
         return "Client{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", cartCapacity=" + cartCapacity +
-                ", cart=" + cart +
+                ", cartCapacity=" + this.maxCapacity +
+                ", cart=" + bag +
                 '}';
+    }
+
+    public Circle getObj() {
+        return obj;
+    }
+
+    public void setObj(Circle obj) {
+        this.obj = obj;
     }
 
     public String getFirstName() {
@@ -40,14 +50,6 @@ public class Client extends Person {
         return lastName;
     }
 
-    public int getCartCapacity() {
-        return cartCapacity;
-    }
-
-    public ArrayList<Product> getCart() {
-        return cart;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -56,13 +58,6 @@ public class Client extends Person {
         this.lastName = lastName;
     }
 
-    public void setCartCapacity(int cartCapacity) {
-        this.cartCapacity = cartCapacity;
-    }
-
-    public void setCart(ArrayList<Product> cart) {
-        this.cart = cart;
-    }
 }
 
 

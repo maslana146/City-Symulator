@@ -40,10 +40,11 @@ public class TableScreen {
             TableColumn id = new TableColumn("ID");
             TableColumn isSick = new TableColumn("Is sick");
             TableColumn isVac = new TableColumn("Is vaccinated");
+            TableColumn wearsMask = new TableColumn("Wears mask");
             TableColumn firstNameCol = new TableColumn("First Name");
             TableColumn lastNameCol = new TableColumn("Last Name");
 
-            mainTableView.getColumns().addAll(id, isSick,isVac, firstNameCol, lastNameCol);
+            mainTableView.getColumns().addAll(id, isSick,isVac, wearsMask,firstNameCol, lastNameCol);
 
             id.setCellValueFactory(
                     new PropertyValueFactory<Client, Integer>("id")
@@ -64,6 +65,10 @@ public class TableScreen {
                     new PropertyValueFactory<Client,Boolean>("vaccinated")
             );
 
+            wearsMask.setCellValueFactory(
+                    new PropertyValueFactory<Client,Boolean>("wearsMask")
+            );
+
             firstNameCol.setCellValueFactory(
                     new PropertyValueFactory<Client, String>("firstName")
             );
@@ -77,10 +82,11 @@ public class TableScreen {
             TableColumn id = new TableColumn("ID");
             TableColumn isSick = new TableColumn("Is sick");
             TableColumn isVac = new TableColumn("Is vaccinated");
+            TableColumn wearsMask = new TableColumn("Wears mask");
             TableColumn companyName = new TableColumn("Company Name");
             TableColumn carBrand = new TableColumn("Car Brand");
 
-            mainTableView.getColumns().addAll(id, isSick,isVac, companyName, carBrand);
+            mainTableView.getColumns().addAll(id, isSick,isVac,wearsMask, companyName, carBrand);
 
             id.setCellValueFactory(
                     new PropertyValueFactory<Supplier, Integer>("id")
@@ -97,8 +103,12 @@ public class TableScreen {
 //                        item.booleanValue() ? "SICK" : "HEALTHY");
 //            }
 //        });
+
             isVac.setCellValueFactory(
                     new PropertyValueFactory<Client,Boolean>("vaccinated")
+            );
+            wearsMask.setCellValueFactory(
+                    new PropertyValueFactory<Supplier,Boolean>("wearsMask")
             );
 
             companyName.setCellValueFactory(

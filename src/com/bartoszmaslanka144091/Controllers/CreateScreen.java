@@ -65,7 +65,7 @@ public class CreateScreen {
         String firstName = Generators.firstName();
         String lastName = Generators.lastName();
         Client client = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
-                maxCapacity, bag, firstName, lastName, maxCapacity, bag);
+                maxCapacity, bag, firstName, lastName);
         System.out.println(client);
         boolean result = program.listOfClients.add(client);
         if (result) {
@@ -143,7 +143,7 @@ public class CreateScreen {
             String firstName = clientFirstNameField.getText();
             String lastBrand = clientLastNameField.getText();
             Client client = new Client(id, isSick, wearsMask, isVac, chanceToGetSick, shopsToGetWell, currentCapacity,
-                    maxCapacity, bag, firstName, lastBrand, maxCapacity, bag);
+                    maxCapacity, bag, firstName, lastBrand);
             System.out.println(client);
             boolean result = program.listOfClients.add(client);
             if (result) {
