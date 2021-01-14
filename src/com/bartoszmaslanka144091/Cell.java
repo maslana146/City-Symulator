@@ -11,28 +11,38 @@ public class Cell extends StackPane {
     boolean availableForSuppliers;
     int centerX;
     int centerY;
+    boolean isThereShop;
 
-    Rectangle border = new Rectangle(50,50);
+
+    public void setThereShop(boolean thereShop) {
+        isThereShop = thereShop;
+    }
+
+    Rectangle border = new Rectangle(Map.cellSize,Map.cellSize);
 
 
     public Cell(int x, int y, String type, boolean availableForClients, boolean availableForSuppliers) {
-        this.x = x * 50;
-        this.y = y * 50;
+        this.x = x * Map.cellSize;
+        this.y = y * Map.cellSize;
         this.type = type;
         this.availableForClients = availableForClients;
         this.availableForSuppliers = availableForSuppliers;
-        this.centerX = this.x + 25;
-        this.centerY = this.y + 25;
+        this.centerX = this.x + (Map.cellSize/2);
+        this.centerY = this.y + (Map.cellSize/2);
         border.setStroke(Color.LIGHTGRAY);
 
 
     }
 
+    public boolean getIsThereShop() {
+        return isThereShop;
+    }
+
     @Override
     public String toString() {
         return "Cell{" +
-                "x=" + x +
-                ", y=" + y +
+                "x=" + x/25 +
+                ", y=" + y/25 +
                 ", for clients=" + availableForClients +
                 '}';
     }
@@ -88,4 +98,5 @@ public class Cell extends StackPane {
     public boolean isAvailableForSuppliers() {
         return availableForSuppliers;
     }
+
 }

@@ -1,7 +1,7 @@
 package com.bartoszmaslanka144091;
 
 import javafx.animation.PathTransition;
-import javafx.scene.shape.Circle;
+import javafx.application.Platform;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -12,15 +12,30 @@ import java.util.List;
 
 
 public class PathCreator {
+
+    //TODO dodaj funkcje dla kogo jest tworzony path jesli supplier
     public static List<Cell> findPath(Cell start, Cell end, Cell[][] grid) {
         List<Cell> visited = new ArrayList<Cell>();
         List<Cell> path = new ArrayList<Cell>();
+        visited.add(start);
+        path.add(start);
         boolean success = false;
         Cell nextMove = start;
+        if (start == end){
+            return path;
+        }
+        int x = 0;
         while (!success) {
+            x +=1;
+            if (x>100){
+                System.out.println("chuj");
+                Platform.exit();
+                break;
+            }
+
             List<Cell> neighbors = getNeighbors(grid, nextMove);
             double minDist = 1000;
-            if (nextMove == end) {
+            if (nextMove.getX() == end.getX() && nextMove.getY() == end.getY()) {
                 success = true;
                 return path;
             }
@@ -28,13 +43,21 @@ public class PathCreator {
                 if (visited.contains(cell)) {
                     continue;
                 } else {
-                    int cellX = cell.getX() / 50;
-                    int cellY = cell.getY() / 50;
-                    double newMinDist = euclideanDist(cellX, cellY, end.getX(), end.getY());
-                    visited.add(cell);
+                    int cellX = cell.getX() / Map.cellSize;
+                    int cellY = cell.getY() / Map.cellSize;
+                    double newMinDist = euclideanDist(cellX, cellY, end.getX() / Map.cellSize, end.getY() / Map.cellSize);
                     if (newMinDist < minDist) {
-                        minDist = newMinDist;
-                        nextMove = cell;
+                        if (cell.getX() == end.getX() && cell.getY() == end.getY()){
+                            path.add(cell);
+                            return path;
+                        }
+                        List<Cell> check = getNeighbors(grid, cell);
+                        //check.size() <= 1 &&
+                        if (check.size() > 1) {
+                            minDist = newMinDist;
+                            nextMove = cell;
+                            visited.add(cell);
+                        }
                     }
                 }
             }
@@ -51,26 +74,26 @@ public class PathCreator {
     }
 
     public static boolean isValidCell(Cell[][] grid, int x, int y) {
-        return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForClients);
+        return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForSuppliers);
     }
 
     public static List<Cell> getNeighbors(Cell[][] grid, Cell cell) {
         List<Cell> neighbors = new ArrayList<Cell>();
 
-        if (isValidCell(grid, cell.getX() / 50 - 1, cell.getY() / 50)) {
-            neighbors.add(grid[cell.getX() / 50 - 1][cell.getY() / 50]);
+        if (isValidCell(grid, cell.getX() / Map.cellSize - 1, cell.getY() / Map.cellSize)) {
+            neighbors.add(grid[cell.getX() / Map.cellSize - 1][cell.getY() / Map.cellSize]);
         }
 
-        if (isValidCell(grid, cell.getX() / 50 + 1, cell.getY() / 50)) {
-            neighbors.add(grid[cell.getX() / 50 + 1][cell.getY() / 50]);
+        if (isValidCell(grid, cell.getX() / Map.cellSize + 1, cell.getY() / Map.cellSize)) {
+            neighbors.add(grid[cell.getX() / Map.cellSize + 1][cell.getY() / Map.cellSize]);
         }
 
-        if (isValidCell(grid, cell.getX() / 50, cell.getY() / 50 - 1)) {
-            neighbors.add(grid[cell.getX() / 50][cell.getY() / 50 - 1]);
+        if (isValidCell(grid, cell.getX() / Map.cellSize, cell.getY() / Map.cellSize - 1)) {
+            neighbors.add(grid[cell.getX() / Map.cellSize][cell.getY() / Map.cellSize - 1]);
         }
 
-        if (isValidCell(grid, cell.getX() / 50, cell.getY() / 50 + 1)) {
-            neighbors.add(grid[cell.getX() / 50][cell.getY() / 50 + 1]);
+        if (isValidCell(grid, cell.getX() / Map.cellSize, cell.getY() / Map.cellSize + 1)) {
+            neighbors.add(grid[cell.getX() / Map.cellSize][cell.getY() / Map.cellSize + 1]);
         }
 
         return neighbors;
@@ -86,10 +109,13 @@ public class PathCreator {
         return path;
 
     }
-    public static void moveObject(Cell[][] grid, Circle obj,Cell start, Cell end){
-        List<Cell> listOfCells = findPath(start,end,grid);
+
+    public static void moveObject(Cell[][] grid, MovingObject obj, Cell start, Cell end) {
+        List<Cell> listOfCells = findPath(start, end, grid);
         Path path = createPath(listOfCells);
-        PathTransition animation = new PathTransition(Duration.seconds(7),path,obj);
+        PathTransition animation = new PathTransition(Duration.seconds(7), path, obj);
+        //TODO dodaj set on finished update pozycji czekaj chwile w sklepie potem rob next move
+        animation.setOnFinished(event -> {obj.setVisible(false);});
         animation.play();
 
     }

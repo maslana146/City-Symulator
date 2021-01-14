@@ -1,16 +1,13 @@
 package com.bartoszmaslanka144091;
 
-import javafx.fxml.FXML;
-
-import javafx.scene.control.Button;
-import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 public class Shop {
     String name;
     String address;
     int maxClientCapacity;
     int storageCapacity;
-    ArrayList<Product> availableProducts;
+    ObservableList<Product> availableProducts;
     int peopleCapacity;
     boolean lockdown;
     boolean isSale;
@@ -26,7 +23,7 @@ public class Shop {
         this.isSale = value;
     };
 
-    public Shop(String name, String address, int maxClientCapacity, int storageCapacity, ArrayList<Product> availableProducts,
+    public Shop(String name, String address, int maxClientCapacity, int storageCapacity, ObservableList<Product> availableProducts,
                 int peopleCapacity, boolean lockdown, boolean isSale) {
         this.name = name;
         this.address = address;
@@ -44,9 +41,5 @@ public class Shop {
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 '}';
-    }
-    @FXML private Button button;
-    public void show(){
-        System.out.println("Działa!!!");
     }
 }

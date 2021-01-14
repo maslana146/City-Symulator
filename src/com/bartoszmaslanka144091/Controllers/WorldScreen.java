@@ -1,59 +1,129 @@
 package com.bartoszmaslanka144091.Controllers;
 
-import com.bartoszmaslanka144091.Cell;
-import com.bartoszmaslanka144091.Map;
-import com.bartoszmaslanka144091.PathCreator;
-import com.bartoszmaslanka144091.Program;
+import com.bartoszmaslanka144091.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorldScreen {
 
     public Canvas worldCanvas;
     public Pane worldPane;
     Program program = Program.getInstance();
-    static int numCols = 10;
-    static int numRows = 10;
-    static int cellWidth = 50;
-    static int cellHeight = 50;
-    static int speed = 5;
-    Cell[][] grid = new Cell[numCols][numRows];
+    static int numCols = 20;
+    static int numRows = 20;
+    static public ObservableList<StaticObject> staticObjects = FXCollections.observableArrayList();
+    static public ObservableList<MovingObject> movingObjects = FXCollections.observableArrayList();
 
 
     @FXML
     public void initialize() {
+//        int id = Generators.newId();
+//        boolean isSick = Generators.genBool();
+//        boolean wearsMask = Generators.genBool();
+//        boolean vac = Generators.genBool();
+//        float chanceToGetSick = Generators.genFloat(0, 1);
+//        int shopsToGetWell = Generators.genInteger(0, 5);
+//        int currentCapacity = 0;
+//        int maxCapacity = Generators.genInteger(0, 5);
+//        ArrayList<Product> bag = new ArrayList<Product>();
+//        String firstName = Generators.firstName();
+//        String lastName = Generators.lastName();
+//        Client dupa = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
+//                maxCapacity, bag, firstName, lastName);
+//        program.listOfClients.add(dupa);
 
         GraphicsContext gc = worldCanvas.getGraphicsContext2D();
         Map.createCells();
         Map.paintMap(gc);
 
         Cell[][] grid = Map.getGrid();
-//        List<Cell> list = PathCreator.findPath(grid[0][0], grid[9][9], grid);
-        Circle circle = new Circle(0, 0, 12.5, Color.RED);
-        worldPane.getChildren().addAll(circle);
-//        Path path = (Path) PathCreator.createPath(list);
-        PathCreator.moveObject(grid,circle,grid[0][5],grid[9][5]);
-
-//        System.out.println("elo");
-//        for (PathElement element : path.getElements()) {
-//            System.out.println(element);
-//        }
-//        Circle circle = new Circle(0, 0, 12.5, Color.RED);
-//        worldPane.getChildren().addAll(circle);
-//        PathTransition pathTransition = new PathTransition(Duration.seconds(8), path, circle);
-//        EventHandler<MouseEvent> eventEventHandler = new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                circle.setFill(Color.BISQUE);
-//            }
-//        };
-//        circle.addEventFilter(MouseEvent.MOUSE_CLICKED,eventEventHandler);
-//        pathTransition.play();
 
 
+        List<Cell> shopCells = Map.getShopCells();
+        List<Cell> goToCells = new ArrayList<Cell>();
+        goToCells.add(grid[1][5]);
+        goToCells.add(grid[2][17]);
+        goToCells.add(grid[2][2]);
+        goToCells.add(grid[4][10]);
+        goToCells.add(grid[8][4]);
+        goToCells.add(grid[8][7]);
+        goToCells.add(grid[8][15]);
+        goToCells.add(grid[10][7]);
+        goToCells.add(grid[10][13]);
+        goToCells.add(grid[12][18]);
+        goToCells.add(grid[14][10]);
+        goToCells.add(grid[17][2]);
+        goToCells.add(grid[17][17]);
+        for (Wholesale wholesale : program.listOfWholesales) {
+            Cell goToCell = goToCells.get(0);
+            goToCells.remove(0);
+            Cell shopCell = shopCells.get(0);
+            shopCells.remove(0);
+            StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
+            staticObject.setFill(Color.YELLOW);
+            staticObject.setWholesale(wholesale);
+            staticObject.setCell(shopCell);
+            staticObject.setGoToCell(goToCell);
+
+            staticObjects.add(staticObject);
+            worldPane.getChildren().add(staticObject);
+        }
+        for (RetailShop retailShop : program.listOfRetailShops) {
+            Cell goToCell = goToCells.get(0);
+            goToCells.remove(0);
+            Cell shopCell = shopCells.get(0);
+            shopCells.remove(0);
+            StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
+            staticObject.setFill(Color.RED);
+            staticObject.setRetailShop(retailShop);
+            staticObject.setCell(shopCell);
+            staticObject.setGoToCell(goToCell);
+
+            worldPane.getChildren().add(staticObject);
+            staticObjects.add(staticObject);
+        }
+        for (Client client : program.listOfClients) {
+            client.setNextshop();
+            MovingObject object = new MovingObject(237, 237, 12.5, Color.HOTPINK, client, null);
+            worldPane.getChildren().add(object);
+            movingObjects.add(object);
+            showInformation(object);
+            //object.getClient().getNextshop().getGoToCell()
+            PathCreator.moveObject(grid, object, grid[8][15], object.getClient().getNextshop().getGoToCell());
+//            PathCreator.moveObject(grid, object, object.getCurrentCell(), grid[9][5]);
+
+        }
+
+
+    }
+
+    private void showInformation(MovingObject obj) {
+        obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(obj.getClient().getFirstName());
+                obj.getClient().setIsSick(!obj.getClient().getIsSick());
+                System.out.println(obj.getClient().getIsSick());
+//                System.out.println(obj.getTranslateX());
+//                System.out.println(obj.getTranslateY());
+//                obj.getCurrentCell();
+//                System.out.println(obj.getClient().getNextshop());
+
+
+//                    System.out.println(obj.getSupplier().getCarBrand());
+//                    System.out.println(obj.getSupplier().getIsSick());
+//
+            }
+        });
     }
 }

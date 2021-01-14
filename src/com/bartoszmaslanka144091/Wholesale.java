@@ -1,6 +1,6 @@
 package com.bartoszmaslanka144091;
 
-import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 public class Wholesale extends Shop{
 
@@ -17,7 +17,7 @@ public class Wholesale extends Shop{
     };
 
     public Wholesale(String name, String address, int max_client_capacity, int storage_capacity,
-                     ArrayList<Product> available_products, int people_capacity, Boolean lockdown, Boolean is_sale) {
+                     ObservableList<Product> available_products, int people_capacity, Boolean lockdown, Boolean is_sale) {
         super(name, address, max_client_capacity, storage_capacity, available_products, people_capacity, lockdown, is_sale);
     }
 }

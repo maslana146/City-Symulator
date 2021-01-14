@@ -1,20 +1,42 @@
 package com.bartoszmaslanka144091;
 
+import com.bartoszmaslanka144091.Controllers.WorldScreen;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Client extends Person {
     String firstName;
     String lastName;
-    Circle obj;
+    int positionX;
+    int positionY;
+    Circle circle;
+    StaticObject nextshop;
 
 
 
-    public void consume(){
+    public void consume() {
 
-    };
-    public void nextShop(){};
+    }
+
+    ;
+
+    public StaticObject getNextshop() {
+        return nextshop;
+    }
+
+    public void setNextshop() {
+        int nextShop = Generators.genInteger(3,WorldScreen.staticObjects.size());
+        this.nextshop = WorldScreen.staticObjects.get(nextShop);
+    }
+
+    public RetailShop nextShop() {
+        List<RetailShop> retailShopList = Program.getInstance().listOfRetailShops;
+        int shop = Generators.genInteger(0, Program.getInstance().listOfRetailShops.size());
+        //TODO zamien by zwracała cell danego retail shopu
+        return retailShopList.get(shop);
+    }
 
     public Client(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
                   int currentCapacity, int maxCapacity, ArrayList<Product> bag, String firstName, String lastName) {
@@ -34,13 +56,32 @@ public class Client extends Person {
                 '}';
     }
 
-    public Circle getObj() {
-        return obj;
+    public Circle getCircle() {
+        return circle;
     }
 
-    public void setObj(Circle obj) {
-        this.obj = obj;
+    public int getPositionX() {
+        return positionX;
     }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public void setPositionY(int positionY) {
+        this.positionY = positionY;
+    }
+//    public Circle getObj() {
+//        return obj;
+//    }
+//
+//    public void setObj(Circle obj) {
+//        this.obj = obj;
+//    }
 
     public String getFirstName() {
         return firstName;
