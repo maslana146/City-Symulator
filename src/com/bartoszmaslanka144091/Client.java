@@ -5,6 +5,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Client extends Person {
     String firstName;
@@ -13,7 +14,6 @@ public class Client extends Person {
     int positionY;
     Circle circle;
     StaticObject nextshop;
-
 
 
     public void consume() {
@@ -27,8 +27,10 @@ public class Client extends Person {
     }
 
     public void setNextshop() {
-        int nextShop = Generators.genInteger(3,WorldScreen.staticObjects.size());
-        this.nextshop = WorldScreen.staticObjects.get(nextShop);
+        List<StaticObject> staticObjects = WorldScreen.staticObjects.stream().filter(p ->
+                p.getRetailShop() != null).collect(Collectors.toList());
+        int nextShop = Generators.genInteger(3, staticObjects.size());
+        this.nextshop = staticObjects.get(nextShop);
     }
 
     public RetailShop nextShop() {

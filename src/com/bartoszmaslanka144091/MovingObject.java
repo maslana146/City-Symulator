@@ -4,7 +4,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 import java.awt.event.MouseEvent;
-import java.util.concurrent.TimeUnit;
 
 public class MovingObject extends Circle implements Runnable {
     Client client = null;
@@ -27,10 +26,9 @@ public class MovingObject extends Circle implements Runnable {
         this.client = client;
     }
 
-    public MovingObject(double centerX, double centerY, double radius, Paint fill, Client client, Supplier supplier) {
+    public MovingObject(double centerX, double centerY, double radius, Paint fill) {
         super(centerX, centerY, radius, fill);
-        this.client = client;
-        this.supplier = supplier;
+
     }
 
     public void onClick(MouseEvent event) {
@@ -39,9 +37,10 @@ public class MovingObject extends Circle implements Runnable {
 
     public void setCurrentCell() {
         Cell[][] grid = Map.getGrid();
-        int x = (int) (getTranslateX() - 12) / 25;
-        int y = (int) (getTranslateY() - 12) / 25;
-        System.out.println("To jes curr cel; " + x + " " + y);
+        int x = (int) ((getTranslateX()) - 12) / 25;
+        int y = (int) ((getTranslateY()) - 12) / 25;
+//        System.out.println(getTranslateX()+" "+getTranslateY());
+//        System.out.println("To jes curr cel; " + x + " " + y);
         this.currentCell = grid[x][y];
     }
 
@@ -57,10 +56,12 @@ public class MovingObject extends Circle implements Runnable {
             this.getClient().setNextshop();
             PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getClient().getNextshop().getGoToCell(),time);
             try {
-                TimeUnit.SECONDS.sleep(time);
+                Thread.sleep(time*2000 + 2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("Koniec " + Thread.currentThread());
+            this.setVisible(true);
         }
     }
 }

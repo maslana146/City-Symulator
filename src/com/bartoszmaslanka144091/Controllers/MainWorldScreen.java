@@ -11,6 +11,10 @@ public class MainWorldScreen {
 
 
     public void backMenu(ActionEvent actionEvent) {
+        for (Thread thread:WorldScreen.threadObservableList){
+            thread.suspend();
+        }
         mainScreen.loadMenuScreen();
+
     }
 }

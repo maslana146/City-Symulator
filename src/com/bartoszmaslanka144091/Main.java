@@ -16,26 +16,27 @@ public class Main extends Application {
         Scene scene = new Scene(stackPane, 800, 500);
         primaryStage.setTitle("Sym-java");
         primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
         Program program = Program.getInstance();
-        for (int i =0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             ObservableList<Product> products = FXCollections.observableArrayList();
             Wholesale wholesale = new Wholesale(Generators.genString(5),
-                    Generators.genString(5),Generators.genInteger(5,10),
-                    Generators.genInteger(5,10),products,0,false,false
-                    );
+                    Generators.genString(5), Generators.genInteger(5, 10),
+                    Generators.genInteger(5, 10), products, 0, false, false
+            );
             program.listOfWholesales.add(wholesale);
 
         }
-        for (int i =0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             ObservableList<Product> products = FXCollections.observableArrayList();
             RetailShop retailShop = new RetailShop(Generators.genString(5),
-                    Generators.genString(5),Generators.genInteger(5,10),
-                    Generators.genInteger(5,10),products,0,false,false
+                    Generators.genString(5), Generators.genInteger(5, 10),
+                    Generators.genInteger(5, 10), products, 0, false, false
             );
             program.listOfRetailShops.add(retailShop);
 

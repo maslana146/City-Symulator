@@ -28,7 +28,7 @@ public class PathCreator {
         while (!success) {
             x += 1;
             if (x > 100) {
-                System.out.println("chuj");
+                System.out.println("PathERROR");
                 Platform.exit();
                 break;
             }
@@ -117,12 +117,12 @@ public class PathCreator {
         animation.setOnFinished(event -> {
             obj.setVisible(false);
             obj.setCurrentCell();
-            try {
-                Thread.sleep(time*1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            obj.setVisible(true);
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
 
 
         });

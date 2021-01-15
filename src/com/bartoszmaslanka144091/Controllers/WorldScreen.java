@@ -23,7 +23,7 @@ public class WorldScreen {
     static int numRows = 20;
     static public ObservableList<StaticObject> staticObjects = FXCollections.observableArrayList();
     static public ObservableList<MovingObject> movingObjects = FXCollections.observableArrayList();
-
+    static public ObservableList<Thread> threadObservableList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -74,7 +74,7 @@ public class WorldScreen {
             staticObject.setWholesale(wholesale);
             staticObject.setCell(shopCell);
             staticObject.setGoToCell(goToCell);
-
+            showInformationStaticObject(staticObject);
             staticObjects.add(staticObject);
             worldPane.getChildren().add(staticObject);
         }
@@ -88,33 +88,53 @@ public class WorldScreen {
             staticObject.setRetailShop(retailShop);
             staticObject.setCell(shopCell);
             staticObject.setGoToCell(goToCell);
+            showInformationStaticObject(staticObject);
 
             worldPane.getChildren().add(staticObject);
             staticObjects.add(staticObject);
         }
         for (Client client : program.listOfClients) {
             client.setNextshop();
-            MovingObject object = new MovingObject(237, 37, 12.5, Color.HOTPINK, client, null);
+            MovingObject object = new MovingObject(0, 0, 12.5, Color.HOTPINK);
+            object.setClient(client);
             worldPane.getChildren().add(object);
             Thread obj = new Thread(object);
+            threadObservableList.add(obj);
             movingObjects.add(object);
-            showInformation(object);
-//            object.getClient().getNextshop().getGoToCell()
-//            PathCreator.moveObject(grid, object, grid[8][15], object.getClient().getNextshop().getGoToCell());
-//            PathCreator.moveObject(grid, object, object.getCurrentCell(), grid[9][5]);
+            showInformationMovingObject(object);
+            obj.setDaemon(true);
+            obj.start();
 
         }
 
 
     }
 
-    private void showInformation(MovingObject obj) {
+    private void showInformationMovingObject(MovingObject obj) {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println(obj.getClient().getFirstName());
                 obj.getClient().setIsSick(!obj.getClient().getIsSick());
                 System.out.println(obj.getClient().getIsSick());
+//                System.out.println(obj.getTranslateX());
+//                System.out.println(obj.getTranslateY());
+//                obj.getCurrentCell();
+//                System.out.println(obj.getClient().getNextshop());
+
+
+//                    System.out.println(obj.getSupplier().getCarBrand());
+//                    System.out.println(obj.getSupplier().getIsSick());
+//
+            }
+        });
+    }
+    private void showInformationStaticObject(StaticObject obj) {
+        obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("RetailsShop: "+obj.getRetailShop());
+                System.out.println("WholeSale: "+obj.getWholesale());
 //                System.out.println(obj.getTranslateX());
 //                System.out.println(obj.getTranslateY());
 //                obj.getCurrentCell();
