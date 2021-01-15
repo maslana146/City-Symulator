@@ -94,12 +94,13 @@ public class WorldScreen {
         }
         for (Client client : program.listOfClients) {
             client.setNextshop();
-            MovingObject object = new MovingObject(237, 237, 12.5, Color.HOTPINK, client, null);
+            MovingObject object = new MovingObject(237, 37, 12.5, Color.HOTPINK, client, null);
             worldPane.getChildren().add(object);
+            Thread obj = new Thread(object);
             movingObjects.add(object);
             showInformation(object);
-            //object.getClient().getNextshop().getGoToCell()
-            PathCreator.moveObject(grid, object, grid[8][15], object.getClient().getNextshop().getGoToCell());
+//            object.getClient().getNextshop().getGoToCell()
+//            PathCreator.moveObject(grid, object, grid[8][15], object.getClient().getNextshop().getGoToCell());
 //            PathCreator.moveObject(grid, object, object.getCurrentCell(), grid[9][5]);
 
         }

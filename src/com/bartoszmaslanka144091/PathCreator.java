@@ -21,13 +21,13 @@ public class PathCreator {
         path.add(start);
         boolean success = false;
         Cell nextMove = start;
-        if (start == end){
+        if (start == end) {
             return path;
         }
         int x = 0;
         while (!success) {
-            x +=1;
-            if (x>100){
+            x += 1;
+            if (x > 100) {
                 System.out.println("chuj");
                 Platform.exit();
                 break;
@@ -47,7 +47,7 @@ public class PathCreator {
                     int cellY = cell.getY() / Map.cellSize;
                     double newMinDist = euclideanDist(cellX, cellY, end.getX() / Map.cellSize, end.getY() / Map.cellSize);
                     if (newMinDist < minDist) {
-                        if (cell.getX() == end.getX() && cell.getY() == end.getY()){
+                        if (cell.getX() == end.getX() && cell.getY() == end.getY()) {
                             path.add(cell);
                             return path;
                         }
@@ -74,7 +74,7 @@ public class PathCreator {
     }
 
     public static boolean isValidCell(Cell[][] grid, int x, int y) {
-        return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForSuppliers);
+        return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForClients);
     }
 
     public static List<Cell> getNeighbors(Cell[][] grid, Cell cell) {
@@ -110,13 +110,24 @@ public class PathCreator {
 
     }
 
-    public static void moveObject(Cell[][] grid, MovingObject obj, Cell start, Cell end) {
+    public static void moveObject(Cell[][] grid, MovingObject obj, Cell start, Cell end, int time) {
         List<Cell> listOfCells = findPath(start, end, grid);
         Path path = createPath(listOfCells);
-        PathTransition animation = new PathTransition(Duration.seconds(7), path, obj);
-        //TODO dodaj set on finished update pozycji czekaj chwile w sklepie potem rob next move
-        animation.setOnFinished(event -> {obj.setVisible(false);});
+        PathTransition animation = new PathTransition(Duration.seconds(time), path, obj);
+        animation.setOnFinished(event -> {
+            obj.setVisible(false);
+            obj.setCurrentCell();
+            try {
+                Thread.sleep(time*1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            obj.setVisible(true);
+
+
+        });
         animation.play();
+
 
     }
 }
