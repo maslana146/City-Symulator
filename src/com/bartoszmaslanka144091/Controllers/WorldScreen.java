@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WorldScreen {
 
@@ -26,7 +27,9 @@ public class WorldScreen {
     static public ObservableList<Thread> threadObservableList = FXCollections.observableArrayList();
 
     @FXML
-    public void initialize() {
+    public void initialize() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+//        Timeline timeline = new Timeline();
 //        int id = Generators.newId();
 //        boolean isSick = Generators.genBool();
 //        boolean wearsMask = Generators.genBool();
@@ -71,6 +74,7 @@ public class WorldScreen {
             shopCells.remove(0);
             StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
             staticObject.setFill(Color.YELLOW);
+            staticObject.setStroke(Color.BLACK);
             staticObject.setWholesale(wholesale);
             staticObject.setCell(shopCell);
             staticObject.setGoToCell(goToCell);
@@ -85,6 +89,7 @@ public class WorldScreen {
             shopCells.remove(0);
             StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
             staticObject.setFill(Color.RED);
+            staticObject.setStroke(Color.BLACK);
             staticObject.setRetailShop(retailShop);
             staticObject.setCell(shopCell);
             staticObject.setGoToCell(goToCell);
@@ -97,6 +102,21 @@ public class WorldScreen {
             client.setNextshop();
             MovingObject object = new MovingObject(0, 0, 12.5, Color.HOTPINK);
             object.setClient(client);
+            object.setStroke(Color.BLACK);
+            worldPane.getChildren().add(object);
+            Thread obj = new Thread(object);
+            threadObservableList.add(obj);
+            movingObjects.add(object);
+            showInformationMovingObject(object);
+            obj.setDaemon(true);
+            obj.start();
+
+        }
+        for (Supplier supplier : program.listOfSuppliers) {
+            supplier.newListOfStops();
+            MovingObject object = new MovingObject(0, 0, 12.5, Color.BROWN);
+            object.setSupplier(supplier);
+            object.setStroke(Color.BLACK);
             worldPane.getChildren().add(object);
             Thread obj = new Thread(object);
             threadObservableList.add(obj);
@@ -108,15 +128,28 @@ public class WorldScreen {
         }
 
 
+
     }
 
     private void showInformationMovingObject(MovingObject obj) {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println(obj.getClient().getFirstName());
-                obj.getClient().setIsSick(!obj.getClient().getIsSick());
-                System.out.println(obj.getClient().getIsSick());
+                if (obj.getSupplier() == null){
+                    System.out.println(obj.getClient().getFirstName());
+                    System.out.println(obj.getClient().getLastName());
+                    System.out.println(obj.getClient().getNextshop());
+
+                }else if(obj.getClient() == null){
+                    System.out.println(obj.getSupplier().getCarBrand());
+                    System.out.println(obj.getSupplier().getCompanyName());
+                    System.out.println(obj.getSupplier().getListOfStops());
+                }
+                //TODO wstaw ifa by dzieli na suppow i clientow
+
+//                System.out.println(obj.getClient().getFirstName());
+//                obj.getClient().setIsSick(!obj.getClient().getIsSick());
+//                System.out.println(obj.getClient().getIsSick());
 //                System.out.println(obj.getTranslateX());
 //                System.out.println(obj.getTranslateY());
 //                obj.getCurrentCell();

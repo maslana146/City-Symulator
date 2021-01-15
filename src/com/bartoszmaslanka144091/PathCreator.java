@@ -14,7 +14,7 @@ import java.util.List;
 public class PathCreator {
 
     //TODO dodaj funkcje dla kogo jest tworzony path jesli supplier
-    public static List<Cell> findPath(Cell start, Cell end, Cell[][] grid) {
+    public static List<Cell> findPath(Cell start, Cell end, Cell[][] grid, MovingObject obj) {
         List<Cell> visited = new ArrayList<Cell>();
         List<Cell> path = new ArrayList<Cell>();
         visited.add(start);
@@ -33,7 +33,7 @@ public class PathCreator {
                 break;
             }
 
-            List<Cell> neighbors = getNeighbors(grid, nextMove);
+            List<Cell> neighbors = getNeighbors(grid, nextMove, obj);
             double minDist = 1000;
             if (nextMove.getX() == end.getX() && nextMove.getY() == end.getY()) {
                 success = true;
@@ -51,7 +51,7 @@ public class PathCreator {
                             path.add(cell);
                             return path;
                         }
-                        List<Cell> check = getNeighbors(grid, cell);
+                        List<Cell> check = getNeighbors(grid, cell, obj);
                         //check.size() <= 1 &&
                         if (check.size() > 1) {
                             minDist = newMinDist;
@@ -73,26 +73,30 @@ public class PathCreator {
         return distance;
     }
 
-    public static boolean isValidCell(Cell[][] grid, int x, int y) {
-        return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForClients);
+    public static boolean isValidCell(Cell[][] grid, int x, int y, MovingObject obj) {
+        if (obj.getClient() == null) {
+            return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForSuppliers);
+        } else {
+            return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForClients);
+        }
     }
 
-    public static List<Cell> getNeighbors(Cell[][] grid, Cell cell) {
+    public static List<Cell> getNeighbors(Cell[][] grid, Cell cell, MovingObject obj) {
         List<Cell> neighbors = new ArrayList<Cell>();
 
-        if (isValidCell(grid, cell.getX() / Map.cellSize - 1, cell.getY() / Map.cellSize)) {
+        if (isValidCell(grid, cell.getX() / Map.cellSize - 1, cell.getY() / Map.cellSize, obj)) {
             neighbors.add(grid[cell.getX() / Map.cellSize - 1][cell.getY() / Map.cellSize]);
         }
 
-        if (isValidCell(grid, cell.getX() / Map.cellSize + 1, cell.getY() / Map.cellSize)) {
+        if (isValidCell(grid, cell.getX() / Map.cellSize + 1, cell.getY() / Map.cellSize, obj)) {
             neighbors.add(grid[cell.getX() / Map.cellSize + 1][cell.getY() / Map.cellSize]);
         }
 
-        if (isValidCell(grid, cell.getX() / Map.cellSize, cell.getY() / Map.cellSize - 1)) {
+        if (isValidCell(grid, cell.getX() / Map.cellSize, cell.getY() / Map.cellSize - 1, obj)) {
             neighbors.add(grid[cell.getX() / Map.cellSize][cell.getY() / Map.cellSize - 1]);
         }
 
-        if (isValidCell(grid, cell.getX() / Map.cellSize, cell.getY() / Map.cellSize + 1)) {
+        if (isValidCell(grid, cell.getX() / Map.cellSize, cell.getY() / Map.cellSize + 1, obj)) {
             neighbors.add(grid[cell.getX() / Map.cellSize][cell.getY() / Map.cellSize + 1]);
         }
 
@@ -111,20 +115,12 @@ public class PathCreator {
     }
 
     public static void moveObject(Cell[][] grid, MovingObject obj, Cell start, Cell end, int time) {
-        List<Cell> listOfCells = findPath(start, end, grid);
+        List<Cell> listOfCells = findPath(start, end, grid,obj);
         Path path = createPath(listOfCells);
         PathTransition animation = new PathTransition(Duration.seconds(time), path, obj);
         animation.setOnFinished(event -> {
             obj.setVisible(false);
             obj.setCurrentCell();
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-
-
-
         });
         animation.play();
 

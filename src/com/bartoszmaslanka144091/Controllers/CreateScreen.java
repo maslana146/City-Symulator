@@ -91,7 +91,7 @@ public class CreateScreen {
         int currentCapacity = 0;
         int maxCapacity = Generators.genInteger(0, 5);
         ArrayList<Product> bag = new ArrayList<Product>();
-        ArrayList<Shop> listOfStops = new ArrayList<Shop>();
+        ArrayList<StaticObject> listOfStops = new ArrayList<StaticObject>();
         String companyName = Generators.brandName();
         String carBrand = Generators.carName();
         float fuelConsumption = Generators.genFloat(0, 1);
@@ -194,7 +194,7 @@ public class CreateScreen {
             ArrayList<Product> bag = new ArrayList<Product>();
             String companyName = supplierCompanyNameField.getText();
             String carBrand = supplierCarBrandField.getText();
-            ArrayList<Shop> listOfStops = new ArrayList<Shop>();
+            ArrayList<StaticObject> listOfStops = new ArrayList<StaticObject>();
             float fuelConsumption = Generators.genFloat(0, 1);
             Supplier supplier = new Supplier(id, isSick, wearsMask, isVac, chanceToGetSick, shopsToGetWell, currentCapacity,
                     maxCapacity, bag, companyName, carBrand, listOfStops, fuelConsumption, (float) 1.0, (float) 1.0);

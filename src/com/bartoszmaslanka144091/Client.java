@@ -36,7 +36,7 @@ public class Client extends Person {
     public RetailShop nextShop() {
         List<RetailShop> retailShopList = Program.getInstance().listOfRetailShops;
         int shop = Generators.genInteger(0, Program.getInstance().listOfRetailShops.size());
-        //TODO zamien by zwracała cell danego retail shopu
+
         return retailShopList.get(shop);
     }
 

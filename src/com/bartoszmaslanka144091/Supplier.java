@@ -1,12 +1,14 @@
 package com.bartoszmaslanka144091;
 
+import com.bartoszmaslanka144091.Controllers.WorldScreen;
+
 import java.util.ArrayList;
 
-public class Supplier extends Person {
+public class Supplier extends Person{
     String companyName;
     String carBrand;
 
-    ArrayList<Shop> listOfStops;
+    ArrayList<StaticObject> listOfStops;
     float fuelConsumption;
     float fuelCapacity;
     float currentFuel;
@@ -18,13 +20,29 @@ public class Supplier extends Person {
         currentCapacity -= 1;
 
     };
+    public void addNextShop(){
+        int nextShop = Generators.genInteger(3, WorldScreen.staticObjects.size());
+        listOfStops.add(WorldScreen.staticObjects.get(nextShop));
+
+    }
+    public StaticObject getNextShop(){
+      StaticObject shop = listOfStops.get(0);
+      listOfStops.remove(0);
+      return shop;
+    };
+    public void newListOfStops(){
+        for (int i = 0; i < 5; i++){
+            int shop = Generators.genInteger(0,WorldScreen.staticObjects.size());
+            listOfStops.add(WorldScreen.staticObjects.get(shop));
+        }
+    }
 
     void tank(){
         this.fuelCapacity = 1;
     };
 
     public Supplier(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
-                    int currentCapacity, int maxCapacity, ArrayList<Product> bag, String companyName, String carBrand, ArrayList<Shop> listOfStops, float fuelConsumption, float fuelCapacity, float currentFuel) {
+                    int currentCapacity, int maxCapacity, ArrayList<Product> bag, String companyName, String carBrand, ArrayList<StaticObject> listOfStops, float fuelConsumption, float fuelCapacity, float currentFuel) {
         super(id, isSick, wearsMask, vaccinated, chanceToGetSick, shopsToGetWell, currentCapacity, maxCapacity, bag);
         this.companyName = companyName;
         this.carBrand = carBrand;
@@ -42,7 +60,7 @@ public class Supplier extends Person {
         this.carBrand = carBrand;
     }
 
-    public void setListOfStops(ArrayList<Shop> listOfStops) {
+    public void setListOfStops(ArrayList<StaticObject> listOfStops) {
         this.listOfStops = listOfStops;
     }
 
@@ -66,7 +84,7 @@ public class Supplier extends Person {
         return carBrand;
     }
 
-    public ArrayList<Shop> getListOfStops() {
+    public ArrayList<StaticObject> getListOfStops() {
         return listOfStops;
     }
 
@@ -93,4 +111,6 @@ public class Supplier extends Person {
                 ", currentFuel=" + currentFuel +
                 '}';
     }
+
+
 }

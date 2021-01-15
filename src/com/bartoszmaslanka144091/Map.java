@@ -12,6 +12,7 @@ public class Map {
     static int cellSize = 25;
     static Cell[][] grid = new Cell[numRows][numCols];
     static List<Cell> shopCells;
+
     public static Cell[][] getGrid() {
         return grid;
     }
@@ -22,9 +23,9 @@ public class Map {
 
     public static List<Cell> getShopCells() {
         List<Cell> cells = new ArrayList<Cell>();
-        for(Cell[] row: grid){
-            for (Cell cell:row){
-                if (cell.isThereShop){
+        for (Cell[] row : grid) {
+            for (Cell cell : row) {
+                if (cell.isThereShop) {
                     cells.add(cell);
                 }
             }
@@ -69,7 +70,6 @@ public class Map {
                 }
                 if (j == 17 && i > 2 && i < 17) {
                     grid[i][j].setAvailableForSuppliers(true);
-//                System.out.println(grid[i][j]);
                 }
 
                 if (j == 9 && i != 0 && i != 19 && i != 1 && i != 18) {
@@ -122,7 +122,6 @@ public class Map {
         grid[2][17].setAvailableForClients(true);
 
 
-
         grid[12][18].setAvailableForSuppliers(true);
         grid[1][5].setAvailableForSuppliers(true);
         grid[4][10].setAvailableForSuppliers(true);
@@ -132,7 +131,6 @@ public class Map {
         grid[10][7].setAvailableForSuppliers(true);
         grid[10][13].setAvailableForSuppliers(true);
         grid[14][10].setAvailableForSuppliers(true);
-        //TODO na miejsce isShop dodaj kwadraty jako retailshop
     }
 
 
@@ -142,6 +140,7 @@ public class Map {
                 if (grid[i][j].availableForClients && !grid[i][j].availableForSuppliers) {
                     graphicsContext.setFill(Color.LIGHTGOLDENRODYELLOW);
                     graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
+
 
                 } else if (grid[i][j].availableForSuppliers && !grid[i][j].availableForClients) {
                     graphicsContext.setFill(Color.GRAY);
