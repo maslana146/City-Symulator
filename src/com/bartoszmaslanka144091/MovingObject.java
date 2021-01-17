@@ -6,6 +6,7 @@ import javafx.scene.shape.Circle;
 import java.awt.event.MouseEvent;
 
 public class MovingObject extends Circle implements Runnable {
+    private volatile boolean running = true;
     Client client = null;
     Supplier supplier = null;
     Cell currentCell = Map.grid[8][9];
@@ -51,7 +52,8 @@ public class MovingObject extends Circle implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (running) {
+            this.setVisible(true);
             int time = Generators.genInteger(4, 10);
             if (supplier == null) {
                 this.getClient().setNextshop();
@@ -59,8 +61,8 @@ public class MovingObject extends Circle implements Runnable {
 
             } else if (client == null) {
                 this.getSupplier().addNextShop();
-                this.getSupplier().getNextShop();
-                PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getSupplier().getNextShop().getGoToCell(), time);
+                this.getSupplier().getNewNextShop();
+                PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getSupplier().getNewNextShop().getGoToCell(), time);
             }
             try {
                 Thread.sleep((time * 2000) + (Generators.genInteger(1,3) * 1000));
@@ -68,7 +70,11 @@ public class MovingObject extends Circle implements Runnable {
                 e.printStackTrace();
             }
 //            System.out.println("Koniec " + Thread.currentThread());
-            this.setVisible(true);
+
         }
+    }
+    public void stop(){
+        this.running = false;
+
     }
 }

@@ -3,6 +3,8 @@ package com.bartoszmaslanka144091.Controllers;
 import com.bartoszmaslanka144091.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -61,12 +63,14 @@ public class CreateScreen {
         int shopsToGetWell = Generators.genInteger(0, 5);
         int currentCapacity = 0;
         int maxCapacity = Generators.genInteger(0, 5);
-        ArrayList<Product> bag = new ArrayList<Product>();
+        ObservableList<Product> bag = FXCollections.observableArrayList();
         String firstName = Generators.firstName();
         String lastName = Generators.lastName();
-        Client client = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
-                maxCapacity, bag, firstName, lastName);
-        System.out.println(client);
+        Client client = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell,
+                currentCapacity, maxCapacity, bag, firstName, lastName);
+//        Client client = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
+//                maxCapacity, bag, firstName, lastName);
+//        System.out.println(client);
         boolean result = program.listOfClients.add(client);
         if (result) {
             showResult("Random Client was created successfully, Client ID: " + id);
@@ -90,7 +94,7 @@ public class CreateScreen {
         int shopsToGetWell = Generators.genInteger(0, 5);
         int currentCapacity = 0;
         int maxCapacity = Generators.genInteger(0, 5);
-        ArrayList<Product> bag = new ArrayList<Product>();
+        ObservableList<Product> bag = FXCollections.observableArrayList();
         ArrayList<StaticObject> listOfStops = new ArrayList<StaticObject>();
         String companyName = Generators.brandName();
         String carBrand = Generators.carName();
@@ -139,7 +143,7 @@ public class CreateScreen {
             int shopsToGetWell = Generators.genInteger(0, 5);
             int currentCapacity = 0;
             int maxCapacity = Integer.parseInt(clientBagCapacityField.getText());
-            ArrayList<Product> bag = new ArrayList<Product>();
+            ObservableList<Product> bag = FXCollections.observableArrayList();
             String firstName = clientFirstNameField.getText();
             String lastBrand = clientLastNameField.getText();
             Client client = new Client(id, isSick, wearsMask, isVac, chanceToGetSick, shopsToGetWell, currentCapacity,
@@ -191,7 +195,7 @@ public class CreateScreen {
             int shopsToGetWell = Generators.genInteger(0, 5);
             int currentCapacity = 0;
             int maxCapacity = Integer.parseInt(supplierBagCapacityField.getText());
-            ArrayList<Product> bag = new ArrayList<Product>();
+            ObservableList<Product> bag = FXCollections.observableArrayList();
             String companyName = supplierCompanyNameField.getText();
             String carBrand = supplierCarBrandField.getText();
             ArrayList<StaticObject> listOfStops = new ArrayList<StaticObject>();

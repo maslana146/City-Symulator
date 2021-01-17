@@ -1,10 +1,12 @@
 package com.bartoszmaslanka144091.Controllers;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
 
 public class MainWorldScreen {
-    public Label showTimeLine;
+
+
+
+
     private MainScreen mainScreen;
 
     public void setMainScreen(MainScreen mainScreen) {
@@ -19,4 +21,10 @@ public class MainWorldScreen {
         mainScreen.loadMenuScreen();
 
     }
+    //TODO obczaj dlaczego to do kurwy jest null!!!
+//    public void clientTabVisable(){
+//        System.out.println(clientBox.getLayoutX());
+//        boolean value = clientBox.isVisible();
+//        clientBox.setVisible(!value);
+//    }
 }

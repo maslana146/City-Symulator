@@ -12,6 +12,14 @@ public class Shop {
     boolean lockdown;
     boolean isSale;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void checkProductsDate(){};
     public void delOldProducts(){};
 

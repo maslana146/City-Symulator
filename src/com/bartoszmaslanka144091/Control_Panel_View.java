@@ -6,8 +6,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 public class Control_Panel_View extends Application {
     Stage window;
     TableView<Client> clientsTable;
@@ -29,12 +27,12 @@ public class Control_Panel_View extends Application {
     public static void main(String[] args) {
         Control_panel controlPanel = new Control_panel();
         int i = 0;
-        while (controlPanel.listOfClients.size() < 3){
-            Client client = new Client(i,Boolean.FALSE,false,false,199.33F,
-                    3,2,3,new ArrayList<Product>(),"abbs",
-                    "abbc");
-            controlPanel.listOfClients.add(client);
-        }
-        launch(args);
+//        while (controlPanel.listOfClients.size() < 3){
+//            Client client = new Client(i,Boolean.FALSE,false,false,199.33F,
+//                    3,2,3,new ObservableList<Product>(),"abbs",
+//                    "abbc");
+//            controlPanel.listOfClients.add(client);
+//        }
+//        launch(args);
     }
 }

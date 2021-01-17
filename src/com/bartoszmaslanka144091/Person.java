@@ -1,6 +1,7 @@
 package com.bartoszmaslanka144091;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Person {
     int id;
@@ -11,7 +12,7 @@ public class Person {
     int shopsToGetWell;
     int currentCapacity;
     int maxCapacity;
-    ArrayList<Product> bag;
+    ObservableList<Product> bag = FXCollections.observableArrayList();
 
     public void currentPosition() {
     }
@@ -34,7 +35,7 @@ public class Person {
     ;
 
     public Person(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick,
-                  int shopsToGetWell, int currentCapacity, int maxCapacity, ArrayList<Product> bag) {
+                  int shopsToGetWell, int currentCapacity, int maxCapacity, ObservableList<Product> bag) {
         this.id = id;
         this.isSick = isSick;
         this.wearsMask = wearsMask;
@@ -85,7 +86,7 @@ public class Person {
         return maxCapacity;
     }
 
-    public ArrayList<Product> getBag() {
+    public ObservableList<Product> getBag() {
         return bag;
     }
 
@@ -121,7 +122,7 @@ public class Person {
         this.maxCapacity = maxCapacity;
     }
 
-    public void setBag(ArrayList<Product> bag) {
+    public void setBag(ObservableList<Product> bag) {
         this.bag = bag;
     }
 }

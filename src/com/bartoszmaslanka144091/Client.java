@@ -1,9 +1,9 @@
 package com.bartoszmaslanka144091;
 
 import com.bartoszmaslanka144091.Controllers.WorldScreen;
+import javafx.collections.ObservableList;
 import javafx.scene.shape.Circle;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +41,7 @@ public class Client extends Person {
     }
 
     public Client(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
-                  int currentCapacity, int maxCapacity, ArrayList<Product> bag, String firstName, String lastName) {
+                  int currentCapacity, int maxCapacity, ObservableList<Product> bag, String firstName, String lastName) {
         super(id, isSick, wearsMask, vaccinated, chanceToGetSick, shopsToGetWell, currentCapacity, maxCapacity, bag);
         this.firstName = firstName;
         this.lastName = lastName;

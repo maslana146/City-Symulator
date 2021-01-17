@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PathCreator {
 
-    //TODO dodaj funkcje dla kogo jest tworzony path jesli supplier
+
     public static List<Cell> findPath(Cell start, Cell end, Cell[][] grid, MovingObject obj) {
         List<Cell> visited = new ArrayList<Cell>();
         List<Cell> path = new ArrayList<Cell>();

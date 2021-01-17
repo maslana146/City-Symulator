@@ -1,6 +1,7 @@
 package com.bartoszmaslanka144091;
 
 import com.bartoszmaslanka144091.Controllers.WorldScreen;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,11 @@ public class Supplier extends Person{
     float fuelConsumption;
     float fuelCapacity;
     float currentFuel;
+    StaticObject nextShop;
+
+    public StaticObject getNextShop() {
+        return nextShop;
+    }
 
     void leaveProduct(Product product, Shop shop){
 
@@ -25,9 +31,10 @@ public class Supplier extends Person{
         listOfStops.add(WorldScreen.staticObjects.get(nextShop));
 
     }
-    public StaticObject getNextShop(){
+    public StaticObject getNewNextShop(){
       StaticObject shop = listOfStops.get(0);
       listOfStops.remove(0);
+      this.nextShop = shop;
       return shop;
     };
     public void newListOfStops(){
@@ -42,7 +49,7 @@ public class Supplier extends Person{
     };
 
     public Supplier(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
-                    int currentCapacity, int maxCapacity, ArrayList<Product> bag, String companyName, String carBrand, ArrayList<StaticObject> listOfStops, float fuelConsumption, float fuelCapacity, float currentFuel) {
+                    int currentCapacity, int maxCapacity, ObservableList<Product> bag, String companyName, String carBrand, ArrayList<StaticObject> listOfStops, float fuelConsumption, float fuelCapacity, float currentFuel) {
         super(id, isSick, wearsMask, vaccinated, chanceToGetSick, shopsToGetWell, currentCapacity, maxCapacity, bag);
         this.companyName = companyName;
         this.carBrand = carBrand;

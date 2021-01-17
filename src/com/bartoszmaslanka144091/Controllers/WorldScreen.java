@@ -3,10 +3,17 @@ package com.bartoszmaslanka144091.Controllers;
 import com.bartoszmaslanka144091.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -19,16 +26,33 @@ public class WorldScreen {
 
     public Canvas worldCanvas;
     public Pane worldPane;
+    public Pane informationWindow;
+    public Label clientNameLabel;
+    public Label clientLastNameLabel;
+    public Label clientNextShopLabel;
+    public Label clientIdLabel;
+    public Button deleteButton;
+    public TableView productsTable;
+    public Label secodnLabel;
+    public Label thirdLabel;
+    public Label firstLabel;
+    public Label fourthLabel;
+    public Label removeLabel;
+    public Label titleTab;
     Program program = Program.getInstance();
     static int numCols = 20;
     static int numRows = 20;
     static public ObservableList<StaticObject> staticObjects = FXCollections.observableArrayList();
     static public ObservableList<MovingObject> movingObjects = FXCollections.observableArrayList();
     static public ObservableList<Thread> threadObservableList = FXCollections.observableArrayList();
+    MainWorldScreen mainWorldScreen = new MainWorldScreen();
+
 
     @FXML
     public void initialize() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
+
+        deleteButton.setGraphic(new ImageView("/com/bartoszmaslanka144091/resource/iconmonstr-recycling-13-32.png"));
+
 //        Timeline timeline = new Timeline();
 //        int id = Generators.newId();
 //        boolean isSick = Generators.genBool();
@@ -114,6 +138,7 @@ public class WorldScreen {
         }
         for (Supplier supplier : program.listOfSuppliers) {
             supplier.newListOfStops();
+            System.out.println(supplier.getListOfStops());
             MovingObject object = new MovingObject(0, 0, 12.5, Color.BROWN);
             object.setSupplier(supplier);
             object.setStroke(Color.BLACK);
@@ -126,8 +151,7 @@ public class WorldScreen {
             obj.start();
 
         }
-
-
+        TimeUnit.SECONDS.sleep(2);
 
     }
 
@@ -135,49 +159,123 @@ public class WorldScreen {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (obj.getSupplier() == null){
-                    System.out.println(obj.getClient().getFirstName());
-                    System.out.println(obj.getClient().getLastName());
-                    System.out.println(obj.getClient().getNextshop());
+                if (obj.getSupplier() == null) {
+                    informationWindowVisable(obj);
 
-                }else if(obj.getClient() == null){
-                    System.out.println(obj.getSupplier().getCarBrand());
-                    System.out.println(obj.getSupplier().getCompanyName());
-                    System.out.println(obj.getSupplier().getListOfStops());
+                } else if (obj.getClient() == null) {
+                    informationWindowVisable(obj);
                 }
-                //TODO wstaw ifa by dzieli na suppow i clientow
-
-//                System.out.println(obj.getClient().getFirstName());
-//                obj.getClient().setIsSick(!obj.getClient().getIsSick());
-//                System.out.println(obj.getClient().getIsSick());
-//                System.out.println(obj.getTranslateX());
-//                System.out.println(obj.getTranslateY());
-//                obj.getCurrentCell();
-//                System.out.println(obj.getClient().getNextshop());
-
-
-//                    System.out.println(obj.getSupplier().getCarBrand());
-//                    System.out.println(obj.getSupplier().getIsSick());
-//
             }
         });
     }
+
     private void showInformationStaticObject(StaticObject obj) {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("RetailsShop: "+obj.getRetailShop());
-                System.out.println("WholeSale: "+obj.getWholesale());
-//                System.out.println(obj.getTranslateX());
-//                System.out.println(obj.getTranslateY());
-//                obj.getCurrentCell();
-//                System.out.println(obj.getClient().getNextshop());
-
-
-//                    System.out.println(obj.getSupplier().getCarBrand());
-//                    System.out.println(obj.getSupplier().getIsSick());
-//
+                System.out.println("RetailsShop: " + obj.getRetailShop());
+                System.out.println("WholeSale: " + obj.getWholesale());
             }
         });
+    }
+
+    public void informationWindowVisable(MovingObject object) {
+        //TODO dodaj funkcji zmiany kierunku koljneo ruchu
+        if (object.getSupplier() == null) {
+            informationWindow.setVisible(true);
+            firstLabel.setText("Id:");
+            clientIdLabel.setText(String.valueOf(object.getClient().getId()));
+            secodnLabel.setText("First name:");
+            clientNameLabel.setText(object.getClient().getFirstName());
+            thirdLabel.setText("Last name:");
+            clientLastNameLabel.setText(object.getClient().getLastName());
+            fourthLabel.setText("Next shop:");
+            clientNextShopLabel.setText(object.getClient().getNextshop().getRetailShop().getName());
+            titleTab.setText("CLIENT");
+            removeLabel.setText("Remove client");
+            deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+                                         @Override
+                                         public void handle(ActionEvent event) {
+
+                                             object.setVisible(false);
+                                             object.stop();
+                                             movingObjects.remove(object);
+                                             program.listOfClients.remove(object.getClient());
+                                             informationWindow.setVisible(false);
+
+                                         }
+                                     }
+
+            );
+            productsTable.getColumns().clear();
+            TableColumn id = new TableColumn("ID");
+            TableColumn name = new TableColumn("Name");
+            TableColumn brand = new TableColumn("Brand");
+            productsTable.getColumns().addAll(id, name, brand);
+            id.setCellValueFactory(
+                    new PropertyValueFactory<Product, Integer>("id")
+            );
+            name.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("name")
+            );
+            brand.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("brand")
+            );
+            productsTable.setItems(object.getClient().getBag());
+
+
+        } else if (object.getClient() == null) {
+            System.out.println(object.getSupplier().getListOfStops().get(0).getWholesale());
+            informationWindow.setVisible(true);
+            firstLabel.setText("Id:");
+            clientIdLabel.setText(String.valueOf(object.getSupplier().getId()));
+            secodnLabel.setText("Car brand:");
+            clientNameLabel.setText(object.getSupplier().getCarBrand());
+            thirdLabel.setText("Company name:");
+            clientLastNameLabel.setText(object.getSupplier().getCompanyName());
+            fourthLabel.setText("Next shop:");
+            if (object.getSupplier().getNextShop().getWholesale() == null) {
+                clientNextShopLabel.setText(object.getSupplier().getNextShop().getRetailShop().getName());
+            } else if (object.getSupplier().getNextShop().getRetailShop() == null){
+                clientNextShopLabel.setText(object.getSupplier().getNextShop().getWholesale().getName());
+            }
+            titleTab.setText("SUPPLIER");
+            removeLabel.setText("Remove supplier");
+            deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+                                         @Override
+                                         public void handle(ActionEvent event) {
+
+                                             object.setVisible(false);
+                                             object.stop();
+                                             movingObjects.remove(object);
+                                             program.listOfSuppliers.remove(object.getSupplier());
+                                             informationWindow.setVisible(false);
+
+                                         }
+                                     }
+
+            );
+            productsTable.getColumns().clear();
+            TableColumn id = new TableColumn("ID");
+            TableColumn name = new TableColumn("Name");
+            TableColumn brand = new TableColumn("Brand");
+            productsTable.getColumns().addAll(id, name, brand);
+            id.setCellValueFactory(
+                    new PropertyValueFactory<Product, Integer>("id")
+            );
+            name.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("name")
+            );
+            brand.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("brand")
+            );
+            productsTable.setItems(object.getSupplier().getBag());
+        }
+    }
+
+
+    public void clearInformationWindow(MouseEvent mouseEvent) {
+        informationWindow.setVisible(false);
+
     }
 }
