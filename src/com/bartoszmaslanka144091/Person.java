@@ -14,26 +14,6 @@ public class Person {
     int maxCapacity;
     ObservableList<Product> bag = FXCollections.observableArrayList();
 
-    public void currentPosition() {
-    }
-
-    ;
-
-    public void takeProducts() {
-    }
-
-    ;
-
-    public void findPath() {
-    }
-
-    ;
-
-    public void move() {
-    }
-
-    ;
-
     public Person(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick,
                   int shopsToGetWell, int currentCapacity, int maxCapacity, ObservableList<Product> bag) {
         this.id = id;

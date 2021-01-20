@@ -121,6 +121,8 @@ public class PathCreator {
         animation.setOnFinished(event -> {
             obj.setVisible(false);
             obj.setCurrentCell();
+            obj.setVisitingShop(obj.getCurrentCell());
+            obj.swapItems();
         });
         animation.play();
 

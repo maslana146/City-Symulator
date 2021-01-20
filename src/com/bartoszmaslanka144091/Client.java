@@ -17,7 +17,9 @@ public class Client extends Person {
 
 
     public void consume() {
-
+        for (int i = 0; i<Generators.genInteger(0,currentCapacity);i++){
+            bag.remove(bag.get(i));
+        }
     }
 
     ;

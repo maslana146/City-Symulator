@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -29,6 +30,26 @@
             <Label fx:id="removeLabel" layoutX="28.0" layoutY="413.0" prefHeight="16.0" prefWidth="115.0" />
             <TableView fx:id="productsTable" layoutX="17.0" layoutY="202.0" prefHeight="200.0" prefWidth="265.0" />
             <Label layoutX="99.0" layoutY="175.0" text="List of products" />
+         </children>
+      </Pane>
+      <Pane fx:id="staticInformationWindow" layoutX="500.0" prefHeight="500.0" prefWidth="300.0" visible="false">
+         <children>
+            <Label fx:id="shopTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="14.0" prefHeight="30.0" prefWidth="265.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="44.0" text="Shop name:" />
+            <Label layoutX="36.0" layoutY="70.0" text="Address:" />
+            <Label fx:id="shopNameLabel" layoutX="190.0" layoutY="44.0" prefHeight="16.0" prefWidth="72.0" />
+            <Label fx:id="shopAddressLabel" layoutX="190.0" layoutY="70.0" prefHeight="16.0" prefWidth="72.0" />
+            <Label layoutX="36.0" layoutY="93.0" prefHeight="38.0" prefWidth="98.0" text="Current/Max Capacity prod." wrapText="true" />
+            <Label fx:id="capacityProdLabel" layoutX="190.0" layoutY="104.0" prefHeight="16.0" prefWidth="72.0" />
+            <Label layoutX="36.0" layoutY="131.0" prefHeight="38.0" prefWidth="92.0" text="Current/Max Capacity per." wrapText="true" />
+            <Label fx:id="capacityPerLabel" layoutX="190.0" layoutY="142.0" prefHeight="16.0" prefWidth="72.0" />
+            <TableView fx:id="productsTable1" layoutX="18.0" layoutY="175.0" prefHeight="151.0" prefWidth="265.0" />
+            <Button fx:id="createProd" layoutX="18.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="265.0" text="Create product" />
+            <ToggleButton fx:id="saleButton" layoutX="18.0" layoutY="338.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="265.0" text="SALE!!!" />
          </children>
       </Pane>
    </children>

@@ -1,7 +1,5 @@
 package com.bartoszmaslanka144091;
 
-import javafx.collections.ObservableList;
-
 public class Wholesale extends Shop{
 
     public void createProduct(){
@@ -13,11 +11,11 @@ public class Wholesale extends Shop{
         boolean sale = false;
         Product product = new Product(id,name,brand,time,chance,sale);
         this.availableProducts.add(product);
+        System.out.println(availableProducts);
 
     };
 
-    public Wholesale(String name, String address, int max_client_capacity, int storage_capacity,
-                     ObservableList<Product> available_products, int people_capacity, Boolean lockdown, Boolean is_sale) {
-        super(name, address, max_client_capacity, storage_capacity, available_products, people_capacity, lockdown, is_sale);
+    public Wholesale(String name, String address, int maxClientCapacity, int maxStorageCapacity, boolean lockdown, boolean isSale) {
+        super(name, address, maxClientCapacity, maxStorageCapacity, lockdown, isSale);
     }
 }

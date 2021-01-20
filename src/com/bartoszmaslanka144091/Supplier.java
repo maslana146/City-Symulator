@@ -27,6 +27,7 @@ public class Supplier extends Person{
 
     };
     public void addNextShop(){
+        //TODO cos tu sie jebie (nie dodaje kolejnych sklepow)
         int nextShop = Generators.genInteger(3, WorldScreen.staticObjects.size());
         listOfStops.add(WorldScreen.staticObjects.get(nextShop));
 

@@ -1,6 +1,7 @@
 package com.bartoszmaslanka144091.Controllers;
 
 import com.bartoszmaslanka144091.*;
+import com.bartoszmaslanka144091.Cell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,10 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +37,15 @@ public class WorldScreen {
     public Label fourthLabel;
     public Label removeLabel;
     public Label titleTab;
+    public Pane staticInformationWindow;
+    public Label shopTitle;
+    public Label shopNameLabel;
+    public Label shopAddressLabel;
+    public Label capacityProdLabel;
+    public Label capacityPerLabel;
+    public TableView productsTable1;
+    public Button createProd;
+    public ToggleButton saleButton;
     Program program = Program.getInstance();
     static int numCols = 20;
     static int numRows = 20;
@@ -50,10 +57,9 @@ public class WorldScreen {
 
     @FXML
     public void initialize() throws InterruptedException {
-
         deleteButton.setGraphic(new ImageView("/com/bartoszmaslanka144091/resource/iconmonstr-recycling-13-32.png"));
 
-//        Timeline timeline = new Timeline();
+////        Timeline timeline = new Timeline();
 //        int id = Generators.newId();
 //        boolean isSick = Generators.genBool();
 //        boolean wearsMask = Generators.genBool();
@@ -62,7 +68,7 @@ public class WorldScreen {
 //        int shopsToGetWell = Generators.genInteger(0, 5);
 //        int currentCapacity = 0;
 //        int maxCapacity = Generators.genInteger(0, 5);
-//        ArrayList<Product> bag = new ArrayList<Product>();
+//        ObservableList<Product> bag = FXCollections.observableArrayList();
 //        String firstName = Generators.firstName();
 //        String lastName = Generators.lastName();
 //        Client dupa = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
@@ -107,6 +113,8 @@ public class WorldScreen {
             worldPane.getChildren().add(staticObject);
         }
         for (RetailShop retailShop : program.listOfRetailShops) {
+//            System.out.println(retailShop.getAvailableProducts());
+
             Cell goToCell = goToCells.get(0);
             goToCells.remove(0);
             Cell shopCell = shopCells.get(0);
@@ -138,7 +146,6 @@ public class WorldScreen {
         }
         for (Supplier supplier : program.listOfSuppliers) {
             supplier.newListOfStops();
-            System.out.println(supplier.getListOfStops());
             MovingObject object = new MovingObject(0, 0, 12.5, Color.BROWN);
             object.setSupplier(supplier);
             object.setStroke(Color.BLACK);
@@ -159,12 +166,7 @@ public class WorldScreen {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (obj.getSupplier() == null) {
-                    informationWindowVisable(obj);
-
-                } else if (obj.getClient() == null) {
-                    informationWindowVisable(obj);
-                }
+                informationWindowVisable(obj);
             }
         });
     }
@@ -173,16 +175,98 @@ public class WorldScreen {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("RetailsShop: " + obj.getRetailShop());
-                System.out.println("WholeSale: " + obj.getWholesale());
+                //TODO dodaj information window
+                shopInformationWindow(obj);
+
             }
         });
     }
 
+    public void shopInformationWindow(StaticObject object) {
+        informationWindow.setVisible(false);
+        staticInformationWindow.setVisible(true);
+
+        if (object.getRetailShop() == null) {
+            shopNameLabel.setText(object.getWholesale().getName());
+            shopAddressLabel.setText(object.getWholesale().getAddress());
+            capacityProdLabel.setText(String.valueOf(object.getWholesale().getStorageCapacity()) + '/' + object.getWholesale().getMaxStorageCapacity());
+            capacityPerLabel.setText(String.valueOf(object.getWholesale().getPeopleCapacity()) + '/' + object.getWholesale().getMaxClientCapacity());
+            shopTitle.setText("WHOLESALE");
+            saleButton.setOnAction(new EventHandler<ActionEvent>() {
+                                       @Override
+                                       public void handle(ActionEvent event) {
+
+                                           object.getWholesale().setIs_sale(saleButton.isSelected());
+                                       }
+                                   }
+
+            );
+            createProd.setVisible(true);
+            createProd.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    object.getWholesale().createProduct();
+                    capacityProdLabel.setText(String.valueOf(object.getWholesale().getStorageCapacity()) + '/' + object.getWholesale().getMaxStorageCapacity());
+
+                }
+            });
+            productsTable1.getColumns().clear();
+            TableColumn id = new TableColumn("ID");
+            TableColumn name = new TableColumn("Name");
+            TableColumn brand = new TableColumn("Brand");
+            productsTable1.getColumns().addAll(id, name, brand);
+            id.setCellValueFactory(
+                    new PropertyValueFactory<Product, Integer>("id")
+            );
+            name.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("name")
+            );
+            brand.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("brand")
+            );
+            productsTable1.setItems(object.getWholesale().getAvailableProducts());
+
+
+        } else if (object.getWholesale() == null) {
+            shopNameLabel.setText(object.getRetailShop().getName());
+            shopAddressLabel.setText(object.getRetailShop().getAddress());
+            capacityProdLabel.setText(String.valueOf(object.getRetailShop().getStorageCapacity()) + '/' + object.getRetailShop().getMaxStorageCapacity());
+            capacityPerLabel.setText(String.valueOf(object.getRetailShop().getPeopleCapacity()) + '/' + object.getRetailShop().getMaxClientCapacity());
+            shopTitle.setText("RETAILSHOP");
+            saleButton.setOnAction(new EventHandler<ActionEvent>() {
+                                       @Override
+                                       public void handle(ActionEvent event) {
+
+                                           object.getRetailShop().setIs_sale(saleButton.isSelected());
+                                       }
+                                   }
+
+            );
+            createProd.setVisible(false);
+            productsTable1.getColumns().clear();
+            TableColumn id = new TableColumn("ID");
+            TableColumn name = new TableColumn("Name");
+            TableColumn brand = new TableColumn("Brand");
+            productsTable1.getColumns().addAll(id, name, brand);
+            id.setCellValueFactory(
+                    new PropertyValueFactory<Product, Integer>("id")
+            );
+            name.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("name")
+            );
+            brand.setCellValueFactory(
+                    new PropertyValueFactory<Product, String>("brand")
+            );
+            productsTable1.setItems(object.getRetailShop().getAvailableProducts());
+        }
+    }
+
     public void informationWindowVisable(MovingObject object) {
+        staticInformationWindow.setVisible(false);
+        informationWindow.setVisible(true);
+//        System.out.println(object.getClient().getMaxCapacity());
         //TODO dodaj funkcji zmiany kierunku koljneo ruchu
         if (object.getSupplier() == null) {
-            informationWindow.setVisible(true);
             firstLabel.setText("Id:");
             clientIdLabel.setText(String.valueOf(object.getClient().getId()));
             secodnLabel.setText("First name:");
@@ -225,8 +309,7 @@ public class WorldScreen {
 
 
         } else if (object.getClient() == null) {
-            System.out.println(object.getSupplier().getListOfStops().get(0).getWholesale());
-            informationWindow.setVisible(true);
+
             firstLabel.setText("Id:");
             clientIdLabel.setText(String.valueOf(object.getSupplier().getId()));
             secodnLabel.setText("Car brand:");
@@ -236,7 +319,7 @@ public class WorldScreen {
             fourthLabel.setText("Next shop:");
             if (object.getSupplier().getNextShop().getWholesale() == null) {
                 clientNextShopLabel.setText(object.getSupplier().getNextShop().getRetailShop().getName());
-            } else if (object.getSupplier().getNextShop().getRetailShop() == null){
+            } else if (object.getSupplier().getNextShop().getRetailShop() == null) {
                 clientNextShopLabel.setText(object.getSupplier().getNextShop().getWholesale().getName());
             }
             titleTab.setText("SUPPLIER");
@@ -276,6 +359,7 @@ public class WorldScreen {
 
     public void clearInformationWindow(MouseEvent mouseEvent) {
         informationWindow.setVisible(false);
+        staticInformationWindow.setVisible(false);
 
     }
 }

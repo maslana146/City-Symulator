@@ -5,7 +5,7 @@ public class Product {
     String name;
     String brand;
     int best_before_date;
-    Float chance_to_take;
+    float chance_to_take;
     Boolean on_sale;
 
     void setOn_sale(Boolean value){
