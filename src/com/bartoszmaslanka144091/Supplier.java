@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-public class Supplier extends Person{
+public class Supplier extends Person {
     String companyName;
     String carBrand;
 
@@ -19,35 +19,37 @@ public class Supplier extends Person{
         return nextShop;
     }
 
-    void leaveProduct(Product product, Shop shop){
-
-        shop.availableProducts.add(product);
-        bag.remove(product);
-        currentCapacity -= 1;
-
-    };
-    public void addNextShop(){
-        //TODO cos tu sie jebie (nie dodaje kolejnych sklepow)
-        int nextShop = Generators.genInteger(3, WorldScreen.staticObjects.size());
-        listOfStops.add(WorldScreen.staticObjects.get(nextShop));
-
+    public void addNextShop() {
+        if (Generators.genFloat(0, 1) < 0.5) {
+            int nextShop = Generators.genInteger(0, 3);
+            listOfStops.add(WorldScreen.staticObjects.get(nextShop));
+        } else {
+            int nextShop = Generators.genInteger(3, WorldScreen.staticObjects.size());
+            listOfStops.add(WorldScreen.staticObjects.get(nextShop));
+        }
     }
-    public StaticObject getNewNextShop(){
-      StaticObject shop = listOfStops.get(0);
-      listOfStops.remove(0);
-      this.nextShop = shop;
-      return shop;
-    };
-    public void newListOfStops(){
-        for (int i = 0; i < 5; i++){
-            int shop = Generators.genInteger(0,WorldScreen.staticObjects.size());
+
+    public StaticObject getNewNextShop() {
+        StaticObject shop = listOfStops.get(0);
+        listOfStops.remove(0);
+        this.nextShop = shop;
+        return shop;
+    }
+
+    ;
+
+    public void newListOfStops() {
+        for (int i = 0; i < 5; i++) {
+            int shop = Generators.genInteger(0, WorldScreen.staticObjects.size());
             listOfStops.add(WorldScreen.staticObjects.get(shop));
         }
     }
 
-    void tank(){
+    void tank() {
         this.fuelCapacity = 1;
-    };
+    }
+
+    ;
 
     public Supplier(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
                     int currentCapacity, int maxCapacity, ObservableList<Product> bag, String companyName, String carBrand, ArrayList<StaticObject> listOfStops, float fuelConsumption, float fuelCapacity, float currentFuel) {

@@ -85,8 +85,8 @@ public class WorldScreen {
         List<Cell> shopCells = Map.getShopCells();
         List<Cell> goToCells = new ArrayList<Cell>();
         goToCells.add(grid[1][5]);
-        goToCells.add(grid[2][17]);
         goToCells.add(grid[2][2]);
+        goToCells.add(grid[2][17]);
         goToCells.add(grid[4][10]);
         goToCells.add(grid[8][4]);
         goToCells.add(grid[8][7]);
@@ -166,7 +166,9 @@ public class WorldScreen {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+
                 informationWindowVisable(obj);
+
             }
         });
     }
@@ -175,7 +177,6 @@ public class WorldScreen {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //TODO dodaj information window
                 shopInformationWindow(obj);
 
             }
@@ -267,6 +268,7 @@ public class WorldScreen {
 //        System.out.println(object.getClient().getMaxCapacity());
         //TODO dodaj funkcji zmiany kierunku koljneo ruchu
         if (object.getSupplier() == null) {
+//            System.out.println("max: "+object.getClient().getMaxCapacity()+" current: "+object.getClient().getCurrentCapacity());
             firstLabel.setText("Id:");
             clientIdLabel.setText(String.valueOf(object.getClient().getId()));
             secodnLabel.setText("First name:");
@@ -309,6 +311,7 @@ public class WorldScreen {
 
 
         } else if (object.getClient() == null) {
+//            System.out.println("max: "+object.getSupplier().getMaxCapacity()+" current: "+object.getSupplier().getCurrentCapacity());
 
             firstLabel.setText("Id:");
             clientIdLabel.setText(String.valueOf(object.getSupplier().getId()));

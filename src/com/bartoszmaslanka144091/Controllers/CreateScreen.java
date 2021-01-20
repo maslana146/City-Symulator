@@ -60,7 +60,7 @@ public class CreateScreen {
         boolean wearsMask = Generators.genBool();
         boolean vac = Generators.genBool();
         float chanceToGetSick = Generators.genFloat(0, 1);
-        int shopsToGetWell = Generators.genInteger(0, 5);
+        int shopsToGetWell = Generators.genInteger(1, 3);
         int currentCapacity = 0;
         int maxCapacity = Generators.genInteger(0, 5);
         ObservableList<Product> bag = FXCollections.observableArrayList();
@@ -93,7 +93,7 @@ public class CreateScreen {
         float chanceToGetSick = Generators.genFloat(0, 1);
         int shopsToGetWell = Generators.genInteger(0, 5);
         int currentCapacity = 0;
-        int maxCapacity = Generators.genInteger(0, 5);
+        int maxCapacity = Generators.genInteger(3, 6);
         ObservableList<Product> bag = FXCollections.observableArrayList();
         ArrayList<StaticObject> listOfStops = new ArrayList<StaticObject>();
         String companyName = Generators.brandName();

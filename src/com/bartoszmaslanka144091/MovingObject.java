@@ -14,44 +14,13 @@ public class MovingObject extends Circle implements Runnable {
     Cell currentCell = Map.grid[8][9];
     StaticObject visitingShop;
 
+    public MovingObject(double centerX, double centerY, double radius, Paint fill) {
+        super(centerX, centerY, radius, fill);
+
+    }
+
     public StaticObject getVisitingShop() {
         return visitingShop;
-    }
-
-    public void setVisitingShop(Cell cell) {
-        for (StaticObject staticObject : WorldScreen.staticObjects) {
-            if (staticObject.getGoToCell().getX() == cell.getX() && staticObject.getGoToCell().getY() == cell.getY()) {
-                this.visitingShop = staticObject;
-
-            }
-        }
-    }
-
-    public void swapItems() {
-        if (this.client == null) {
-
-        } else if (this.supplier == null) {
-            visitingShop.getRetailShop().setPeopleCapacity(visitingShop.getRetailShop().getPeopleCapacity()+1);
-            List<Product> deleteList = new ArrayList<>();
-            for (Product product: visitingShop.getRetailShop().getAvailableProducts()){
-                if (this.client.currentCapacity < this.client.maxCapacity) {
-                    float p = Generators.genFloat(0, 1);
-                    System.out.println();
-                    if (p <= product.chance_to_take) {
-                        deleteList.add(product);
-//                        System.out.println(deleteList);
-//                        visitingShop.getRetailShop().getAvailableProducts().remove();
-//                        System.out.println("Dodano"+product);
-                        this.client.getBag().add(product);
-                        this.client.currentCapacity += 1;
-                    }
-                }else break;
-            }
-            for (Product product: deleteList){
-                visitingShop.getRetailShop().availableProducts.remove(product);
-            }
-
-        }
     }
 
     public Supplier getSupplier() {
@@ -70,11 +39,6 @@ public class MovingObject extends Circle implements Runnable {
         this.client = client;
     }
 
-    public MovingObject(double centerX, double centerY, double radius, Paint fill) {
-        super(centerX, centerY, radius, fill);
-
-    }
-
     public void setCurrentCell() {
         Cell[][] grid = Map.getGrid();
         int x = (int) ((getTranslateX()) - 12) / 25;
@@ -85,6 +49,67 @@ public class MovingObject extends Circle implements Runnable {
 
     public Cell getCurrentCell() {
         return currentCell;
+    }
+
+    public void swapItems() {
+
+        List<Product> deleteList = new ArrayList<>();
+        if (this.client == null) {
+            if (visitingShop.getWholesale() == null) {
+                visitingShop.getRetailShop().setPeopleCapacity(visitingShop.getRetailShop().getPeopleCapacity() + 1);
+                for (Product product : this.supplier.bag) {
+                    if (visitingShop.getRetailShop().getStorageCapacity() < visitingShop.getRetailShop().getMaxStorageCapacity()){
+                        visitingShop.getRetailShop().getAvailableProducts().add(product);
+                        visitingShop.getRetailShop().setStorageCapacity((visitingShop.getRetailShop().getStorageCapacity()));
+                        deleteList.add(product);
+                        this.supplier.currentCapacity -=1;
+
+                    }
+                }
+                this.supplier.bag.removeAll(deleteList);
+            } else if (visitingShop.getRetailShop() == null) {
+                visitingShop.getWholesale().setPeopleCapacity(visitingShop.getWholesale().getPeopleCapacity() + 1);
+                for (Product product : visitingShop.wholesale.availableProducts) {
+                    if (this.supplier.currentCapacity < this.supplier.maxCapacity) {
+                        deleteList.add(product);
+                        this.supplier.getBag().add(product);
+                        this.supplier.currentCapacity += 1;
+                    }
+                }
+                visitingShop.getWholesale().getStorageCapacity();
+                visitingShop.getWholesale().availableProducts.removeAll(deleteList);
+            }
+
+
+        } else if (this.supplier == null) {
+            visitingShop.getRetailShop().setPeopleCapacity(visitingShop.getRetailShop().getPeopleCapacity() + 1);
+            for (Product product : visitingShop.getRetailShop().getAvailableProducts()) {
+                if (this.client.currentCapacity < this.client.maxCapacity) {
+                    float p = Generators.genFloat(0, 1);
+                    System.out.println();
+                    if (p <= product.chance_to_take) {
+                        deleteList.add(product);
+//                        System.out.println(deleteList);
+//                        visitingShop.getRetailShop().getAvailableProducts().remove();
+//                        System.out.println("Dodano"+product);
+                        this.client.getBag().add(product);
+                        this.client.currentCapacity += 1;
+                    }
+                } else break;
+            }
+            visitingShop.getRetailShop().availableProducts.removeAll(deleteList);
+        }
+
+
+    }
+
+    public void setVisitingShop(Cell cell) {
+        for (StaticObject staticObject : WorldScreen.staticObjects) {
+            if (staticObject.getGoToCell().getX() == cell.getX() && staticObject.getGoToCell().getY() == cell.getY()) {
+                this.visitingShop = staticObject;
+
+            }
+        }
     }
 
     @Override
@@ -99,23 +124,17 @@ public class MovingObject extends Circle implements Runnable {
             } else if (client == null) {
                 this.getSupplier().addNextShop();
                 this.getSupplier().getNewNextShop();
-                PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getSupplier().getNewNextShop().getGoToCell(), time);
+                PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getSupplier().getNextShop().getGoToCell(), time);
             }
             try {
                 Thread.sleep((time * 2000) + (Generators.genInteger(1, 3) * 1000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            System.out.println(this.getCurrentCell());
-//            System.out.println(getVisitingShop().getWholesale());
-//
-//            System.out.println(getVisitingShop().getRetailShop());
-//            System.out.println("Koniec " + Thread.currentThread());
-
-            if (this.getVisitingShop().getRetailShop() == null){
-                this.getVisitingShop().getWholesale().setPeopleCapacity(getVisitingShop().getWholesale().getPeopleCapacity()-1);
-            }else if(this.getVisitingShop().getWholesale() == null){
-                this.visitingShop.getRetailShop().setPeopleCapacity(getVisitingShop().getRetailShop().getPeopleCapacity()-1);
+            if (this.getVisitingShop().getRetailShop() == null) {
+                this.getVisitingShop().getWholesale().setPeopleCapacity(getVisitingShop().getWholesale().getPeopleCapacity() - 1);
+            } else if (this.getVisitingShop().getWholesale() == null) {
+                this.getVisitingShop().getRetailShop().setPeopleCapacity(getVisitingShop().getRetailShop().getPeopleCapacity() - 1);
             }
         }
     }
