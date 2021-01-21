@@ -51,6 +51,51 @@ public class MovingObject extends Circle implements Runnable {
         return currentCell;
     }
 
+    public void coronaVirus() {
+        Program program = Program.getInstance();
+        float prob = 1;
+        List<MovingObject> objectsInShop = WorldScreen.movingObjects.filtered(object -> object.getCurrentCell() == this.getCurrentCell() && object != this);
+        for (MovingObject movingObject : objectsInShop) {
+            if (movingObject.getSupplier() == null) {
+                if (movingObject.getClient().isSick) {
+                    if (movingObject.getClient().wearsMask) {
+                        prob = 1;
+                    } else prob = 2;
+                }
+            } else if (movingObject.getClient() == null) {
+                if (movingObject.getSupplier().isSick) {
+                    if (movingObject.getSupplier().wearsMask) {
+                        prob = 1;
+                    } else prob = 2;
+                }
+            }
+            if (this.getSupplier() == null) {
+                if (this.getClient().wearsMask) prob *= program.GetSickWithMask;
+                else prob *= (2 * program.getGetSickWithMask());
+                if (this.getClient().vaccinated) prob *= program.GetSickVaccinated;
+                else prob *= (2 * program.GetSickVaccinated);
+
+                if (Generators.genInteger(0, 100) < prob/100) {
+                    this.getClient().setIsSick(true);
+                    return;
+                }
+
+            } else if (this.getClient() == null) {
+                if (this.getSupplier().wearsMask) prob *= program.GetSickWithMask;
+                else prob *= (2 * program.getGetSickWithMask());
+                if (this.getSupplier().vaccinated) prob *= program.GetSickVaccinated;
+                else prob *= (2 * program.GetSickVaccinated);
+
+                if (Generators.genInteger(0, 100) < prob/100) {
+                    this.getSupplier().setIsSick(true);
+                    return;
+                }
+
+            }
+        }
+    }
+
+
     public void swapItems() {
 
         List<Product> deleteList = new ArrayList<>();
@@ -58,11 +103,11 @@ public class MovingObject extends Circle implements Runnable {
             if (visitingShop.getWholesale() == null) {
                 visitingShop.getRetailShop().setPeopleCapacity(visitingShop.getRetailShop().getPeopleCapacity() + 1);
                 for (Product product : this.supplier.bag) {
-                    if (visitingShop.getRetailShop().getStorageCapacity() < visitingShop.getRetailShop().getMaxStorageCapacity()){
+                    if (visitingShop.getRetailShop().getStorageCapacity() < visitingShop.getRetailShop().getMaxStorageCapacity()) {
                         visitingShop.getRetailShop().getAvailableProducts().add(product);
                         visitingShop.getRetailShop().setStorageCapacity((visitingShop.getRetailShop().getStorageCapacity()));
                         deleteList.add(product);
-                        this.supplier.currentCapacity -=1;
+                        this.supplier.currentCapacity -= 1;
 
                     }
                 }

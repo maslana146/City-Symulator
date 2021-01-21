@@ -18,18 +18,22 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="secodnLabel" layoutX="27.0" layoutY="93.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="thirdLabel" layoutX="28.0" layoutY="116.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="firstLabel" layoutX="28.0" layoutY="67.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="fourthLabel" layoutX="28.0" layoutY="139.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientIdLabel" layoutX="185.0" layoutY="67.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientNameLabel" layoutX="185.0" layoutY="93.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientLastNameLabel" layoutX="185.0" layoutY="116.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientNextShopLabel" layoutX="185.0" layoutY="139.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="secodnLabel" layoutX="21.0" layoutY="78.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="thirdLabel" layoutX="22.0" layoutY="101.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="firstLabel" layoutX="22.0" layoutY="52.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="fourthLabel" layoutX="22.0" layoutY="124.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="clientIdLabel" layoutX="179.0" layoutY="52.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="clientNameLabel" layoutX="179.0" layoutY="78.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="clientLastNameLabel" layoutX="179.0" layoutY="101.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="clientNextShopLabel" layoutX="179.0" layoutY="124.0" prefHeight="16.0" prefWidth="98.0" />
             <Button fx:id="deleteButton" layoutX="205.0" layoutY="408.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="32.0" />
             <Label fx:id="removeLabel" layoutX="28.0" layoutY="413.0" prefHeight="16.0" prefWidth="115.0" />
-            <TableView fx:id="productsTable" layoutX="17.0" layoutY="202.0" prefHeight="200.0" prefWidth="265.0" />
-            <Label layoutX="99.0" layoutY="175.0" text="List of products" />
+            <TableView fx:id="productsTable" layoutX="17.0" layoutY="229.0" prefHeight="160.0" prefWidth="265.0" />
+            <Label layoutX="99.0" layoutY="205.0" text="List of products" />
+            <Label fx:id="vacLabel" layoutX="22.0" layoutY="148.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="vacResultLabel" layoutX="179.0" layoutY="148.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="sickLabel" layoutX="22.0" layoutY="173.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="sickResultLabel" layoutX="179.0" layoutY="165.0" prefHeight="16.0" prefWidth="98.0" />
          </children>
       </Pane>
       <Pane fx:id="staticInformationWindow" layoutX="500.0" prefHeight="500.0" prefWidth="300.0" visible="false">

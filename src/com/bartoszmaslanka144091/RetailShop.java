@@ -4,7 +4,6 @@ public class RetailShop extends Shop{
 
     public void isFullyProd(){};
     public void isFullyPer(){};
-    //TODO dodaj cell do ktorego będą dążyć supplierzy/clienci
 
 
     public RetailShop(String name, String address, int maxClientCapacity, int maxStorageCapacity, boolean lockdown, boolean isSale) {

@@ -119,11 +119,13 @@ public class PathCreator {
         Path path = createPath(listOfCells);
         PathTransition animation = new PathTransition(Duration.seconds(time), path, obj);
         animation.setOnFinished(event -> {
+
             obj.setVisible(false);
             obj.setCurrentCell();
             obj.setVisitingShop(obj.getCurrentCell());
 
             obj.swapItems();
+            obj.coronaVirus();
         });
         animation.play();
 

@@ -1,7 +1,7 @@
 package com.bartoszmaslanka144091.Controllers;
 
-import com.bartoszmaslanka144091.*;
 import com.bartoszmaslanka144091.Cell;
+import com.bartoszmaslanka144091.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class WorldScreen {
 
@@ -46,6 +45,10 @@ public class WorldScreen {
     public TableView productsTable1;
     public Button createProd;
     public ToggleButton saleButton;
+    public Label vacLabel;
+    public Label vacResultLabel;
+    public Label sickLabel;
+    public Label sickResultLabel;
     Program program = Program.getInstance();
     static int numCols = 20;
     static int numRows = 20;
@@ -158,7 +161,7 @@ public class WorldScreen {
             obj.start();
 
         }
-        TimeUnit.SECONDS.sleep(2);
+//        TimeUnit.SECONDS.sleep(2);
 
     }
 
@@ -268,6 +271,7 @@ public class WorldScreen {
 //        System.out.println(object.getClient().getMaxCapacity());
         //TODO dodaj funkcji zmiany kierunku koljneo ruchu
         if (object.getSupplier() == null) {
+//            System.out.println(object.getClient().getIsSick());
 //            System.out.println("max: "+object.getClient().getMaxCapacity()+" current: "+object.getClient().getCurrentCapacity());
             firstLabel.setText("Id:");
             clientIdLabel.setText(String.valueOf(object.getClient().getId()));
@@ -277,6 +281,10 @@ public class WorldScreen {
             clientLastNameLabel.setText(object.getClient().getLastName());
             fourthLabel.setText("Next shop:");
             clientNextShopLabel.setText(object.getClient().getNextshop().getRetailShop().getName());
+            vacLabel.setText("Is vaccinated:");
+            vacResultLabel.setText(String.valueOf(object.getClient().getVaccinated()));
+            sickLabel.setText("Is sick:");
+            sickResultLabel.setText(String.valueOf(object.getClient().getIsSick()));
             titleTab.setText("CLIENT");
             removeLabel.setText("Remove client");
             deleteButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -311,6 +319,8 @@ public class WorldScreen {
 
 
         } else if (object.getClient() == null) {
+//            System.out.println(object.getSupplier().getIsSick());
+
 //            System.out.println("max: "+object.getSupplier().getMaxCapacity()+" current: "+object.getSupplier().getCurrentCapacity());
 
             firstLabel.setText("Id:");
@@ -319,6 +329,10 @@ public class WorldScreen {
             clientNameLabel.setText(object.getSupplier().getCarBrand());
             thirdLabel.setText("Company name:");
             clientLastNameLabel.setText(object.getSupplier().getCompanyName());
+            vacLabel.setText("Is vaccinated:");
+            vacResultLabel.setText(String.valueOf(object.getSupplier().getVaccinated()));
+            sickLabel.setText("Is sick:");
+            sickResultLabel.setText(String.valueOf(object.getSupplier().getIsSick()));
             fourthLabel.setText("Next shop:");
             if (object.getSupplier().getNextShop().getWholesale() == null) {
                 clientNextShopLabel.setText(object.getSupplier().getNextShop().getRetailShop().getName());

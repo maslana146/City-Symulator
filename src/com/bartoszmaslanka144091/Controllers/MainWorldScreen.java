@@ -21,10 +21,5 @@ public class MainWorldScreen {
         mainScreen.loadMenuScreen();
 
     }
-    //TODO obczaj dlaczego to do kurwy jest null!!!
-//    public void clientTabVisable(){
-//        System.out.println(clientBox.getLayoutX());
-//        boolean value = clientBox.isVisible();
-//        clientBox.setVisible(!value);
-//    }
+
 }
