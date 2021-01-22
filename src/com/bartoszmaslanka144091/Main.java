@@ -14,6 +14,11 @@ public class Main extends Application {
         Scene scene = new Scene(stackPane, 800, 500);
         primaryStage.setTitle("Sym-java");
         primaryStage.setScene(scene);
+//        primaryStage.setResizable(false);
+        primaryStage.setMaxHeight(530);
+        primaryStage.setMaxWidth(800);
+        primaryStage.setMinHeight(530);
+        primaryStage.setMinWidth(800);
 
         primaryStage.show();
     }
@@ -35,6 +40,20 @@ public class Main extends Application {
             program.listOfRetailShops.add(retailShop);
 
         }
+        //TODO ogarnij tą muze
+//        final Task task = new Task() {
+//            @Override
+//            protected Object call() throws Exception {
+//                int s = INDEFINITE;
+//                AudioClip audio = new AudioClip(getClass().getResource("/com/bartoszmaslanka144091/resource/Volume Alpha - 03 - Subwoofer Lullaby.mp3").toExternalForm());
+//                audio.setVolume(0.5f);
+//                audio.setCycleCount(s);
+//                audio.play();
+//                return null;
+//            }
+//        };
+//        Thread thread = new Thread(task);
+//        thread.start();
 
 
         launch(args);

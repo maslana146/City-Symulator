@@ -1,0 +1,34 @@
+.tab-pane{
+    /*-fx-background-color: saddlebrown;*/
+}
+.tab{
+    -fx-text-base-color: white;
+    -fx-background-color: #3a3a3a;
+    -fx-focus-color:white;
+}
+.label,.check-box{
+    -fx-text-fill: white;
+
+}
+.slider{
+    -fx-control-inner-background:#3a3a3a;
+    -fx-focus-color:transparent;
+
+
+}
+
+.button,.toggle-button {
+    -fx-background-color: #3a3a3a;
+
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+
+}
+.toggle-button:selected{
+    -fx-background-color: RED;
+}
+.button:hover,.tab:selected{
+    -fx-background-color: #616161;
+
+}

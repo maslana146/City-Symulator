@@ -4,29 +4,60 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.CreateScreen">
    <children>
-      <Label layoutX="69.0" layoutY="61.0" text="Create Client" />
+      <ImageView fitHeight="500.0" fitWidth="800.0">
+         <image>
+            <Image url="@dirt.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="55.0" layoutY="57.0" text="Create Client">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
       <CheckBox fx:id="clientIsSick" layoutX="34.0" layoutY="117.0" mnemonicParsing="false" text="is sick" />
       <CheckBox fx:id="clientWearsMask" layoutX="129.0" layoutY="117.0" mnemonicParsing="false" text="wears mask" />
       <CheckBox fx:id="clientIsVaccinated" layoutX="248.0" layoutY="117.0" mnemonicParsing="false" text="is vaccinated" />
-      <Label layoutX="37.0" layoutY="226.0" prefHeight="16.0" prefWidth="117.0" text="First name" />
-      <Label layoutX="37.0" layoutY="194.0" prefHeight="16.0" prefWidth="117.0" text="Max bag capacity" />
-      <Label layoutX="37.0" layoutY="257.0" prefHeight="16.0" prefWidth="117.0" text="Last name" />
+      <Label layoutX="14.0" layoutY="222.0" prefHeight="24.0" prefWidth="174.0" text="First name">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label layoutX="10.0" layoutY="190.0" prefHeight="24.0" prefWidth="174.0" text="Max bag capacity">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label layoutX="14.0" layoutY="253.0" prefHeight="24.0" prefWidth="174.0" text="Last name">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
       <TextField fx:id="clientBagCapacityField" layoutX="188.0" layoutY="189.0" />
       <TextField fx:id="clientFirstNameField" layoutX="188.0" layoutY="221.0" />
       <TextField fx:id="clientLastNameField" layoutX="188.0" layoutY="252.0" />
       <Button layoutX="200.0" layoutY="56.0" mnemonicParsing="false" onAction="#createRandomClient" text="Create random Client" />
-      <Label layoutX="457.0" layoutY="61.0" text="Create Supplier" />
+      <Label layoutX="431.0" layoutY="57.0" text="Create Supplier">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
       <CheckBox fx:id="supplierIsSick" layoutX="441.0" layoutY="117.0" mnemonicParsing="false" text="is sick" />
       <CheckBox fx:id="supplierWearsMask" layoutX="536.0" layoutY="117.0" mnemonicParsing="false" text="wears mask" />
       <CheckBox fx:id="supplierIsVaccinated" layoutX="655.0" layoutY="117.0" mnemonicParsing="false" text="is vaccinated" />
-      <Label layoutX="444.0" layoutY="226.0" prefHeight="16.0" prefWidth="117.0" text="Company name" />
-      <Label layoutX="444.0" layoutY="194.0" prefHeight="16.0" prefWidth="117.0" text="Max bag capacity" />
-      <Label layoutX="444.0" layoutY="257.0" prefHeight="16.0" prefWidth="117.0" text="Car brand" />
+      <Label layoutX="418.0" layoutY="222.0" prefHeight="24.0" prefWidth="170.0" text="Company name">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label layoutX="418.0" layoutY="190.0" prefHeight="24.0" prefWidth="174.0" text="Max bag capacity">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label layoutX="418.0" layoutY="253.0" prefHeight="24.0" prefWidth="170.0" text="Car brand">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
       <TextField fx:id="supplierBagCapacityField" layoutX="595.0" layoutY="189.0" />
       <TextField fx:id="supplierCompanyNameField" layoutX="595.0" layoutY="221.0" />
       <TextField fx:id="supplierCarBrandField" layoutX="595.0" layoutY="252.0" />

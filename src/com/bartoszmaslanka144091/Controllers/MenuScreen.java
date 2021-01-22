@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class MenuScreen {
 
+
     private MainScreen mainScreen;
 
     public void setMainScreen(MainScreen mainScreen) {
@@ -39,5 +40,6 @@ public class MenuScreen {
     public void exit(){
         Platform.exit();
     }
+
 
 }
