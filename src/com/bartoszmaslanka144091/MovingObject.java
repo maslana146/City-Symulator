@@ -94,14 +94,30 @@ public class MovingObject extends Circle implements Runnable {
             }
         }
     }
+    public void action(){
+        if (visitingShop.getRetailShop() == null){
+            if (visitingShop.getWholesale().getPeopleCapacity() < visitingShop.getWholesale().getMaxClientCapacity()){
+                this.setVisible(false);
+                visitingShop.getWholesale().enterPerson();
+                swapItems();
+            }else System.out.println("Nie wlazłem");
+        }else if(visitingShop.getWholesale() == null){
+            if (visitingShop.getRetailShop().getPeopleCapacity() < visitingShop.getRetailShop().getMaxClientCapacity()){
+                this.setVisible(false);
+                visitingShop.getRetailShop().enterPerson();
+                swapItems();
 
+            }else System.out.println("Nie wlazłem");
+
+        }
+    }
 
     public void swapItems() {
 
         List<Product> deleteList = new ArrayList<>();
         if (this.client == null) {
             if (visitingShop.getWholesale() == null) {
-                visitingShop.getRetailShop().setPeopleCapacity(visitingShop.getRetailShop().getPeopleCapacity() + 1);
+
                 for (Product product : this.supplier.bag) {
                     if (visitingShop.getRetailShop().getStorageCapacity() < visitingShop.getRetailShop().getMaxStorageCapacity()) {
                         visitingShop.getRetailShop().getAvailableProducts().add(product);
@@ -113,7 +129,7 @@ public class MovingObject extends Circle implements Runnable {
                 }
                 this.supplier.bag.removeAll(deleteList);
             } else if (visitingShop.getRetailShop() == null) {
-                visitingShop.getWholesale().setPeopleCapacity(visitingShop.getWholesale().getPeopleCapacity() + 1);
+
                 for (Product product : visitingShop.wholesale.availableProducts) {
                     if (this.supplier.currentCapacity < this.supplier.maxCapacity) {
                         deleteList.add(product);
@@ -127,7 +143,7 @@ public class MovingObject extends Circle implements Runnable {
 
 
         } else if (this.supplier == null) {
-            visitingShop.getRetailShop().setPeopleCapacity(visitingShop.getRetailShop().getPeopleCapacity() + 1);
+
             for (Product product : visitingShop.getRetailShop().getAvailableProducts()) {
                 if (this.client.currentCapacity < this.client.maxCapacity) {
                     float p = Generators.genFloat(0, 1);
@@ -177,9 +193,9 @@ public class MovingObject extends Circle implements Runnable {
                 e.printStackTrace();
             }
             if (this.getVisitingShop().getRetailShop() == null) {
-                this.getVisitingShop().getWholesale().setPeopleCapacity(getVisitingShop().getWholesale().getPeopleCapacity() - 1);
+                this.getVisitingShop().getWholesale().outPerson();
             } else if (this.getVisitingShop().getWholesale() == null) {
-                this.getVisitingShop().getRetailShop().setPeopleCapacity(getVisitingShop().getRetailShop().getPeopleCapacity() - 1);
+                this.getVisitingShop().getRetailShop().outPerson();
             }
         }
     }

@@ -28,14 +28,15 @@ public class Main extends Application {
         Program program = Program.getInstance();
         for (int i = 0; i < 3; i++) {
             Wholesale wholesale = new Wholesale(Generators.genString(5), Generators.genString(5),
-                    Generators.genInteger(5, 10), Generators.genInteger(5, 10), false, false);
+                    Generators.genInteger(2, 4), Generators.genInteger(3, 5), false, false);
 
             program.listOfWholesales.add(wholesale);
 
         }
+        //TODO po zmainie max capacity i funkcji generate start products w retail wywala bląd
         for (int i = 0; i < 10; i++) {
             RetailShop retailShop = new RetailShop(Generators.genString(5), Generators.genString(5),
-                    Generators.genInteger(5, 10), Generators.genInteger(5, 10), false, false);
+                    1, Generators.genInteger(3, 5), false, false);
             retailShop.createStartProducts();
             program.listOfRetailShops.add(retailShop);
 

@@ -11,7 +11,7 @@ public class RetailShop extends Shop{
     }
 
     public void createStartProducts(){
-        int numOfProd = Generators.genInteger(1, maxStorageCapacity /2);
+        int numOfProd = Generators.genInteger(1, maxStorageCapacity);
         for (int i=0;i<numOfProd;i++){
             Product product = new Product(Generators.newId(),Generators.genString(5),Generators.brandName(),Generators.genInteger(0,5),
                     Generators.genFloat(0,1),Generators.genBool());

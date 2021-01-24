@@ -36,7 +36,12 @@ public class Shop {
         storageCapacity = getAvailableProducts().size();
         return storageCapacity;
     }
-
+    public void enterPerson(){
+        this.peopleCapacity +=1;
+    };
+    public void outPerson(){
+        this.peopleCapacity -= 1;
+    }
     public void setStorageCapacity(int storageCapacity) {
         this.storageCapacity = storageCapacity;
     }

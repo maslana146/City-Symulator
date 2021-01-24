@@ -232,16 +232,18 @@ public class WorldScreen {
 
 
         } else if (object.getWholesale() == null) {
+//            System.out.println(object.getRetailShop().isSale());
             shopNameLabel.setText(object.getRetailShop().getName());
             shopAddressLabel.setText(object.getRetailShop().getAddress());
             capacityProdLabel.setText(String.valueOf(object.getRetailShop().getStorageCapacity()) + '/' + object.getRetailShop().getMaxStorageCapacity());
             capacityPerLabel.setText(String.valueOf(object.getRetailShop().getPeopleCapacity()) + '/' + object.getRetailShop().getMaxClientCapacity());
             shopTitle.setText("RETAILSHOP");
+            saleButton.setSelected(object.getRetailShop().isSale());
             saleButton.setOnAction(new EventHandler<ActionEvent>() {
                                        @Override
                                        public void handle(ActionEvent event) {
-
                                            object.getRetailShop().setIs_sale(saleButton.isSelected());
+                                           shopInformationWindow(object);
                                        }
                                    }
 
@@ -251,7 +253,8 @@ public class WorldScreen {
             TableColumn id = new TableColumn("ID");
             TableColumn name = new TableColumn("Name");
             TableColumn brand = new TableColumn("Brand");
-            productsTable1.getColumns().addAll(id, name, brand);
+            TableColumn chance = new TableColumn("Chance to take");
+            productsTable1.getColumns().addAll(id, name, brand,chance);
             id.setCellValueFactory(
                     new PropertyValueFactory<Product, Integer>("id")
             );
@@ -261,8 +264,12 @@ public class WorldScreen {
             brand.setCellValueFactory(
                     new PropertyValueFactory<Product, String>("brand")
             );
+            chance.setCellValueFactory(
+                    new PropertyValueFactory<Product,Float>("chance_to_take")
+            );
             productsTable1.setItems(object.getRetailShop().getAvailableProducts());
         }
+
     }
 
     public void informationWindowVisable(MovingObject object) {
