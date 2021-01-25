@@ -17,23 +17,23 @@
          </image>
       </ImageView>
       <Slider fx:id="popVacSlider" blockIncrement="25.0" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="181.0" layoutY="181.0" onContextMenuRequested="#setPopulationVac" onDragDetected="#setPopulationVac" onDragDone="#setPopulationVac" onDragDropped="#setPopulationVac" onMouseClicked="#setPopulationVac" onMouseDragged="#setPopulationVac" onMouseEntered="#setPopulationVac" prefHeight="38.0" prefWidth="403.0" scaleShape="false" value="25.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="25.0" prefHeight="16.0" prefWidth="493.0" text="\% population sick">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="25.0" prefHeight="16.0" prefWidth="493.0" text="\% POPULATION SICK">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="160.0" prefHeight="16.0" prefWidth="493.0" text="\% population vaccinated">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="160.0" prefHeight="16.0" prefWidth="493.0" text="\% POPULATION VACCINATED">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="229.0" prefHeight="16.0" prefWidth="493.0" text="Chance to get sick vaccinated">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="229.0" prefHeight="16.0" prefWidth="493.0" text="CHANCE TO GET SICK VACCINATED">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="297.0" prefHeight="16.0" prefWidth="493.0" text="Chance to get sick with mask">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="297.0" prefHeight="16.0" prefWidth="493.0" text="CHANCE TO GET SICK WITH MASK">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="91.0" prefHeight="16.0" prefWidth="493.0" text="Shops to get well">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="91.0" prefHeight="16.0" prefWidth="493.0" text="SHOPS TO GET WELL">
          <font>
             <Font size="18.0" />
          </font></Label>

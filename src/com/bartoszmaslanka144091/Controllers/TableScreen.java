@@ -44,7 +44,7 @@ public class TableScreen {
             TableColumn firstNameCol = new TableColumn("First Name");
             TableColumn lastNameCol = new TableColumn("Last Name");
 
-            mainTableView.getColumns().addAll(id, isSick,isVac, wearsMask,firstNameCol, lastNameCol);
+            mainTableView.getColumns().addAll(id, isSick, isVac, wearsMask, firstNameCol, lastNameCol);
 
             id.setCellValueFactory(
                     new PropertyValueFactory<Client, Integer>("id")
@@ -62,11 +62,11 @@ public class TableScreen {
 //            }
 //        });
             isVac.setCellValueFactory(
-                    new PropertyValueFactory<Client,Boolean>("vaccinated")
+                    new PropertyValueFactory<Client, Boolean>("vaccinated")
             );
 
             wearsMask.setCellValueFactory(
-                    new PropertyValueFactory<Client,Boolean>("wearsMask")
+                    new PropertyValueFactory<Client, Boolean>("wearsMask")
             );
 
             firstNameCol.setCellValueFactory(
@@ -77,6 +77,7 @@ public class TableScreen {
             );
             mainTableView.setItems(program.listOfClients);
 
+
         } else if (comboSwitch.getValue() == "Suppliers") {
             mainTableView.getColumns().clear();
             TableColumn id = new TableColumn("ID");
@@ -86,7 +87,7 @@ public class TableScreen {
             TableColumn companyName = new TableColumn("Company Name");
             TableColumn carBrand = new TableColumn("Car Brand");
 
-            mainTableView.getColumns().addAll(id, isSick,isVac,wearsMask, companyName, carBrand);
+            mainTableView.getColumns().addAll(id, isSick, isVac, wearsMask, companyName, carBrand);
 
             id.setCellValueFactory(
                     new PropertyValueFactory<Supplier, Integer>("id")
@@ -105,10 +106,10 @@ public class TableScreen {
 //        });
 
             isVac.setCellValueFactory(
-                    new PropertyValueFactory<Client,Boolean>("vaccinated")
+                    new PropertyValueFactory<Client, Boolean>("vaccinated")
             );
             wearsMask.setCellValueFactory(
-                    new PropertyValueFactory<Supplier,Boolean>("wearsMask")
+                    new PropertyValueFactory<Supplier, Boolean>("wearsMask")
             );
 
             companyName.setCellValueFactory(
@@ -119,6 +120,7 @@ public class TableScreen {
             );
             mainTableView.setItems(program.listOfSuppliers);
         }
+
     }
 
 
@@ -148,10 +150,10 @@ public class TableScreen {
                 }
 
             }
-            if (check){
-            deleteField.clear();
-            showResult.setText("");}
-            else {
+            if (check) {
+                deleteField.clear();
+                showResult.setText("");
+            } else {
                 showResult.setText("No object with id: " + idx);
                 deleteField.clear();
             }

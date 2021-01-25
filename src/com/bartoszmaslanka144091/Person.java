@@ -34,6 +34,15 @@ public class Person {
                 '}';
     }
 
+    public void getWell() {
+        if (isSick) {
+            shopsToGetWell -= 1;
+        } else shopsToGetWell = 0;
+        if (shopsToGetWell == 0){
+            isSick = false;
+        }
+    }
+
     public int getId() {
         return id;
     }

@@ -5,13 +5,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="worldPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.WorldScreen">
+<Pane fx:id="worldPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.WorldScreen">
    <children>
+      <ImageView fitHeight="500.0" fitWidth="800.0">
+         <image>
+            <Image url="@dirt.jpg" />
+         </image>
+      </ImageView>
       <Canvas fx:id="worldCanvas" height="500.0" onMouseClicked="#clearInformationWindow" width="500.0" />
-      <Pane fx:id="informationWindow" layoutX="500.0" prefHeight="500.0" prefWidth="300.0" visible="false">
+      <Pane fx:id="informationWindow" layoutX="494.0" prefHeight="500.0" prefWidth="300.0" visible="false">
          <children>
             <Label fx:id="titleTab" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="30.0" prefWidth="201.0" textAlignment="CENTER">
                <font>
@@ -19,18 +26,17 @@
                </font>
             </Label>
             <Label fx:id="secodnLabel" layoutX="21.0" layoutY="78.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="thirdLabel" layoutX="22.0" layoutY="101.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="firstLabel" layoutX="22.0" layoutY="52.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="fourthLabel" layoutX="22.0" layoutY="124.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="thirdLabel" layoutX="22.0" layoutY="101.0" prefHeight="19.0" prefWidth="127.0" />
+            <Label fx:id="firstLabel" layoutX="22.0" layoutY="52.0" prefHeight="19.0" prefWidth="127.0" />
+            <Label fx:id="fourthLabel" layoutX="22.0" layoutY="124.0" prefHeight="19.0" prefWidth="127.0" />
             <Label fx:id="clientIdLabel" layoutX="179.0" layoutY="52.0" prefHeight="16.0" prefWidth="98.0" />
             <Label fx:id="clientNameLabel" layoutX="179.0" layoutY="78.0" prefHeight="16.0" prefWidth="98.0" />
             <Label fx:id="clientLastNameLabel" layoutX="179.0" layoutY="101.0" prefHeight="16.0" prefWidth="98.0" />
             <Label fx:id="clientNextShopLabel" layoutX="179.0" layoutY="124.0" prefHeight="16.0" prefWidth="98.0" />
-            <Button fx:id="deleteButton" layoutX="205.0" layoutY="408.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="32.0" />
-            <Label fx:id="removeLabel" layoutX="28.0" layoutY="413.0" prefHeight="16.0" prefWidth="115.0" />
-            <TableView fx:id="productsTable" layoutX="17.0" layoutY="229.0" prefHeight="160.0" prefWidth="265.0" />
-            <Label layoutX="99.0" layoutY="205.0" text="List of products" />
-            <Label fx:id="vacLabel" layoutX="22.0" layoutY="148.0" prefHeight="16.0" prefWidth="98.0" />
+            <Button fx:id="deleteButton" layoutX="92.0" layoutY="417.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" text="DELETE" />
+            <TableView fx:id="productsTable" layoutX="17.0" layoutY="250.0" prefHeight="160.0" prefWidth="265.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="225.0" prefHeight="19.0" prefWidth="265.0" text="List of products" textAlignment="CENTER" />
+            <Label fx:id="vacLabel" layoutX="22.0" layoutY="148.0" prefHeight="19.0" prefWidth="127.0" />
             <Label fx:id="vacResultLabel" layoutX="179.0" layoutY="148.0" prefHeight="16.0" prefWidth="98.0" />
             <Label fx:id="sickLabel" layoutX="22.0" layoutY="173.0" prefHeight="16.0" prefWidth="98.0" />
             <Label fx:id="sickResultLabel" layoutX="179.0" layoutY="165.0" prefHeight="16.0" prefWidth="98.0" />
@@ -56,5 +62,6 @@
             <ToggleButton fx:id="saleButton" layoutX="18.0" layoutY="338.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="265.0" text="SALE!!!" />
          </children>
       </Pane>
+      <Button layoutX="607.0" layoutY="460.0" mnemonicParsing="false" onAction="#pause" text="pan" />
    </children>
 </Pane>

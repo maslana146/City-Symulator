@@ -77,6 +77,7 @@ public class MovingObject extends Circle implements Runnable {
 
                 if (Generators.genInteger(0, 100) < prob/100) {
                     this.getClient().setIsSick(true);
+                    this.getClient().setShopsToGetWell(program.shopsToGetWell);
                     return;
                 }
 
@@ -88,6 +89,7 @@ public class MovingObject extends Circle implements Runnable {
 
                 if (Generators.genInteger(0, 100) < prob/100) {
                     this.getSupplier().setIsSick(true);
+                    this.getSupplier().setShopsToGetWell(program.shopsToGetWell);
                     return;
                 }
 
@@ -95,6 +97,11 @@ public class MovingObject extends Circle implements Runnable {
         }
     }
     public void action(){
+        if (this.getSupplier() == null){
+            this.getClient().getWell();
+        }else if (this.getClient()==null){
+            this.getSupplier().getWell();
+        }
         if (visitingShop.getRetailShop() == null){
             if (visitingShop.getWholesale().getPeopleCapacity() < visitingShop.getWholesale().getMaxClientCapacity()){
                 this.setVisible(false);
@@ -116,6 +123,7 @@ public class MovingObject extends Circle implements Runnable {
 
         List<Product> deleteList = new ArrayList<>();
         if (this.client == null) {
+
             if (visitingShop.getWholesale() == null) {
 
                 for (Product product : this.supplier.bag) {
@@ -159,6 +167,8 @@ public class MovingObject extends Circle implements Runnable {
                 } else break;
             }
             visitingShop.getRetailShop().availableProducts.removeAll(deleteList);
+            //TODO sprawdz czy działa to
+            this.getClient().consume();
         }
 
 
@@ -188,10 +198,10 @@ public class MovingObject extends Circle implements Runnable {
                 PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getSupplier().getNextShop().getGoToCell(), time);
             }
             try {
-                Thread.sleep((time * 2000) + (Generators.genInteger(1, 3) * 1000));
+                Thread.sleep((time * 2000) + (Generators.genInteger(1, 2) * 1000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }//TODO zamiana jakoś by zwracalo wartosc czy wchodzi do sklepu czy nie
             if (this.getVisitingShop().getRetailShop() == null) {
                 this.getVisitingShop().getWholesale().outPerson();
             } else if (this.getVisitingShop().getWholesale() == null) {

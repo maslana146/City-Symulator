@@ -23,13 +23,13 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button layoutX="639.0" layoutY="283.0" mnemonicParsing="false" onAction="#deleteObject" text="Delete object" />
+      <Button layoutX="606.0" layoutY="273.0" mnemonicParsing="false" onAction="#deleteObject" prefHeight="26.0" prefWidth="170.0" text="Delete object" />
       <TextField fx:id="deleteField" layoutX="606.0" layoutY="237.0" />
       <Label layoutX="608.0" layoutY="209.0" text="Delete object by ID">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="showResult" contentDisplay="CENTER" layoutX="611.0" layoutY="334.0" prefHeight="16.0" prefWidth="161.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
-      <Button layoutX="661.0" layoutY="38.0" mnemonicParsing="false" onAction="#refreshTable" text="Refresh" />
+      <Label fx:id="showResult" contentDisplay="CENTER" layoutX="611.0" layoutY="334.0" prefHeight="62.0" prefWidth="161.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+      <Button layoutX="639.0" layoutY="37.0" mnemonicParsing="false" onAction="#refreshTable" prefHeight="26.0" prefWidth="104.0" text="Refresh" />
    </children>
 </Pane>

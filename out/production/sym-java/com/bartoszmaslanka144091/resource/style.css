@@ -1,23 +1,33 @@
-.tab-pane{
+.tab-pane {
     /*-fx-background-color: saddlebrown;*/
 }
-.tab{
+
+.tab {
     -fx-text-base-color: white;
     -fx-background-color: #3a3a3a;
-    -fx-focus-color:white;
+    -fx-focus-color: white;
 }
-.label,.check-box{
+
+.label, .check-box {
     -fx-text-fill: white;
 
-}
-.slider{
-    -fx-control-inner-background:#3a3a3a;
-    -fx-focus-color:transparent;
-
 
 }
 
-.button,.toggle-button {
+.text {
+
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.slider {
+    -fx-control-inner-background: #3a3a3a;
+    -fx-focus-color: transparent;
+
+
+}
+
+.button, .toggle-button {
     -fx-background-color: #3a3a3a;
 
     -fx-text-fill: white;
@@ -25,10 +35,42 @@
     -fx-border-width: 2;
 
 }
-.toggle-button:selected{
+
+.toggle-button:selected {
     -fx-background-color: RED;
 }
-.button:hover,.tab:selected{
+
+.button:hover, .tab:selected {
     -fx-background-color: #616161;
 
+}
+
+.tab-pane *.tab-header-area *.tab-header-background {
+    -fx-background-image: url('grass.png');
+}
+
+.table-view {
+    -fx-background-color: rgba(152,115,52,1);
+}
+.table-view .column-header{
+    -fx-background-color: #3a3a3a;
+}
+.table-view .filler{-fx-background-color: #3a3a3a;}
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+.table-row-cell:hover {
+    -fx-background-color: #93f9b911;
+    -fx-text-background-color: red;
+}
+.table-row-cell:odd{
+    -fx-background-color: #93f9b911;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+    -fx-background-color: #1dbbdd11;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
 }

@@ -1,9 +1,11 @@
 package com.bartoszmaslanka144091;
 
 import com.bartoszmaslanka144091.Controllers.WorldScreen;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.shape.Circle;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +19,26 @@ public class Client extends Person {
 
 
     public void consume() {
-        for (int i = 0; i<Generators.genInteger(0,currentCapacity);i++){
-            bag.remove(bag.get(i));
+        System.out.println(this.getBag());
+        Comparator<Product> comparator = Comparator.comparingInt(Product::getBest_before_date);
+        FXCollections.sort(bag,comparator);
+        int x = 0;
+        List<Product> ls =bag.stream().filter(c -> c.getBest_before_date() == 0).collect(Collectors.toList());
+        for (Product product: ls){
+            bag.remove(product);
+            x += 1;
         }
+        System.out.println(getFirstName()+" consume "+ x + "products");
+        for (Product product:bag){
+            product.best_before_date -= 1;
+
+        }
+
+
+//        List bagLs = Collections.sort(bag,p);
+//        for (int i = 0; i<Generators.genInteger(0,currentCapacity);i++){
+//            bag.remove(bag.get(i));
+//        }
     }
 
     ;

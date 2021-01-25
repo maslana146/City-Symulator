@@ -60,9 +60,9 @@ public class CreateScreen {
         boolean wearsMask = Generators.genBool();
         boolean vac = Generators.genBool();
         float chanceToGetSick = Generators.genFloat(0, 1);
-        int shopsToGetWell = Generators.genInteger(1, 3);
+        int shopsToGetWell = program.getShopsToGetWell();
         int currentCapacity = 0;
-        int maxCapacity = Generators.genInteger(0, 5);
+        int maxCapacity = Generators.genInteger(1, 5);
         ObservableList<Product> bag = FXCollections.observableArrayList();
         String firstName = Generators.firstName();
         String lastName = Generators.lastName();
@@ -74,7 +74,7 @@ public class CreateScreen {
         boolean result = program.listOfClients.add(client);
         if (result) {
             showResult("Random Client was created successfully, Client ID: " + id);
-            resultLabel.setTextFill(Color.GREEN);
+            resultLabel.setTextFill(Color.WHITE);
             program.checkPerSick();
             program.checkVacSick();
 
@@ -91,7 +91,7 @@ public class CreateScreen {
         boolean wearsMask = Generators.genBool();
         boolean vac = Generators.genBool();
         float chanceToGetSick = Generators.genFloat(0, 1);
-        int shopsToGetWell = Generators.genInteger(0, 5);
+        int shopsToGetWell = program.getShopsToGetWell();
         int currentCapacity = 0;
         int maxCapacity = Generators.genInteger(3, 6);
         ObservableList<Product> bag = FXCollections.observableArrayList();
@@ -106,7 +106,7 @@ public class CreateScreen {
         boolean result = program.listOfSuppliers.add(supplier);
         if (result) {
             showResult("Random Supplier was created successfully, Supplier ID: " + id);
-            resultLabel.setTextFill(Color.GREEN);
+            resultLabel.setTextFill(Color.WHITE);
             program.checkPerSick();
             program.checkVacSick();
 
@@ -124,7 +124,7 @@ public class CreateScreen {
                 if (!newValue.matches("\\d*")) {
                     clientBagCapacityField.setText(newValue.replaceAll("[^\\d]", ""));
                     showResult("Bag capacity must be an Integer");
-                    resultLabel.setTextFill(Color.BROWN);
+                    resultLabel.setTextFill(Color.WHITE);
                 }
             }
         });
@@ -133,14 +133,14 @@ public class CreateScreen {
                 (clientBagCapacityField.getText() == null || clientBagCapacityField.getText().trim().isEmpty())
         ) {
             showResult("All fields must be fill");
-            resultLabel.setTextFill(Color.BROWN);
+            resultLabel.setTextFill(Color.WHITE);
         } else {
             int id = Generators.newId();
             boolean isSick = clientIsSick.isSelected();
             boolean wearsMask = clientWearsMask.isSelected();
             boolean isVac = clientIsVaccinated.isSelected();
             float chanceToGetSick = Generators.genFloat(0, 1);
-            int shopsToGetWell = Generators.genInteger(0, 5);
+            int shopsToGetWell = program.getShopsToGetWell();
             int currentCapacity = 0;
             int maxCapacity = Integer.parseInt(clientBagCapacityField.getText());
             ObservableList<Product> bag = FXCollections.observableArrayList();
@@ -151,8 +151,8 @@ public class CreateScreen {
             System.out.println(client);
             boolean result = program.listOfClients.add(client);
             if (result) {
-                showResult("Random Client was created successfully, Client ID: " + id);
-                resultLabel.setTextFill(Color.GREEN);
+                showResult("Client was created successfully, Client ID: " + id);
+                resultLabel.setTextFill(Color.WHITE);
                 program.checkPerSick();
                 program.checkVacSick();
 
@@ -176,7 +176,7 @@ public class CreateScreen {
                 if (!newValue.matches("\\d*")) {
                     supplierBagCapacityField.setText(newValue.replaceAll("[^\\d]", ""));
                     showResult("Bag capacity must be an Integer");
-                    resultLabel.setTextFill(Color.BROWN);
+                    resultLabel.setTextFill(Color.WHITE);
                 }
             }
         });
@@ -185,14 +185,14 @@ public class CreateScreen {
                 (supplierBagCapacityField.getText() == null || supplierBagCapacityField.getText().trim().isEmpty())
         ) {
             showResult("All fields must be fill");
-            resultLabel.setTextFill(Color.BROWN);
+            resultLabel.setTextFill(Color.WHITE);
         } else {
             int id = Generators.newId();
             boolean isSick = supplierIsSick.isSelected();
             boolean wearsMask = supplierWearsMask.isSelected();
             boolean isVac = supplierIsVaccinated.isSelected();
             float chanceToGetSick = Generators.genFloat(0, 1);
-            int shopsToGetWell = Generators.genInteger(0, 5);
+            int shopsToGetWell = program.getShopsToGetWell();
             int currentCapacity = 0;
             int maxCapacity = Integer.parseInt(supplierBagCapacityField.getText());
             ObservableList<Product> bag = FXCollections.observableArrayList();
@@ -205,8 +205,8 @@ public class CreateScreen {
             System.out.println(supplier);
             boolean result = program.listOfSuppliers.add(supplier);
             if (result) {
-                showResult("Random Supplier was created successfully, Supplier ID: " + id);
-                resultLabel.setTextFill(Color.GREEN);
+                showResult("Supplier was created successfully, Supplier ID: " + id);
+                resultLabel.setTextFill(Color.WHITE);
                 program.checkPerSick();
                 program.checkVacSick();
                 supplierBagCapacityField.clear();

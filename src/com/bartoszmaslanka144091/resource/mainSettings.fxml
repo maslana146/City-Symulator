@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bartoszmaslanka144091.Controllers.MainSettingsScreen">
    <children>
-      <TabPane prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Main settings">
             <content>

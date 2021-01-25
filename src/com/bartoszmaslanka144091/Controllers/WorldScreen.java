@@ -11,7 +11,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -34,7 +33,6 @@ public class WorldScreen {
     public Label thirdLabel;
     public Label firstLabel;
     public Label fourthLabel;
-    public Label removeLabel;
     public Label titleTab;
     public Pane staticInformationWindow;
     public Label shopTitle;
@@ -60,8 +58,6 @@ public class WorldScreen {
 
     @FXML
     public void initialize() throws InterruptedException {
-        deleteButton.setGraphic(new ImageView("/com/bartoszmaslanka144091/resource/iconmonstr-recycling-13-32.png"));
-
 ////        Timeline timeline = new Timeline();
 //        int id = Generators.newId();
 //        boolean isSick = Generators.genBool();
@@ -275,9 +271,11 @@ public class WorldScreen {
     public void informationWindowVisable(MovingObject object) {
         staticInformationWindow.setVisible(false);
         informationWindow.setVisible(true);
+
 //        System.out.println(object.getClient().getMaxCapacity());
         //TODO dodaj funkcji zmiany kierunku koljneo ruchu
         if (object.getSupplier() == null) {
+            System.out.println(object.getClient().getShopsToGetWell());
 //            System.out.println(object.getClient().getIsSick());
 //            System.out.println("max: "+object.getClient().getMaxCapacity()+" current: "+object.getClient().getCurrentCapacity());
             firstLabel.setText("Id:");
@@ -293,7 +291,6 @@ public class WorldScreen {
             sickLabel.setText("Is sick:");
             sickResultLabel.setText(String.valueOf(object.getClient().getIsSick()));
             titleTab.setText("CLIENT");
-            removeLabel.setText("Remove client");
             deleteButton.setOnAction(new EventHandler<ActionEvent>() {
                                          @Override
                                          public void handle(ActionEvent event) {
@@ -347,7 +344,6 @@ public class WorldScreen {
                 clientNextShopLabel.setText(object.getSupplier().getNextShop().getWholesale().getName());
             }
             titleTab.setText("SUPPLIER");
-            removeLabel.setText("Remove supplier");
             deleteButton.setOnAction(new EventHandler<ActionEvent>() {
                                          @Override
                                          public void handle(ActionEvent event) {
@@ -384,6 +380,14 @@ public class WorldScreen {
     public void clearInformationWindow(MouseEvent mouseEvent) {
         informationWindow.setVisible(false);
         staticInformationWindow.setVisible(false);
+
+    }
+
+    public void pause(ActionEvent actionEvent) throws InterruptedException {
+        for (Thread thread:threadObservableList){
+            thread.suspend();
+            //TODO zatrzymuje wstaw do initialize if jestli sie juz raz zrobilo a jesli nie to zrob caly intialize
+        }
 
     }
 }
