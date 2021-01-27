@@ -201,7 +201,7 @@ public class MovingObject extends Circle implements Runnable {
                 Thread.sleep((time * 2000) + (Generators.genInteger(1, 2) * 1000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }//TODO zamiana jakoś by zwracalo wartosc czy wchodzi do sklepu czy nie
+            }//TODO zamiana jakoś by zwracalo wartosc czy wchodzi do sklepu czy nie bo robi się -1
             if (this.getVisitingShop().getRetailShop() == null) {
                 this.getVisitingShop().getWholesale().outPerson();
             } else if (this.getVisitingShop().getWholesale() == null) {

@@ -26,11 +26,20 @@ public class Program {
     int GetSickWithMask = 20;
     int shopsToGetWell = 4;
     boolean lockdown = false;
+    boolean created = false;
 
     public ObservableList<Wholesale> listOfWholesales = FXCollections.observableArrayList();
     public ObservableList<RetailShop> listOfRetailShops = FXCollections.observableArrayList();
     public ObservableList<Supplier> listOfSuppliers = FXCollections.observableArrayList();
     public ObservableList<Client> listOfClients = FXCollections.observableArrayList();
+
+    public boolean isCreated() {
+        return created;
+    }
+
+    public void setCreated(boolean created) {
+        this.created = created;
+    }
 
     public void setPercentageSick(int percentageSick) {
         PercentageSick = percentageSick;

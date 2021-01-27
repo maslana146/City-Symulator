@@ -1,5 +1,6 @@
 package com.bartoszmaslanka144091.Controllers;
 
+import com.bartoszmaslanka144091.MovingObject;
 import javafx.event.ActionEvent;
 
 public class MainWorldScreen {
@@ -15,7 +16,10 @@ public class MainWorldScreen {
 
 
     public void backMenu(ActionEvent actionEvent) {
-        for (Thread thread:WorldScreen.threadObservableList){
+        for (MovingObject movingObject:WorldScreen.movingObjects){
+            movingObject.stop();
+            WorldScreen.threadObservableList.remove(movingObject);
+
 
         }
         mainScreen.loadMenuScreen();
