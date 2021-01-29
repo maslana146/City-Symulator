@@ -34,6 +34,7 @@ public class Main extends Application {
 
         }
         //TODO po zmainie max capacity i funkcji generate start products w retail wywala bląd
+        //TODO pamietaj zmienic randomowa people cpacity
         for (int i = 0; i < 10; i++) {
             RetailShop retailShop = new RetailShop(Generators.genString(5), Generators.genString(5),
                     1, Generators.genInteger(3, 5), false, false);

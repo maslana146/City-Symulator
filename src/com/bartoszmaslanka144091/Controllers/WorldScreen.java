@@ -11,9 +11,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +90,7 @@ public class WorldScreen {
                 Cell shopCell = shopCells.get(0);
                 shopCells.remove(0);
                 StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
-                staticObject.setFill(Color.YELLOW);
+                staticObject.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/gold.png")));
                 staticObject.setStroke(Color.BLACK);
                 staticObject.setWholesale(wholesale);
                 staticObject.setCell(shopCell);
@@ -105,7 +107,7 @@ public class WorldScreen {
                 Cell shopCell = shopCells.get(0);
                 shopCells.remove(0);
                 StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
-                staticObject.setFill(Color.RED);
+                staticObject.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/diamond.png")));
                 staticObject.setStroke(Color.BLACK);
                 staticObject.setRetailShop(retailShop);
                 staticObject.setCell(shopCell);
@@ -118,8 +120,9 @@ public class WorldScreen {
             for (Client client : program.listOfClients) {
                 client.setNextshop();
                 MovingObject object = new MovingObject(0, 0, 12.5, Color.HOTPINK);
+                object.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/client.png")));
                 object.setClient(client);
-                object.setStroke(Color.BLACK);
+//                object.setStroke(Color.BLACK);
                 worldPane.getChildren().add(object);
                 Thread obj = new Thread(object);
                 threadObservableList.add(obj);
@@ -133,7 +136,7 @@ public class WorldScreen {
                 supplier.newListOfStops();
                 MovingObject object = new MovingObject(0, 0, 12.5, Color.BROWN);
                 object.setSupplier(supplier);
-                object.setStroke(Color.BLACK);
+                object.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/supplier.png")));
                 worldPane.getChildren().add(object);
                 Thread obj = new Thread(object);
                 threadObservableList.add(obj);
@@ -371,19 +374,18 @@ public class WorldScreen {
 
     }
 
-    public void pause(ActionEvent actionEvent) throws InterruptedException {
-        System.out.println(threadObservableList);
-//        for (Thread thread:threadObservableList){
-//            thread.suspend();
-//            //TODO zatrzymuje wstaw do initialize if jestli sie juz raz zrobilo a jesli nie to zrob caly intialize
+//    public void pause(ActionEvent actionEvent) throws InterruptedException {
+//        System.out.println(threadObservableList);
+////        for (Thread thread:threadObservableList){
+////            thread.suspend();
+///            //TODO zatrzymuje wstaw do initialize if jestli sie juz raz zrobilo a jesli nie to zrob caly intialize
+////        }
+//
+//    }
+//
+//    public void go(ActionEvent actionEvent) {
+//        for (Thread thread : threadObservableList) {
+//            thread.resume();
 //        }
-
-    }
-
-    public void go(ActionEvent actionEvent) {
-        for (Thread thread : threadObservableList) {
-            thread.resume();
-            //TODO zatrzymuje wstaw do initialize if jestli sie juz raz zrobilo a jesli nie to zrob caly intialize
-        }
-    }
+//    }
 }

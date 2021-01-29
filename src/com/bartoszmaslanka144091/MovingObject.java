@@ -167,7 +167,7 @@ public class MovingObject extends Circle implements Runnable {
                 } else break;
             }
             visitingShop.getRetailShop().availableProducts.removeAll(deleteList);
-            //TODO sprawdz czy działa to
+
             this.getClient().consume();
         }
 

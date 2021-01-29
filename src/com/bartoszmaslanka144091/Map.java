@@ -1,6 +1,7 @@
 package com.bartoszmaslanka144091;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -138,13 +139,16 @@ public class Map {
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
                 if (grid[i][j].availableForClients && !grid[i][j].availableForSuppliers) {
-                    graphicsContext.setFill(Color.LIGHTGOLDENRODYELLOW);
-                    graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
+//                    graphicsContext.setFill(Color.LIGHTGOLDENRODYELLOW);
+//                    graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
+                    graphicsContext.drawImage(new Image("/com/bartoszmaslanka144091/resource/road_pane.png"),grid[i][j].getX(), grid[i][j].getY(),25,25);
 
 
                 } else if (grid[i][j].availableForSuppliers && !grid[i][j].availableForClients) {
-                    graphicsContext.setFill(Color.GRAY);
-                    graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
+                    graphicsContext.drawImage(new Image("/com/bartoszmaslanka144091/resource/test_block.png"),grid[i][j].getX(), grid[i][j].getY(),25,25);
+//                    graphicsContext.drawImage(new Image("/com/bartoszmaslanka144091/resource/stone_plane.png"),grid[i][j].getX(), grid[i][j].getY(),image.);
+//                    graphicsContext.setFill(Color.GRAY);
+//                    graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
 
                 } else if (grid[i][j].availableForSuppliers && grid[i][j].availableForClients) {
                     graphicsContext.setFill(Color.LIGHTGRAY);
@@ -155,8 +159,9 @@ public class Map {
                     graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
 
                 } else {
-                    graphicsContext.setFill(Color.GREEN);
-                    graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
+                    graphicsContext.drawImage(new Image("/com/bartoszmaslanka144091/resource/grass.png"),grid[i][j].getX(), grid[i][j].getY(),25,25);
+//                    graphicsContext.setFill(Color.GREEN);
+//                    graphicsContext.fillRect(grid[i][j].getX(), grid[i][j].getY(), 500, 500);
                 }
             }
         }
