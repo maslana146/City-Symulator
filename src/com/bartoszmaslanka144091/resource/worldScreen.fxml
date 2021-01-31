@@ -29,17 +29,19 @@
             <Label fx:id="thirdLabel" layoutX="22.0" layoutY="101.0" prefHeight="19.0" prefWidth="127.0" />
             <Label fx:id="firstLabel" layoutX="22.0" layoutY="52.0" prefHeight="19.0" prefWidth="127.0" />
             <Label fx:id="fourthLabel" layoutX="22.0" layoutY="124.0" prefHeight="19.0" prefWidth="127.0" />
-            <Label fx:id="clientIdLabel" layoutX="179.0" layoutY="52.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientNameLabel" layoutX="179.0" layoutY="78.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientLastNameLabel" layoutX="179.0" layoutY="101.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="clientNextShopLabel" layoutX="179.0" layoutY="124.0" prefHeight="16.0" prefWidth="98.0" />
-            <Button fx:id="deleteButton" layoutX="92.0" layoutY="417.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" text="DELETE" />
-            <TableView fx:id="productsTable" layoutX="17.0" layoutY="250.0" prefHeight="160.0" prefWidth="265.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="225.0" prefHeight="19.0" prefWidth="265.0" text="List of products" textAlignment="CENTER" />
+            <Label fx:id="clientIdLabel" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="52.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label fx:id="clientNameLabel" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="78.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label fx:id="clientLastNameLabel" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="101.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label fx:id="clientNextShopLabel" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="124.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Button fx:id="deleteButton" layoutX="92.0" layoutY="433.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="117.0" text="DELETE" />
+            <TableView fx:id="productsTable" layoutX="17.0" layoutY="266.0" prefHeight="160.0" prefWidth="265.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="241.0" prefHeight="19.0" prefWidth="265.0" text="List of products" textAlignment="CENTER" />
             <Label fx:id="vacLabel" layoutX="22.0" layoutY="148.0" prefHeight="19.0" prefWidth="127.0" />
-            <Label fx:id="vacResultLabel" layoutX="179.0" layoutY="148.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="vacResultLabel" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="148.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
             <Label fx:id="sickLabel" layoutX="22.0" layoutY="173.0" prefHeight="16.0" prefWidth="98.0" />
-            <Label fx:id="sickResultLabel" layoutX="179.0" layoutY="165.0" prefHeight="16.0" prefWidth="98.0" />
+            <Label fx:id="sickResultLabel" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="173.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label fx:id="ShopLabel" layoutX="22.0" layoutY="201.0" prefHeight="38.0" prefWidth="98.0" wrapText="true" />
+            <Label fx:id="shopsToGet" alignment="CENTER_RIGHT" layoutX="169.0" layoutY="211.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
          </children>
       </Pane>
       <Pane fx:id="staticInformationWindow" layoutX="500.0" prefHeight="500.0" prefWidth="300.0" visible="false">
@@ -49,14 +51,14 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="36.0" layoutY="44.0" text="Shop name:" />
-            <Label layoutX="36.0" layoutY="70.0" text="Address:" />
-            <Label fx:id="shopNameLabel" layoutX="190.0" layoutY="44.0" prefHeight="16.0" prefWidth="72.0" />
-            <Label fx:id="shopAddressLabel" layoutX="190.0" layoutY="70.0" prefHeight="16.0" prefWidth="72.0" />
-            <Label layoutX="36.0" layoutY="93.0" prefHeight="38.0" prefWidth="98.0" text="Current/Max Capacity prod." wrapText="true" />
-            <Label fx:id="capacityProdLabel" layoutX="190.0" layoutY="104.0" prefHeight="16.0" prefWidth="72.0" />
-            <Label layoutX="36.0" layoutY="131.0" prefHeight="38.0" prefWidth="92.0" text="Current/Max Capacity per." wrapText="true" />
-            <Label fx:id="capacityPerLabel" layoutX="190.0" layoutY="142.0" prefHeight="16.0" prefWidth="72.0" />
+            <Label layoutX="24.0" layoutY="42.0" text="Shop name:" />
+            <Label layoutX="24.0" layoutY="68.0" text="Address:" />
+            <Label fx:id="shopNameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="163.0" layoutY="42.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label fx:id="shopAddressLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="163.0" layoutY="68.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label layoutX="24.0" layoutY="91.0" prefHeight="38.0" prefWidth="127.0" text="Current/Max Capacity prod." wrapText="true" />
+            <Label fx:id="capacityProdLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="163.0" layoutY="102.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
+            <Label layoutX="24.0" layoutY="129.0" prefHeight="38.0" prefWidth="117.0" text="Current/Max Capacity per." wrapText="true" />
+            <Label fx:id="capacityPerLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="163.0" layoutY="140.0" prefHeight="19.0" prefWidth="108.0" textAlignment="RIGHT" />
             <TableView fx:id="productsTable1" layoutX="18.0" layoutY="175.0" prefHeight="151.0" prefWidth="265.0" />
             <Button fx:id="createProd" layoutX="18.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="265.0" text="Create product" />
             <ToggleButton fx:id="saleButton" layoutX="18.0" layoutY="338.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="265.0" text="SALE!!!" />

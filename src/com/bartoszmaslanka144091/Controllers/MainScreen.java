@@ -1,9 +1,7 @@
 package com.bartoszmaslanka144091.Controllers;
 
-import com.bartoszmaslanka144091.Program;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -17,6 +15,9 @@ public class MainScreen {
         loadMenuScreen();
     }
 
+    /**
+     * loads fxml
+     */
     public void loadMenuScreen() {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/bartoszmaslanka144091/resource/menuScreen.fxml"));
         Pane pane = null;

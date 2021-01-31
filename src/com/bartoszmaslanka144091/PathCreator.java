@@ -14,6 +14,14 @@ import java.util.List;
 public class PathCreator {
 
 
+    /**
+     * main path finding function
+     * @param start start cell
+     * @param end end cell
+     * @param grid map
+     * @param obj object
+     * @return
+     */
     public static List<Cell> findPath(Cell start, Cell end, Cell[][] grid, MovingObject obj) {
         List<Cell> visited = new ArrayList<Cell>();
         List<Cell> path = new ArrayList<Cell>();
@@ -28,7 +36,7 @@ public class PathCreator {
         while (!success) {
             x += 1;
             if (x > 100) {
-                System.out.println("PathERROR");
+//                System.out.println("PathERROR");
                 Platform.exit();
                 break;
             }
@@ -67,12 +75,28 @@ public class PathCreator {
         return path;
     }
 
+    /**
+     * calculates euclidean distance between two points
+     * @param startX
+     * @param startY
+     * @param endX
+     * @param endY
+     * @return
+     */
     public static double euclideanDist(int startX, int startY, int endX, int endY) {
         double distance;
         distance = Math.sqrt(Math.pow((startX - endX), 2) + Math.pow((startY - endY), 2));
         return distance;
     }
 
+    /**
+     * checks if the cell is valid ( available for object )
+     * @param grid
+     * @param x
+     * @param y
+     * @param obj
+     * @return
+     */
     public static boolean isValidCell(Cell[][] grid, int x, int y, MovingObject obj) {
         if (obj.getClient() == null) {
             return !(x < 0 || x >= grid.length || y < 0 || y >= grid.length) && (grid[x][y].availableForSuppliers);
@@ -81,6 +105,13 @@ public class PathCreator {
         }
     }
 
+    /**
+     * returns list of available neighbours cells
+     * @param grid
+     * @param cell
+     * @param obj
+     * @return
+     */
     public static List<Cell> getNeighbors(Cell[][] grid, Cell cell, MovingObject obj) {
         List<Cell> neighbors = new ArrayList<Cell>();
 
@@ -103,6 +134,10 @@ public class PathCreator {
         return neighbors;
     }
 
+    /** transofrm path to scene.shape.path moves
+     * @param list
+     * @return
+     */
     public static Path createPath(List<Cell> list) {
         javafx.scene.shape.Path path = new javafx.scene.shape.Path();
         MoveTo start = new MoveTo(list.get(0).getCenterX(), list.get(0).getCenterY());
@@ -114,6 +149,14 @@ public class PathCreator {
 
     }
 
+    /**
+     * move object function which start animation and set some other functions on finisched
+     * @param grid
+     * @param obj
+     * @param start
+     * @param end
+     * @param time
+     */
     public static void moveObject(Cell[][] grid, MovingObject obj, Cell start, Cell end, int time) {
         List<Cell> listOfCells = findPath(start, end, grid,obj);
         Path path = createPath(listOfCells);

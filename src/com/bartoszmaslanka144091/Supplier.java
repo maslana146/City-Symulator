@@ -15,10 +15,16 @@ public class Supplier extends Person {
     float currentFuel;
     StaticObject nextShop;
 
+    /**
+     * @return new shop
+     */
     public StaticObject getNextShop() {
         return nextShop;
     }
 
+    /**
+     * adds next shop to list of stops
+     */
     public void addNextShop() {
         if (Generators.genFloat(0, 1) < 0.5) {
             int nextShop = Generators.genInteger(0, 3);
@@ -29,6 +35,9 @@ public class Supplier extends Person {
         }
     }
 
+    /**
+     * @return gets new next shop
+     */
     public StaticObject getNewNextShop() {
         StaticObject shop = listOfStops.get(0);
         listOfStops.remove(0);
@@ -38,19 +47,35 @@ public class Supplier extends Person {
 
     ;
 
+    /**
+     * creates new list of stops
+     */
     public void newListOfStops() {
         for (int i = 0; i < 5; i++) {
             int shop = Generators.genInteger(0, WorldScreen.staticObjects.size());
             listOfStops.add(WorldScreen.staticObjects.get(shop));
         }
     }
+        ;
 
-    void tank() {
-        this.fuelCapacity = 1;
-    }
-
-    ;
-
+    /**
+     * constuuctor
+     * @param id
+     * @param isSick
+     * @param wearsMask
+     * @param vaccinated
+     * @param chanceToGetSick
+     * @param shopsToGetWell
+     * @param currentCapacity
+     * @param maxCapacity
+     * @param bag
+     * @param companyName
+     * @param carBrand
+     * @param listOfStops
+     * @param fuelConsumption
+     * @param fuelCapacity
+     * @param currentFuel
+     */
     public Supplier(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
                     int currentCapacity, int maxCapacity, ObservableList<Product> bag, String companyName, String carBrand, ArrayList<StaticObject> listOfStops, float fuelConsumption, float fuelCapacity, float currentFuel) {
         super(id, isSick, wearsMask, vaccinated, chanceToGetSick, shopsToGetWell, currentCapacity, maxCapacity, bag);
@@ -82,14 +107,23 @@ public class Supplier extends Person {
         this.fuelCapacity = fuelCapacity;
     }
 
+    /**
+     * @param currentFuel seting new value of fuel
+     */
     public void setCurrentFuel(float currentFuel) {
         this.currentFuel = currentFuel;
     }
 
+    /**
+     * @return getter
+     */
     public String getCompanyName() {
         return companyName;
     }
 
+    /**
+     * @return getter
+     */
     public String getCarBrand() {
         return carBrand;
     }
@@ -106,10 +140,16 @@ public class Supplier extends Person {
         return fuelCapacity;
     }
 
+    /**
+     * @return getter
+     */
     public float getCurrentFuel() {
         return currentFuel;
     }
 
+    /**
+     * @return to string method
+     */
     @Override
     public String toString() {
         return "Supplier{" +

@@ -11,10 +11,21 @@ public class Shop {
     int maxClientCapacity;
     int storageCapacity = 0;
     int maxStorageCapacity;
-
+    int lockdownCapacity;
+    int saveMaxCapacity;
     boolean lockdown;
     boolean isSale;
 
+
+    /**
+     * constuctor
+     * @param name
+     * @param address
+     * @param maxClientCapacity
+     * @param maxStorageCapacity
+     * @param lockdown
+     * @param isSale
+     */
     public Shop(String name, String address, int maxClientCapacity, int maxStorageCapacity, boolean lockdown, boolean isSale) {
         this.name = name;
         this.address = address;
@@ -22,38 +33,92 @@ public class Shop {
         this.maxStorageCapacity = maxStorageCapacity;
         this.lockdown = lockdown;
         this.isSale = isSale;
+        this.lockdownCapacity = maxClientCapacity/4;
+        this.saveMaxCapacity = maxClientCapacity;
     }
 
+    /**
+     * @return 25% of max capacity
+     */
+    public int getLockdownCapacity() {
+        return lockdownCapacity;
+    }
+
+    public void setLockdownCapacity(int lockdownCapacity) {
+        this.lockdownCapacity = lockdownCapacity;
+    }
+
+    /**
+     * @return getter
+     */
+    public int getSaveMaxCapacity() {
+        return saveMaxCapacity;
+    }
+
+    public void setSaveMaxCapacity(int saveMaxCapacity) {
+        this.saveMaxCapacity = saveMaxCapacity;
+    }
+
+    /**
+     * @return getter
+     */
     public int getPeopleCapacity() {
         return peopleCapacity;
     }
 
+    /**
+     * @param peopleCapacity setter
+     */
     public void setPeopleCapacity(int peopleCapacity) {
         this.peopleCapacity = peopleCapacity;
     }
 
+    /**
+     * @return getter
+     */
     public int getStorageCapacity() {
         storageCapacity = getAvailableProducts().size();
         return storageCapacity;
     }
+
+    /**
+     * increase people capacity by 1
+     */
     public void enterPerson(){
         this.peopleCapacity +=1;
     };
+
+    /**
+     * decrease people capacity by 1
+     */
     public void outPerson(){
         this.peopleCapacity -= 1;
     }
+
+    /**
+     * @param storageCapacity setter
+     */
     public void setStorageCapacity(int storageCapacity) {
         this.storageCapacity = storageCapacity;
     }
 
+    /**
+     * @return getter
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name setter
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return getter
+     */
     public ObservableList<Product> getAvailableProducts() {
         return availableProducts;
     }
@@ -78,6 +143,9 @@ public class Shop {
 
     ;
 
+    /**
+     * @param value increase cahnce to take of each product
+     */
     public void setIs_sale(Boolean value) {
         this.isSale = value;
         if (this.isSale) {
@@ -92,6 +160,9 @@ public class Shop {
         }
     }
 
+    /**
+     * @return getter
+     */
     public String getAddress() {
         return address;
     }
@@ -100,14 +171,23 @@ public class Shop {
         this.address = address;
     }
 
+    /**
+     * @return getter
+     */
     public int getMaxClientCapacity() {
         return maxClientCapacity;
     }
 
+    /**
+     * @param maxClientCapacity setter
+     */
     public void setMaxClientCapacity(int maxClientCapacity) {
         this.maxClientCapacity = maxClientCapacity;
     }
 
+    /**
+     * @return getter
+     */
     public int getMaxStorageCapacity() {
         return maxStorageCapacity;
     }
@@ -125,6 +205,9 @@ public class Shop {
         this.lockdown = lockdown;
     }
 
+    /**
+     * @return getter
+     */
     public boolean isSale() {
         return isSale;
     }
@@ -133,6 +216,9 @@ public class Shop {
         isSale = sale;
     }
 
+    /**
+     * @return to string method
+     */
     @Override
     public String toString() {
         return "Shop{" +

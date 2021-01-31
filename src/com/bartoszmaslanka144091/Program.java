@@ -9,6 +9,9 @@ import java.util.Iterator;
 public class Program {
     private static Program instance;
 
+    /**
+     * @return get one instance of program class
+     */
     public static Program getInstance() {
         if (instance == null) {
             synchronized (Program.class) {
@@ -28,67 +31,111 @@ public class Program {
     boolean lockdown = false;
     boolean created = false;
 
+    /**
+     * list of wholsales
+     */
     public ObservableList<Wholesale> listOfWholesales = FXCollections.observableArrayList();
+    /**
+     * list of retailshops
+     */
     public ObservableList<RetailShop> listOfRetailShops = FXCollections.observableArrayList();
+    /**
+     * list of suppliers
+     */
     public ObservableList<Supplier> listOfSuppliers = FXCollections.observableArrayList();
+    /**
+     * list of clinets
+     */
     public ObservableList<Client> listOfClients = FXCollections.observableArrayList();
 
-    public boolean isCreated() {
-        return created;
-    }
 
-    public void setCreated(boolean created) {
-        this.created = created;
-    }
-
+    /**
+     * @param percentageSick set
+     */
     public void setPercentageSick(int percentageSick) {
         PercentageSick = percentageSick;
     }
 
+    /**
+     * @param percentageVaccinated set
+     */
     public void setPercentageVaccinated(int percentageVaccinated) {
         PercentageVaccinated = percentageVaccinated;
     }
 
+    /**
+     * @param getSickVaccinated setter
+     */
     public void setGetSickVaccinated(int getSickVaccinated) {
         GetSickVaccinated = getSickVaccinated;
     }
 
+    /**
+     * @param getSickWithMask setter
+     */
     public void setGetSickWithMask(int getSickWithMask) {
         GetSickWithMask = getSickWithMask;
     }
 
+    /**
+     * @param shopsToGetWell setter
+     */
     public void setShopsToGetWell(int shopsToGetWell) {
         this.shopsToGetWell = shopsToGetWell;
     }
 
+    /**
+     * @param lockdown setter
+     */
     public void setLockdown(boolean lockdown) {
         this.lockdown = lockdown;
     }
 
+    /**
+     * @return getter
+     */
     public int getPercentageSick() {
         return PercentageSick;
     }
 
+    /**
+     * @return getter
+     */
     public int getPercentageVaccinated() {
         return PercentageVaccinated;
     }
 
+    /**
+     * @return getter
+     */
     public int getGetSickVaccinated() {
         return GetSickVaccinated;
     }
 
+    /**
+     * @return getter
+     */
     public int getGetSickWithMask() {
         return GetSickWithMask;
     }
 
+    /**
+     * @return getter
+     */
     public int getShopsToGetWell() {
         return shopsToGetWell;
     }
 
+    /**
+     * @return getter
+     */
     public boolean isLockdown() {
         return lockdown;
     }
 
+    /**
+     * sets % population sick
+     */
     public void setPerSick() {
         int population = listOfClients.size() + listOfSuppliers.size();
         double max = (double) PercentageSick / 100 * population;
@@ -120,6 +167,9 @@ public class Program {
         }
     }
 
+    /**
+     * sets % population vaccinated
+     */
     public void setVacSick() {
         int population = listOfClients.size() + listOfSuppliers.size();
         double max = (double) PercentageVaccinated / 100 * population;
@@ -151,6 +201,9 @@ public class Program {
         }
     }
 
+    /**
+     * checks new % population sick
+     */
     public void checkPerSick() {
         int population = listOfClients.size() + listOfSuppliers.size();
         int number = 0;
@@ -169,6 +222,9 @@ public class Program {
 
     }
 
+    /**
+     * check new %vaccinated population
+     */
     public void checkVacSick() {
         int population = listOfClients.size() + listOfSuppliers.size();
         int number = 0;
@@ -186,6 +242,10 @@ public class Program {
         setPercentageVaccinated((int) x);
 
     }
+
+    /**
+     * setter
+     */
     public void setShopsToGetWell(){
         for (Iterator<Client> iterator = listOfClients.iterator(); iterator.hasNext(); ) {
             iterator.next().setShopsToGetWell(shopsToGetWell);

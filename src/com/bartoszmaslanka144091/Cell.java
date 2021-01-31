@@ -14,6 +14,9 @@ public class Cell extends StackPane {
     boolean isThereShop;
 
 
+    /**
+     * @param thereShop sets shops in cell
+     */
     public void setThereShop(boolean thereShop) {
         isThereShop = thereShop;
     }
@@ -21,6 +24,13 @@ public class Cell extends StackPane {
     Rectangle border = new Rectangle(Map.cellSize,Map.cellSize);
 
 
+    /**
+     * @param x constructor
+     * @param y
+     * @param type
+     * @param availableForClients
+     * @param availableForSuppliers
+     */
     public Cell(int x, int y, String type, boolean availableForClients, boolean availableForSuppliers) {
         this.x = x * Map.cellSize;
         this.y = y * Map.cellSize;
@@ -38,6 +48,9 @@ public class Cell extends StackPane {
         return isThereShop;
     }
 
+    /**
+     * @return to string method
+     */
     @Override
     public String toString() {
         return "Cell{" +
@@ -47,10 +60,16 @@ public class Cell extends StackPane {
                 '}';
     }
 
+    /**
+     * @return get center x coordinate
+     */
     public int getCenterX() {
         return centerX;
     }
 
+    /**
+     * @return get center y coordinate
+     */
     public int getCenterY() {
         return centerY;
     }
@@ -67,10 +86,16 @@ public class Cell extends StackPane {
         this.type = type;
     }
 
+    /**
+     * @param availableForClients setter
+     */
     public void setAvailableForClients(boolean availableForClients) {
         this.availableForClients = availableForClients;
     }
 
+    /**
+     * @param availableForSuppliers setter
+     */
     public void setAvailableForSuppliers(boolean availableForSuppliers) {
         this.availableForSuppliers = availableForSuppliers;
     }
@@ -79,10 +104,16 @@ public class Cell extends StackPane {
         this.border = border;
     }
 
+    /**
+     * @return get x coordinate
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @return get y coordinate
+     */
     public int getY() {
         return y;
     }

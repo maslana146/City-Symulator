@@ -15,12 +15,13 @@ public class MainWorldScreen {
     }
 
 
+    /**
+     * @param actionEvent back to menu
+     */
     public void backMenu(ActionEvent actionEvent) {
         for (MovingObject movingObject:WorldScreen.movingObjects){
             movingObject.stop();
             WorldScreen.threadObservableList.remove(movingObject);
-
-
         }
         mainScreen.loadMenuScreen();
 

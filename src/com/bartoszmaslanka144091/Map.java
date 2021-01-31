@@ -14,14 +14,23 @@ public class Map {
     static Cell[][] grid = new Cell[numRows][numCols];
     static List<Cell> shopCells;
 
+    /**
+     * @return getter
+     */
     public static Cell[][] getGrid() {
         return grid;
     }
 
+    /**
+     * @param shopCells setter
+     */
     public static void setShopCells(List<Cell> shopCells) {
         Map.shopCells = shopCells;
     }
 
+    /**
+     * @return getter
+     */
     public static List<Cell> getShopCells() {
         List<Cell> cells = new ArrayList<Cell>();
         for (Cell[] row : grid) {
@@ -35,6 +44,9 @@ public class Map {
         return cells;
     }
 
+    /**
+     * creates grid map and sets available for client/suppliers
+     */
     public static void createCells() {
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {
@@ -135,6 +147,9 @@ public class Map {
     }
 
 
+    /**
+     * @param graphicsContext color map function
+     */
     public static void paintMap(GraphicsContext graphicsContext) {
         for (int i = 0; i < numCols; i++) {
             for (int j = 0; j < numRows; j++) {

@@ -37,6 +37,9 @@ public class SettingsTab {
     @FXML
     ToggleButton lockdownButton;
 
+    /**
+     * crates main settings tab
+     */
     @FXML
     public void initialize() {
         popSicklabel.setText(String.valueOf(program.getPercentageSick()) + " %");
@@ -49,9 +52,12 @@ public class SettingsTab {
         chanToGetSickMaskSlider.valueProperty().setValue((program.getGetSickWithMask()));
         chanToGetSickVaclabel.setText(String.valueOf((program.getGetSickVaccinated())) + " %");
         chanToGetSickVacSlider.valueProperty().setValue((program.getGetSickVaccinated()));
-
+        lockdownButton.setSelected(program.isLockdown());
     }
 
+    /**
+     * @param mouseEvent sets new value of % pop sick form slider
+     */
     public void setPopulationSick(MouseEvent mouseEvent) {
         popSickSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -64,6 +70,9 @@ public class SettingsTab {
 
     }
 
+    /**
+     * @param mouseEvent sets new value of % vaccinated sick form slider
+     */
     public void setPopulationVac(MouseEvent mouseEvent) {
         popVacSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -77,6 +86,9 @@ public class SettingsTab {
 
     }
 
+    /**
+     * @param mouseEvent sets new value of % chance to get  sick vaccinated form slider
+     */
     public void setChanceToGetSickVac(MouseEvent mouseEvent) {
         chanToGetSickVacSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -87,6 +99,9 @@ public class SettingsTab {
         });
     }
 
+    /**
+     * @param mouseEvent sets new value of % chance to get  sick mask  form slider
+     */
     public void setChanceToGetSickMask(MouseEvent mouseEvent) {
         chanToGetSickMaskSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -97,6 +112,9 @@ public class SettingsTab {
         });
     }
 
+    /**
+     * @param mouseEvent sets new value of shops to get well form slider
+     */
     public void setShopsToGetWell(MouseEvent mouseEvent) {
         shopsToGetWellSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -108,10 +126,13 @@ public class SettingsTab {
     }
 
     public void checkPer(ActionEvent actionEvent) {
-        System.out.println(program.getPercentageSick());
+//        System.out.println(program.getPercentageSick());
         program.setPerSick();
     }
 
+    /**
+     * refresh
+     */
     public void initSettings() {
         program.checkVacSick();
         program.checkPerSick();
@@ -119,6 +140,9 @@ public class SettingsTab {
 
     }
 
+    /**
+     * @param actionEvent save settings
+     */
     public void saveSettings(ActionEvent actionEvent) {
         program.setVacSick();
         program.setPerSick();
@@ -128,7 +152,11 @@ public class SettingsTab {
 
     }
 
+    /**
+     * @param actionEvent set lockdown
+     */
     public void lockdown(ActionEvent actionEvent) {
+
         program.setLockdown(lockdownButton.isSelected());
 
     }

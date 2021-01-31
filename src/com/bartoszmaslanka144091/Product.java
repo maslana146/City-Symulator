@@ -11,6 +11,16 @@ public class Product {
     void setOn_sale(Boolean value){
         this.on_sale = value;
     }
+
+    /**
+     * constructor
+     * @param id
+     * @param name
+     * @param brand
+     * @param best_before_date
+     * @param chance_to_take
+     * @param on_sale
+     */
     public Product(int id, String name, String brand, int best_before_date, Float chance_to_take, Boolean on_sale) {
         this.id = id;
         this.name = name;
@@ -20,6 +30,9 @@ public class Product {
         this.on_sale = on_sale;
     }
 
+    /**
+     * @return to string method
+     */
     @Override
     public String toString() {
         return "Product{" +
@@ -31,18 +44,30 @@ public class Product {
                 '}';
     }
 
+    /**
+     * @return getter
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id setter
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * @return getter
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name setter
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -55,6 +80,9 @@ public class Product {
         this.brand = brand;
     }
 
+    /**
+     * @return getter
+     */
     public int getBest_before_date() {
         return best_before_date;
     }

@@ -19,6 +19,7 @@ import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class WorldScreen {
 
@@ -49,6 +50,8 @@ public class WorldScreen {
     public Label vacResultLabel;
     public Label sickLabel;
     public Label sickResultLabel;
+    public Label ShopLabel;
+    public Label shopsToGet;
     Program program = Program.getInstance();
     public boolean created = false;
     static int numCols = 20;
@@ -59,97 +62,110 @@ public class WorldScreen {
     MainWorldScreen mainWorldScreen = new MainWorldScreen();
 
 
+    /**
+     * @throws InterruptedException creates new world - creates new grid, color map, new staticobjects, new movingobjects
+     * , new threads
+     */
     @FXML
     public void initialize() throws InterruptedException {
-            GraphicsContext gc = worldCanvas.getGraphicsContext2D();
-            Map.createCells();
-            Map.paintMap(gc);
+        GraphicsContext gc = worldCanvas.getGraphicsContext2D();
+        Map.createCells();
+        Map.paintMap(gc);
 
-            Cell[][] grid = Map.getGrid();
+        Cell[][] grid = Map.getGrid();
 
 
-            List<Cell> shopCells = Map.getShopCells();
-            List<Cell> goToCells = new ArrayList<Cell>();
-            goToCells.add(grid[1][5]);
-            goToCells.add(grid[2][2]);
-            goToCells.add(grid[2][17]);
-            goToCells.add(grid[4][10]);
-            goToCells.add(grid[8][4]);
-            goToCells.add(grid[8][7]);
-            goToCells.add(grid[8][15]);
-            goToCells.add(grid[10][7]);
-            goToCells.add(grid[10][13]);
-            goToCells.add(grid[12][18]);
-            goToCells.add(grid[14][10]);
-            goToCells.add(grid[17][2]);
-            goToCells.add(grid[17][17]);
-            for (Wholesale wholesale : program.listOfWholesales) {
-                wholesale.setPeopleCapacity(0);
-                Cell goToCell = goToCells.get(0);
-                goToCells.remove(0);
-                Cell shopCell = shopCells.get(0);
-                shopCells.remove(0);
-                StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
-                staticObject.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/gold.png")));
-                staticObject.setStroke(Color.BLACK);
-                staticObject.setWholesale(wholesale);
-                staticObject.setCell(shopCell);
-                staticObject.setGoToCell(goToCell);
-                showInformationStaticObject(staticObject);
-                staticObjects.add(staticObject);
-                worldPane.getChildren().add(staticObject);
-            }
-            for (RetailShop retailShop : program.listOfRetailShops) {
+        List<Cell> shopCells = Map.getShopCells();
+        List<Cell> goToCells = new ArrayList<Cell>();
+        goToCells.add(grid[1][5]);
+        goToCells.add(grid[2][2]);
+        goToCells.add(grid[2][17]);
+        goToCells.add(grid[4][10]);
+        goToCells.add(grid[8][4]);
+        goToCells.add(grid[8][7]);
+        goToCells.add(grid[8][15]);
+        goToCells.add(grid[10][7]);
+        goToCells.add(grid[10][13]);
+        goToCells.add(grid[12][18]);
+        goToCells.add(grid[14][10]);
+        goToCells.add(grid[17][2]);
+        goToCells.add(grid[17][17]);
+        for (Wholesale wholesale : program.listOfWholesales) {
+            wholesale.setPeopleCapacity(0);
+            Cell goToCell = goToCells.get(0);
+            goToCells.remove(0);
+            Cell shopCell = shopCells.get(0);
+            shopCells.remove(0);
+            StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
+            staticObject.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/gold.png")));
+            staticObject.setStroke(Color.BLACK);
+            staticObject.setWholesale(wholesale);
+            staticObject.setCell(shopCell);
+            staticObject.setGoToCell(goToCell);
+            if (program.isLockdown()) {
+                wholesale.setMaxClientCapacity(wholesale.getLockdownCapacity());
+            } else wholesale.setMaxClientCapacity(wholesale.getSaveMaxCapacity());
+            showInformationStaticObject(staticObject);
+            staticObjects.add(staticObject);
+            worldPane.getChildren().add(staticObject);
+        }
+        for (RetailShop retailShop : program.listOfRetailShops) {
 //            System.out.println(retailShop.getAvailableProducts());
-                retailShop.setPeopleCapacity(0);
-                Cell goToCell = goToCells.get(0);
-                goToCells.remove(0);
-                Cell shopCell = shopCells.get(0);
-                shopCells.remove(0);
-                StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
-                staticObject.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/diamond.png")));
-                staticObject.setStroke(Color.BLACK);
-                staticObject.setRetailShop(retailShop);
-                staticObject.setCell(shopCell);
-                staticObject.setGoToCell(goToCell);
-                showInformationStaticObject(staticObject);
+            retailShop.setPeopleCapacity(0);
+            Cell goToCell = goToCells.get(0);
+            goToCells.remove(0);
+            Cell shopCell = shopCells.get(0);
+            shopCells.remove(0);
+            StaticObject staticObject = new StaticObject(shopCell.getX(), shopCell.getY(), 25, 25);
+            staticObject.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/diamond.png")));
+            staticObject.setStroke(Color.BLACK);
+            staticObject.setRetailShop(retailShop);
+            staticObject.setCell(shopCell);
+            staticObject.setGoToCell(goToCell);
+            showInformationStaticObject(staticObject);
+            if (program.isLockdown()) {
+                retailShop.setMaxClientCapacity(retailShop.getLockdownCapacity());
+            } else retailShop.setMaxClientCapacity(retailShop.getSaveMaxCapacity());
+            worldPane.getChildren().add(staticObject);
+            staticObjects.add(staticObject);
+        }
+        TimeUnit.SECONDS.sleep(1);
+        for (Supplier supplier : program.listOfSuppliers) {
+            supplier.newListOfStops();
+            MovingObject object = new MovingObject(0, 0, 12.5, Color.BROWN);
+            object.setSupplier(supplier);
+            object.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/supplier.png")));
+            worldPane.getChildren().add(object);
+            Thread obj = new Thread(object);
+            threadObservableList.add(obj);
+            movingObjects.add(object);
+            showInformationMovingObject(object);
+            obj.setDaemon(true);
+            obj.start();
 
-                worldPane.getChildren().add(staticObject);
-                staticObjects.add(staticObject);
-            }
-            for (Client client : program.listOfClients) {
-                client.setNextshop();
-                MovingObject object = new MovingObject(0, 0, 12.5, Color.HOTPINK);
-                object.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/client.png")));
-                object.setClient(client);
+        }
+        for (Client client : program.listOfClients) {
+            client.setNextshop();
+            MovingObject object = new MovingObject(0, 0, 12.5, Color.HOTPINK);
+            object.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/client.png")));
+            object.setClient(client);
 //                object.setStroke(Color.BLACK);
-                worldPane.getChildren().add(object);
-                Thread obj = new Thread(object);
-                threadObservableList.add(obj);
-                movingObjects.add(object);
-                showInformationMovingObject(object);
-                obj.setDaemon(true);
-                obj.start();
+            worldPane.getChildren().add(object);
+            Thread obj = new Thread(object);
+            threadObservableList.add(obj);
+            movingObjects.add(object);
+            showInformationMovingObject(object);
+            obj.setDaemon(true);
+            obj.start();
 
-            }
-            for (Supplier supplier : program.listOfSuppliers) {
-                supplier.newListOfStops();
-                MovingObject object = new MovingObject(0, 0, 12.5, Color.BROWN);
-                object.setSupplier(supplier);
-                object.setFill(new ImagePattern(new Image("/com/bartoszmaslanka144091/resource/supplier.png")));
-                worldPane.getChildren().add(object);
-                Thread obj = new Thread(object);
-                threadObservableList.add(obj);
-                movingObjects.add(object);
-                showInformationMovingObject(object);
-                obj.setDaemon(true);
-                obj.start();
-
-            }
+        }
 //        TimeUnit.SECONDS.sleep(2);
 
     }
 
+    /**
+     * @param obj display information about moving object
+     */
     private void showInformationMovingObject(MovingObject obj) {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -161,6 +177,9 @@ public class WorldScreen {
         });
     }
 
+    /**
+     * @param obj display information about static  object
+     */
     private void showInformationStaticObject(StaticObject obj) {
         obj.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -171,6 +190,9 @@ public class WorldScreen {
         });
     }
 
+    /**
+     * @param object dispaly information about staticobject
+     */
     public void shopInformationWindow(StaticObject object) {
         informationWindow.setVisible(false);
         staticInformationWindow.setVisible(true);
@@ -233,6 +255,8 @@ public class WorldScreen {
                                    }
 
             );
+
+
             createProd.setVisible(false);
             productsTable1.getColumns().clear();
             TableColumn id = new TableColumn("ID");
@@ -257,6 +281,9 @@ public class WorldScreen {
 
     }
 
+    /**
+     * @param object dispaly information about movingobject
+     */
     public void informationWindowVisable(MovingObject object) {
         staticInformationWindow.setVisible(false);
         informationWindow.setVisible(true);
@@ -264,7 +291,7 @@ public class WorldScreen {
 //        System.out.println(object.getClient().getMaxCapacity());
         //TODO dodaj funkcji zmiany kierunku koljneo ruchu
         if (object.getSupplier() == null) {
-            System.out.println(object.getClient().getShopsToGetWell());
+//            System.out.println(object.getClient().getShopsToGetWell());
 //            System.out.println(object.getClient().getIsSick());
 //            System.out.println("max: "+object.getClient().getMaxCapacity()+" current: "+object.getClient().getCurrentCapacity());
             firstLabel.setText("Id:");
@@ -280,6 +307,8 @@ public class WorldScreen {
             sickLabel.setText("Is sick:");
             sickResultLabel.setText(String.valueOf(object.getClient().getIsSick()));
             titleTab.setText("CLIENT");
+            ShopLabel.setText("Shops to well:");
+            shopsToGet.setText(String.valueOf(object.getClient().getShopsToGetWell()));
             deleteButton.setOnAction(new EventHandler<ActionEvent>() {
                                          @Override
                                          public void handle(ActionEvent event) {
@@ -298,7 +327,8 @@ public class WorldScreen {
             TableColumn id = new TableColumn("ID");
             TableColumn name = new TableColumn("Name");
             TableColumn brand = new TableColumn("Brand");
-            productsTable.getColumns().addAll(id, name, brand);
+            TableColumn date = new TableColumn("Date");
+            productsTable.getColumns().addAll(id, name, brand, date);
             id.setCellValueFactory(
                     new PropertyValueFactory<Product, Integer>("id")
             );
@@ -307,6 +337,9 @@ public class WorldScreen {
             );
             brand.setCellValueFactory(
                     new PropertyValueFactory<Product, String>("brand")
+            );
+            date.setCellValueFactory(
+                    new PropertyValueFactory<Product, Integer>("best_before_date")
             );
             productsTable.setItems(object.getClient().getBag());
 
@@ -333,6 +366,9 @@ public class WorldScreen {
                 clientNextShopLabel.setText(object.getSupplier().getNextShop().getWholesale().getName());
             }
             titleTab.setText("SUPPLIER");
+            ShopLabel.setText("Current fuel:");
+            object.getSupplier().setCurrentFuel((float) (object.getSupplier().getCurrentFuel() * 0.8));
+            shopsToGet.setText(String.valueOf(object.getSupplier().getCurrentFuel()));
             deleteButton.setOnAction(new EventHandler<ActionEvent>() {
                                          @Override
                                          public void handle(ActionEvent event) {
@@ -368,24 +404,12 @@ public class WorldScreen {
     }
 
 
+    /**
+     * @param mouseEvent turn off information window
+     */
     public void clearInformationWindow(MouseEvent mouseEvent) {
         informationWindow.setVisible(false);
         staticInformationWindow.setVisible(false);
 
     }
-
-//    public void pause(ActionEvent actionEvent) throws InterruptedException {
-//        System.out.println(threadObservableList);
-////        for (Thread thread:threadObservableList){
-////            thread.suspend();
-///            //TODO zatrzymuje wstaw do initialize if jestli sie juz raz zrobilo a jesli nie to zrob caly intialize
-////        }
-//
-//    }
-//
-//    public void go(ActionEvent actionEvent) {
-//        for (Thread thread : threadObservableList) {
-//            thread.resume();
-//        }
-//    }
 }

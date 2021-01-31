@@ -7,6 +7,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    /**
+     * @param primaryStage start function
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/bartoszmaslanka144091/resource/mainScreen.fxml"));
@@ -24,30 +28,40 @@ public class Main extends Application {
     }
 
 
+    /**
+     * @param args main function
+     */
     public static void main(String[] args) {
         Program program = Program.getInstance();
         for (int i = 0; i < 3; i++) {
-            Wholesale wholesale = new Wholesale(Generators.genString(5), Generators.genString(5),
-                    Generators.genInteger(2, 4), Generators.genInteger(3, 5), false, false);
+            Wholesale wholesale = new Wholesale(Generators.shopName(), Generators.streetName(),
+                    Generators.genInteger(4, 10), Generators.genInteger(4, 10), false, false);
 
             program.listOfWholesales.add(wholesale);
 
         }
-        //TODO po zmainie max capacity i funkcji generate start products w retail wywala bląd
-        //TODO pamietaj zmienic randomowa people cpacity
+
         for (int i = 0; i < 10; i++) {
-            RetailShop retailShop = new RetailShop(Generators.genString(5), Generators.genString(5),
-                    1, Generators.genInteger(3, 5), false, false);
+            RetailShop retailShop = new RetailShop(Generators.shopName(), Generators.streetName(),
+                    Generators.genInteger(4, 10), Generators.genInteger(4, 10), false, false);
             retailShop.createStartProducts();
             program.listOfRetailShops.add(retailShop);
 
         }
-        //TODO ogarnij tą muze
-//        final Task task = new Task() {
+//        //TODO ogarnij tą muze
+//        String path = "/com/bartoszmaslanka144091/resource/babyshark.mp3";
+//        Media media = new Media(new File(path).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.play();
+//        Media media = new Media(new File(path).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
+
+//                final Task task = new Task() {
 //            @Override
 //            protected Object call() throws Exception {
 //                int s = INDEFINITE;
-//                AudioClip audio = new AudioClip(getClass().getResource("/com/bartoszmaslanka144091/resource/Volume Alpha - 03 - Subwoofer Lullaby.mp3").toExternalForm());
+//                AudioClip audio = new AudioClip(getClass().getResource("/com/bartoszmaslanka144091/resource/Baby Shark ChaCha  Watazu Remix.mp3").toExternalForm());
 //                audio.setVolume(0.5f);
 //                audio.setCycleCount(s);
 //                audio.play();

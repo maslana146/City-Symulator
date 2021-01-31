@@ -18,8 +18,11 @@ public class Client extends Person {
     StaticObject nextshop;
 
 
+    /**
+     * client after visiting n shops consume some products
+     */
     public void consume() {
-        System.out.println(this.getBag());
+//        System.out.println(this.getBag());
         Comparator<Product> comparator = Comparator.comparingInt(Product::getBest_before_date);
         FXCollections.sort(bag,comparator);
         int x = 0;
@@ -28,7 +31,7 @@ public class Client extends Person {
             bag.remove(product);
             x += 1;
         }
-        System.out.println(getFirstName()+" consume "+ x + "products");
+//        System.out.println(getFirstName()+" consume "+ x + "products");
         for (Product product:bag){
             product.best_before_date -= 1;
 
@@ -43,10 +46,16 @@ public class Client extends Person {
 
     ;
 
+    /**
+     * @return getter
+     */
     public StaticObject getNextshop() {
         return nextshop;
     }
 
+    /**
+     * sets new next shop
+     */
     public void setNextshop() {
         List<StaticObject> staticObjects = WorldScreen.staticObjects.stream().filter(p ->
                 p.getRetailShop() != null).collect(Collectors.toList());
@@ -61,6 +70,19 @@ public class Client extends Person {
         return retailShopList.get(shop);
     }
 
+    /**consturctor
+     * @param id
+     * @param isSick
+     * @param wearsMask
+     * @param vaccinated
+     * @param chanceToGetSick
+     * @param shopsToGetWell
+     * @param currentCapacity
+     * @param maxCapacity
+     * @param bag
+     * @param firstName
+     * @param lastName
+     */
     public Client(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick, int shopsToGetWell,
                   int currentCapacity, int maxCapacity, ObservableList<Product> bag, String firstName, String lastName) {
         super(id, isSick, wearsMask, vaccinated, chanceToGetSick, shopsToGetWell, currentCapacity, maxCapacity, bag);
@@ -69,6 +91,9 @@ public class Client extends Person {
 
     }
 
+    /**
+     * @return to string method
+     */
     @Override
     public String toString() {
         return "Client{" +
@@ -106,10 +131,16 @@ public class Client extends Person {
 //        this.obj = obj;
 //    }
 
+    /**
+     * @return getter
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * @return getter
+     */
     public String getLastName() {
         return lastName;
     }

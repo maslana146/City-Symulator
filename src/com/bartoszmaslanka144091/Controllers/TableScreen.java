@@ -25,6 +25,9 @@ public class TableScreen {
     @FXML
     Label showResult;
 
+    /**
+     * creates table screen
+     */
     @FXML
     public void initialize() {
         ObservableList<String> list = FXCollections.observableArrayList("Clients", "Suppliers");
@@ -34,6 +37,9 @@ public class TableScreen {
         switchTable();
     }
 
+    /**
+     * comboswitch function  display clients/supplers on view-table
+     */
     public void switchTable() {
         if (comboSwitch.getValue() == "Clients") {
             mainTableView.getColumns().clear();
@@ -124,6 +130,9 @@ public class TableScreen {
     }
 
 
+    /**
+     * @param actionEvent delete client/suppliers entering id
+     */
     public void deleteObject(ActionEvent actionEvent) {
 
         if (deleteField.getText().isEmpty()) {
@@ -160,6 +169,9 @@ public class TableScreen {
         }
     }
 
+    /**
+     * @param actionEvent refresh table after some changes
+     */
     public void refreshTable(ActionEvent actionEvent) {
         mainTableView.refresh();
     }

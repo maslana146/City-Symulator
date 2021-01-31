@@ -13,6 +13,10 @@ public class Generators {
         return idCount;
     }
 
+    /**
+     * Generates new ID
+     * @return
+     */
     public static Integer newId() {
         int id = idCount;
         idCount += 1;
@@ -22,6 +26,38 @@ public class Generators {
 
     ;
 
+    /**
+     * generates street name
+     * @return
+     */
+    public static String streetName(){
+        List<String> brands_names = Arrays.asList("Złota","Jedlinowa","Matejki","WallST","Wiejska","Miastowa");
+        return brands_names.get(genInteger(0, brands_names.size()));
+    }
+
+    /**
+     * generates shop name
+     * @return
+     */
+    public static String shopName(){
+        List<String> brands_names = Arrays.asList("Biedronka","Lidl","IKEA","iStore","SATURN","Castorama");
+        return brands_names.get(genInteger(0, brands_names.size()));
+    }
+
+    /**
+     * generates product name
+     * @return
+     */
+    public static String prodName(){
+        List<String> brands_names = Arrays.asList("Phone","Tablet","Tomato","Computer","Juice","Sausage","Ham","Bread",
+                "Whisky","Milk","Cheese","Game","Gum","Sweets");
+        return brands_names.get(genInteger(0, brands_names.size()));
+    }
+
+    /**
+     * generates product name
+     * @return
+     */
     public static String brandName() {
         List<String> brands_names = Arrays.asList("Pepsi", "CocaCola", "Nestle", "Apple", "Samasung", "Xiaomi",
                 "Lipton", "Madero", "Tyskie", "Lech", "McDonalds", "Pattex", "Huawei", "Neutrogena", "Polski Banan", "Microsoft",
@@ -31,6 +67,10 @@ public class Generators {
 
     ;
 
+    /**
+     * generates car name
+     * @return
+     */
     public static String carName() {
         List<String> cars_brand = Arrays.asList("Mercedes", "Porsche", "Ford", "Opel", "Mazda", "Audi", "BMW", "KIA", "Toyota", "Bugatti",
                 "Ferrari", "Lamborghini", "Jaguar", "Volkswagen", "Nisan", "Peugeot", "Skoda");
@@ -39,18 +79,30 @@ public class Generators {
 
     ;
 
+    /**
+     * generates first name
+     * @return
+     */
     public static String firstName() {
         List<String> firstName = Arrays.asList("Bartek", "Klaudia", "Maciej", "Janek", "Marcin", "Ola", "Nicole", "Hubert",
                 "Michał", "Darek", "Ula", "Lidia", "Janusz");
         return firstName.get(genInteger(0, firstName.size()));
     }
 
+    /**
+     * generates last name
+     * @return
+     */
     public static String lastName() {
         List<String> lastName = Arrays.asList("Kowalski", "Maślanka", "Duda", "Andrzejwska", "Musk", "Lewansdowski",
                 "Małysz", "Stoch", "Żyła", "Tusk", "Messi", "Ronaldo");
         return lastName.get(genInteger(0, lastName.size()));
     }
 
+    /**
+     * generates string
+     * @return
+     */
     public static String genString(int range) {
         int leftLimit = 48;
         int rightLimit = 122;
@@ -63,15 +115,30 @@ public class Generators {
         return newString;
     }
 
+    /**
+     * @param min min range
+     * @param max max range
+     *            generate inteager
+     * @return
+     */
     public static int genInteger(int min, int max) {
         return random.nextInt(max - min) + min;
     }
 
+    /**
+     * @param min min range
+     * @param max max range
+     *            generates float
+     * @return
+     */
     public static float genFloat(int min, int max) {
 
         return random.nextFloat() * (max - min) + min;
     }
 
+    /**
+     * @return generates bool
+     */
     public static boolean genBool() {
         return random.nextBoolean();
     }

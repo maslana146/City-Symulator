@@ -15,6 +15,9 @@ public class MenuScreen {
         this.mainScreen = mainScreen;
     }
 
+    /**
+     * @throws IOException open new world
+     */
     @FXML
     public void openWorld() throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/bartoszmaslanka144091/resource/mainWorldScreen.fxml"));
@@ -24,6 +27,10 @@ public class MenuScreen {
         mainWorldScreen.setMainScreen(mainScreen);
         mainScreen.setScreen(pane);
     }
+
+    /**
+     * @throws IOException open settings
+     */
     @FXML
     public void openSettings() throws IOException {
 
@@ -36,6 +43,10 @@ public class MenuScreen {
 
 
     }
+
+    /**
+     * exit program
+     */
     @FXML
     public void exit(){
         Platform.exit();

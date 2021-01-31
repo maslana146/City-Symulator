@@ -14,6 +14,18 @@ public class Person {
     int maxCapacity;
     ObservableList<Product> bag = FXCollections.observableArrayList();
 
+    /**
+     * constructor
+     * @param id
+     * @param isSick
+     * @param wearsMask
+     * @param vaccinated
+     * @param chanceToGetSick
+     * @param shopsToGetWell
+     * @param currentCapacity
+     * @param maxCapacity
+     * @param bag
+     */
     public Person(int id, Boolean isSick, Boolean wearsMask, Boolean vaccinated, Float chanceToGetSick,
                   int shopsToGetWell, int currentCapacity, int maxCapacity, ObservableList<Product> bag) {
         this.id = id;
@@ -27,6 +39,9 @@ public class Person {
         this.bag = bag;
     }
 
+    /**
+     * @return to string method
+     */
     @Override
     public String toString() {
         return "Person{" +
@@ -34,6 +49,9 @@ public class Person {
                 '}';
     }
 
+    /**
+     *  sets shops to get well if sick or not
+     */
     public void getWell() {
         if (isSick) {
             shopsToGetWell -= 1;
@@ -43,10 +61,16 @@ public class Person {
         }
     }
 
+    /**
+     * @return getter
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return gettter
+     */
     public Boolean getIsSick() {
         return isSick;
     }
@@ -55,6 +79,9 @@ public class Person {
         return wearsMask;
     }
 
+    /**
+     * @return getter
+     */
     public Boolean getVaccinated() {
         return vaccinated;
     }
@@ -63,6 +90,9 @@ public class Person {
         return chanceToGetSick;
     }
 
+    /**
+     * @return getter
+     */
     public int getShopsToGetWell() {
         return shopsToGetWell;
     }
@@ -75,14 +105,23 @@ public class Person {
         return maxCapacity;
     }
 
+    /**
+     * @return getter
+     */
     public ObservableList<Product> getBag() {
         return bag;
     }
 
+    /**
+     * @param id setter
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * @param sick setter
+     */
     public void setIsSick(Boolean sick) {
         isSick = sick;
     }
@@ -91,6 +130,9 @@ public class Person {
         this.wearsMask = wearsMask;
     }
 
+    /**
+     * @param vaccinated setter
+     */
     public void setVaccinated(Boolean vaccinated) {
         this.vaccinated = vaccinated;
     }
@@ -99,6 +141,9 @@ public class Person {
         this.chanceToGetSick = chanceToGetSick;
     }
 
+    /**
+     * @param shopsToGetWell setter
+     */
     public void setShopsToGetWell(int shopsToGetWell) {
         this.shopsToGetWell = shopsToGetWell;
     }

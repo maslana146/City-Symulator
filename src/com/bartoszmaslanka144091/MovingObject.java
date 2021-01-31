@@ -13,32 +13,58 @@ public class MovingObject extends Circle implements Runnable {
     Supplier supplier = null;
     Cell currentCell = Map.grid[8][9];
     StaticObject visitingShop;
+    boolean enter = false;
 
+    /**
+     * constuctor
+     * @param centerX
+     * @param centerY
+     * @param radius
+     * @param fill
+     */
     public MovingObject(double centerX, double centerY, double radius, Paint fill) {
         super(centerX, centerY, radius, fill);
 
     }
 
+    /**
+     * @return visiting shop
+     */
     public StaticObject getVisitingShop() {
         return visitingShop;
     }
 
+    /**
+     * @return get supplier
+     */
     public Supplier getSupplier() {
         return supplier;
     }
 
+    /**
+     * @param supplier set
+     */
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 
+    /**
+     * @return get client
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * @param client set
+     */
     public void setClient(Client client) {
         this.client = client;
     }
 
+    /**
+     *  transorm pixels to current cell
+     */
     public void setCurrentCell() {
         Cell[][] grid = Map.getGrid();
         int x = (int) ((getTranslateX()) - 12) / 25;
@@ -47,10 +73,16 @@ public class MovingObject extends Circle implements Runnable {
     }
 
 
+    /**
+     * @return get current cell
+     */
     public Cell getCurrentCell() {
         return currentCell;
     }
 
+    /**
+     * Get sick function
+     */
     public void coronaVirus() {
         Program program = Program.getInstance();
         float prob = 1;
@@ -78,6 +110,7 @@ public class MovingObject extends Circle implements Runnable {
                 if (Generators.genInteger(0, 100) < prob/100) {
                     this.getClient().setIsSick(true);
                     this.getClient().setShopsToGetWell(program.shopsToGetWell);
+//                    System.out.println("CHOOOOOOOOOOOOOORYYYY "+this.getClient().getFirstName()+this.currentCell);
                     return;
                 }
 
@@ -96,29 +129,39 @@ public class MovingObject extends Circle implements Runnable {
             }
         }
     }
+
+    /**
+     * do action after enter or not to the shop
+     */
     public void action(){
         if (this.getSupplier() == null){
             this.getClient().getWell();
         }else if (this.getClient()==null){
+            this.getSupplier().setCurrentFuel(1);
             this.getSupplier().getWell();
         }
         if (visitingShop.getRetailShop() == null){
             if (visitingShop.getWholesale().getPeopleCapacity() < visitingShop.getWholesale().getMaxClientCapacity()){
                 this.setVisible(false);
+                this.enter = true;
                 visitingShop.getWholesale().enterPerson();
                 swapItems();
-            }else System.out.println("Nie wlazłem");
+            }
         }else if(visitingShop.getWholesale() == null){
             if (visitingShop.getRetailShop().getPeopleCapacity() < visitingShop.getRetailShop().getMaxClientCapacity()){
                 this.setVisible(false);
+                this.enter = true;
                 visitingShop.getRetailShop().enterPerson();
                 swapItems();
 
-            }else System.out.println("Nie wlazłem");
+            }
 
         }
     }
 
+    /**
+     *  take or leave products from/to shop
+     */
     public void swapItems() {
 
         List<Product> deleteList = new ArrayList<>();
@@ -155,7 +198,7 @@ public class MovingObject extends Circle implements Runnable {
             for (Product product : visitingShop.getRetailShop().getAvailableProducts()) {
                 if (this.client.currentCapacity < this.client.maxCapacity) {
                     float p = Generators.genFloat(0, 1);
-                    System.out.println();
+//                    System.out.println();
                     if (p <= product.chance_to_take) {
                         deleteList.add(product);
 //                        System.out.println(deleteList);
@@ -174,6 +217,9 @@ public class MovingObject extends Circle implements Runnable {
 
     }
 
+    /**
+     * @param cell set visiteed shop
+     */
     public void setVisitingShop(Cell cell) {
         for (StaticObject staticObject : WorldScreen.staticObjects) {
             if (staticObject.getGoToCell().getX() == cell.getX() && staticObject.getGoToCell().getY() == cell.getY()) {
@@ -183,6 +229,9 @@ public class MovingObject extends Circle implements Runnable {
         }
     }
 
+    /**
+     *  thread run function
+     */
     @Override
     public void run() {
         while (running) {
@@ -198,18 +247,25 @@ public class MovingObject extends Circle implements Runnable {
                 PathCreator.moveObject(Map.getGrid(), this, this.getCurrentCell(), this.getSupplier().getNextShop().getGoToCell(), time);
             }
             try {
-                Thread.sleep((time * 2000) + (Generators.genInteger(1, 2) * 1000));
+                //(Generators.genInteger(1, 2) * 1000)
+                Thread.sleep((time * 2000));
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }//TODO zamiana jakoś by zwracalo wartosc czy wchodzi do sklepu czy nie bo robi się -1
-            if (this.getVisitingShop().getRetailShop() == null) {
-                this.getVisitingShop().getWholesale().outPerson();
-            } else if (this.getVisitingShop().getWholesale() == null) {
-                this.getVisitingShop().getRetailShop().outPerson();
+            }
+            if (this.enter){
+                if (this.getVisitingShop().getRetailShop() == null) {
+                    this.getVisitingShop().getWholesale().outPerson();
+                } else if (this.getVisitingShop().getWholesale() == null) {
+                    this.getVisitingShop().getRetailShop().outPerson();
+                }
+                this.enter = false;
             }
         }
     }
 
+    /**
+     * stop thread
+     */
     public void stop() {
         this.running = false;
 

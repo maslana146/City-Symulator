@@ -46,7 +46,7 @@
 }
 
 .tab-pane *.tab-header-area *.tab-header-background {
-    -fx-background-image: url('grass.png');
+    -fx-background-image: url('grass_top.png');
 }
 
 .table-view {

@@ -49,11 +49,17 @@ public class CreateScreen {
     TextField supplierCarBrandField;
 
 
+    /**
+     * @param string show information
+     */
     public void showResult(String string) {
         resultLabel.textProperty().setValue(string);
     }
 
 
+    /**
+     * @param actionEvent create random client
+     */
     public void createRandomClient(ActionEvent actionEvent) {
         int id = Generators.newId();
         boolean isSick = Generators.genBool();
@@ -68,6 +74,9 @@ public class CreateScreen {
         String lastName = Generators.lastName();
         Client client = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell,
                 currentCapacity, maxCapacity, bag, firstName, lastName);
+        if (!client.getIsSick()) {
+            client.setShopsToGetWell(0);
+        }
 //        Client client = new Client(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
 //                maxCapacity, bag, firstName, lastName);
 //        System.out.println(client);
@@ -85,6 +94,9 @@ public class CreateScreen {
 
     }
 
+    /**
+     * @param actionEvent create random supplier
+     */
     public void createRandomSupplier(ActionEvent actionEvent) {
         int id = Generators.newId();
         boolean isSick = Generators.genBool();
@@ -101,8 +113,10 @@ public class CreateScreen {
         float fuelConsumption = Generators.genFloat(0, 1);
         Supplier supplier = new Supplier(id, isSick, wearsMask, vac, chanceToGetSick, shopsToGetWell, currentCapacity,
                 maxCapacity, bag, companyName, carBrand, listOfStops, fuelConsumption, (float) 1.0, (float) 1.0);
-        System.out.println(supplier);
-
+//        System.out.println(supplier);
+        if (!supplier.getIsSick()) {
+            supplier.setShopsToGetWell(0);
+        }
         boolean result = program.listOfSuppliers.add(supplier);
         if (result) {
             showResult("Random Supplier was created successfully, Supplier ID: " + id);
@@ -117,6 +131,9 @@ public class CreateScreen {
     }
 
 
+    /**
+     * @param actionEvent create client with specific attributes
+     */
     public void createClient(ActionEvent actionEvent) {
         clientBagCapacityField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -148,7 +165,10 @@ public class CreateScreen {
             String lastBrand = clientLastNameField.getText();
             Client client = new Client(id, isSick, wearsMask, isVac, chanceToGetSick, shopsToGetWell, currentCapacity,
                     maxCapacity, bag, firstName, lastBrand);
-            System.out.println(client);
+//            System.out.println(client);
+            if (!client.getIsSick()) {
+                client.setShopsToGetWell(0);
+            }
             boolean result = program.listOfClients.add(client);
             if (result) {
                 showResult("Client was created successfully, Client ID: " + id);
@@ -169,6 +189,9 @@ public class CreateScreen {
 
     }
 
+    /**
+     * @param actionEvent create supplier with speciffic attributes
+     */
     public void createSupplier(ActionEvent actionEvent) {
         supplierBagCapacityField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -202,7 +225,10 @@ public class CreateScreen {
             float fuelConsumption = Generators.genFloat(0, 1);
             Supplier supplier = new Supplier(id, isSick, wearsMask, isVac, chanceToGetSick, shopsToGetWell, currentCapacity,
                     maxCapacity, bag, companyName, carBrand, listOfStops, fuelConsumption, (float) 1.0, (float) 1.0);
-            System.out.println(supplier);
+//            System.out.println(supplier);
+            if (!supplier.getIsSick()) {
+                supplier.setShopsToGetWell(0);
+            }
             boolean result = program.listOfSuppliers.add(supplier);
             if (result) {
                 showResult("Supplier was created successfully, Supplier ID: " + id);
@@ -222,12 +248,4 @@ public class CreateScreen {
 
     }
 
-    public void check(ActionEvent actionEvent) {
-        System.out.println(program.listOfClients.size());
-    }
-
-    public void info(ActionEvent actionEvent) {
-        Supplier sup = program.listOfSuppliers.get(0);
-        System.out.println(sup.getWearsMask());
-    }
 }
